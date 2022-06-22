@@ -1,0 +1,6 @@
+{
+  "users": [
+    { "id": "1", "fullName": "Nils Rausch" },
+    { "id": "2", "fullName": "Jannis Bautsch" }
+  ]
+}

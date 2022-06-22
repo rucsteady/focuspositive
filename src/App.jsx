@@ -1,3 +1,4 @@
+import React, { useState, useNavigate } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Dashboard from "./components/Dashboard";
@@ -6,8 +7,12 @@ import Journal from "./components/journal/Journal";
 import Account from "./components/account/Account";
 import NotFound from "./components/NotFound";
 import styles from "./App.module.css";
+import Login from "./components/Login";
+
 
 function App() {
+ 
+
   return (
     <>
       <div className={styles.app}>
@@ -19,6 +24,7 @@ function App() {
           <Route path="chat" element={<Chat />} />
           <Route path="journal" element={<Journal />} />
           <Route path="account" element={<Account />} />
+          <Route path="login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
