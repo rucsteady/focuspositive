@@ -1,5 +1,4 @@
 import React from "react";
-import background from "../img/Munnar4.jpg";
 import "./DashboardStyle.css";
 
 function Dashboard() {

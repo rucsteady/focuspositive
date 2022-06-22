@@ -66,7 +66,7 @@ function Login() {
           />
           <div className="button">
             <Button variant="contained" type="submit">
-              Sign In
+              Login
             </Button>
           </div>
         </form>
