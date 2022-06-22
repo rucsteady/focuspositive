@@ -64,7 +64,11 @@ function Login() {
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button variant="contained" type="submit">Sign In</Button>
+          <div className="button">
+            <Button variant="contained" type="submit">
+              Sign In
+            </Button>
+          </div>
         </form>
       </div>
     </div>
