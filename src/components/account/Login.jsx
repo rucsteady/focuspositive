@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import "./LoginStyle.css";
 
 import swal from "sweetalert";
 
@@ -31,7 +32,7 @@ function Login() {
       }).then((value) => {
         localStorage.setItem("accessToken", response["accessToken"]);
         localStorage.setItem("user", JSON.stringify(response["user"]));
-        window.location.href = "/profile";
+        window.location.href = "/dashboard";
       });
     } else {
       swal("Failed", response.message, "error");
@@ -40,31 +41,30 @@ function Login() {
 
   return (
     <div>
-      <div>
-        <div>Sign in</div>
+      <div className="login">
+        <div>Focus Positive Login</div>
         <form noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
             required
-            fullWidth
             id="email"
             name="email"
             label="Email Address"
             onChange={(e) => setUserName(e.target.value)}
+            sx={{ marginRight: 3 }}
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
-            fullWidth
             id="password"
             name="password"
             label="Password"
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button type="submit">Sign In</Button>
+          <Button variant="contained" type="submit">Sign In</Button>
         </form>
       </div>
     </div>

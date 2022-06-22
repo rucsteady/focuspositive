@@ -7,11 +7,16 @@ import Journal from "./components/journal/Journal";
 import Account from "./components/account/Account";
 import NotFound from "./components/NotFound";
 import styles from "./App.module.css";
-import Login from "./components/Login";
+import Login from "./components/account/Login";
 
 
 function App() {
  
+  const token = localStorage.getItem('accessToken');
+  
+  if(!token) {
+    return <Login />
+  }
 
   return (
     <>
