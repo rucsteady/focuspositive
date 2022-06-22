@@ -2,9 +2,10 @@ import React from "react";
 
 
 function Dashboard() {
+  const user = JSON.parse(localStorage.getItem("user"));
  
 
-  return <div>Dashboard</div>;
-}
+  return <div>Wilkommen {user.fname}</div>;
+} 
 
 export default Dashboard;
