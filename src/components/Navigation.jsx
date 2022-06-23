@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import "./NavigationStyle.css";
 
 function Navigation() {
-  const user = JSON.parse(localStorage.getItem("user"));
+  // const user = JSON.parse(localStorage.getItem("user"));
 
   return (
     <>
@@ -25,7 +25,7 @@ function Navigation() {
         <NavLink to="/journal">Journal</NavLink>
         <NavLink to="/account">Account</NavLink>
         
-        { !user && <NavLink to="/login">Login</NavLink> }
+        <NavLink to="/login">Login</NavLink> 
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Dashboard from "./components/Dashboard";
@@ -9,13 +9,11 @@ import NotFound from "./components/NotFound";
 import styles from "./App.module.css";
 import Login from "./components/account/Login";
 
-
 function App() {
- 
-  const token = localStorage.getItem('accessToken');
-  
-  if(!token) {
-    return <Login />
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
+
+  if (!userLoggedIn) {
+    return <Login setUserLoggedIn={setUserLoggedIn} />;
   }
 
   return (
@@ -29,7 +27,10 @@ function App() {
           <Route path="chat" element={<Chat />} />
           <Route path="journal" element={<Journal />} />
           <Route path="account" element={<Account />} />
-          <Route path="login" element={<Login />} />
+          <Route
+            path="login"
+            element={<Login setUserLoggedIn={setUserLoggedIn} />}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
