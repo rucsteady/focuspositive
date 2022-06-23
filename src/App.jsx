@@ -8,6 +8,7 @@ import Account from "./components/account/Account";
 import NotFound from "./components/NotFound";
 import styles from "./App.module.css";
 import Login from "./components/account/Login";
+import Register from "./components/account/Register";
 
 function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(false);
@@ -30,6 +31,10 @@ function App() {
           <Route
             path="login"
             element={<Login setUserLoggedIn={setUserLoggedIn} />}
+          />
+          <Route
+            path="register"
+            element={<Register setUserLoggedIn={setUserLoggedIn} />}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -70,6 +70,7 @@ function Login({ setUserLoggedIn }) {
           </div>
         </form>
       </div>
+      
     </div>
   );
 }
