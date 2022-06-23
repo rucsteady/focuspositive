@@ -1,48 +1,46 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import axiox from "axios";
 import "./LoginStyle.css";
 
-import swal from "sweetalert";
-
-async function loginUser(credentials) {
-  return fetch("https://www.mecallapi.com/api/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(credentials),
-  }).then((data) => data.json());
-}
-
-function Login() {
-  const [username, setUserName] = useState();
-  const [password, setPassword] = useState();
+function Login({ setLogoutUser }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await loginUser({
-      username,
-      password,
-    });
-    if ("accessToken" in response) {
-      swal("Success", response.message, "success", {
-        buttons: false,
-        timer: 2000,
-      }).then((value) => {
-        localStorage.setItem("accessToken", response["accessToken"]);
-        localStorage.setItem("user", JSON.stringify(response["user"]));
-        window.location.href = "/dashboard";
-      });
-    } else {
-      swal("Failed", response.message, "error");
-    }
+    axiox
+      .post("http://localhost:8080/api/auth/login", {
+        email,
+        password,
+      })
+      .then((response) => {
+        console.log("response", response);
+        localStorage.setItem(
+          "login",
+          JSON.stringify({
+            userLogin: true,
+            token: response.data.access_token,
+          })
+        );
+        setError("");
+        setEmail("");
+        setPassword("");
+        setLogoutUser(false);
+        navigate("/");
+      })
+      .catch((error) => setError(error.response.data.message));
   };
 
   return (
     <div>
       <div className="login">
-        <div>Focus Positive Login</div>
+        <div style={{ marginBottom: "10px" }}>Focus Positive Login</div>
+        {error && <p style={{ color: "red", marginBottom: "10px" }}>{error}</p>}
         <form noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
@@ -50,8 +48,9 @@ function Login() {
             required
             id="email"
             name="email"
-            label="Email Address"
-            onChange={(e) => setUserName(e.target.value)}
+            label="Email Addresse"
+            type="text"
+            onChange={(e) => setEmail(e.target.value)}
             sx={{ marginRight: 3 }}
           />
           <TextField
@@ -60,7 +59,7 @@ function Login() {
             required
             id="password"
             name="password"
-            label="Password"
+            label="Passwort"
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
