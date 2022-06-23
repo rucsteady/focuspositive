@@ -33,7 +33,7 @@ function Login({ setUserLoggedIn }) {
         setUserLoggedIn(true);
         navigate("/");
       })
-      .catch((err) => setError(err.message));
+      .catch((err) => setError(err.response.data.message));
   };
 
   return (
