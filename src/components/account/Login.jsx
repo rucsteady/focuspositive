@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import axiox from "axios";
 import "./LoginStyle.css";
 
-function Login({ setLogoutUser }) {
+function Login({ setUserLoggedIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -30,10 +30,10 @@ function Login({ setLogoutUser }) {
         setError("");
         setEmail("");
         setPassword("");
-        setLogoutUser(false);
+        setUserLoggedIn(true);
         navigate("/");
       })
-      .catch((error) => setError(error.response.data.message));
+      .catch((err) => setError(err.message));
   };
 
   return (
