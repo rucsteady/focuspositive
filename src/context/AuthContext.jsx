@@ -1,12 +1,14 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axi from "axios";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
+  const [users, setUsers] = useState([]);
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
+  const [currentEmail, setCurrentEmail] = useState();
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   let navigate = useNavigate();
@@ -27,6 +29,7 @@ export function AuthProvider({ children }) {
             token: response.data.access_token,
           })
         );
+        setCurrentEmail(email);
         setError("");
         setEmail("");
         setPassword("");
@@ -36,11 +39,14 @@ export function AuthProvider({ children }) {
       .catch((err) => setError(err.response.data.message));
   };
 
-  const getUsers = async (e) => {
-    e.preventDefault();
-    axi.get('http://localhost:8080/api/users')
-  }
-  
+  useEffect(() => {
+    axi
+      .get("http://localhost:8080/api/users")
+      .then((response) => setUsers(response.data.users));
+  }, []);
+
+  console.log(users);
+
   return (
     <AuthContext.Provider
       value={{
@@ -50,7 +56,8 @@ export function AuthProvider({ children }) {
         setUserLoggedIn,
         userLoggedIn,
         error,
-        email
+        currentEmail,
+        users,
       }}
     >
       {children}

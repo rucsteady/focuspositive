@@ -14,7 +14,7 @@ function Login() {
       <div className="login">
         <div style={{ marginBottom: "10px" }}>Focus Positive Login</div>
         {error && <p style={{ color: "red", marginBottom: "10px" }}>{error}</p>}
-      
+
         <form noValidate onSubmit={handleLogin}>
           <TextField
             variant="outlined"
