@@ -9,26 +9,23 @@ import NotFound from "./components/NotFound";
 import styles from "./App.module.css";
 import Login from "./components/account/Login";
 import Register from "./components/account/Register";
-import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
     <>
       <div className={styles.app}>
-        <AuthProvider>
-          <Navigation />
+        <Navigation />
 
-          <Routes>
-            <Route index element={<Dashboard />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="chat" element={<Chat />} />
-            <Route path="journal" element={<Journal />} />
-            <Route path="account" element={<Account />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </AuthProvider>
+        <Routes>
+          <Route index element={<Dashboard />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="chat" element={<Chat />} />
+          <Route path="journal" element={<Journal />} />
+          <Route path="account" element={<Account />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
     </>
   );
