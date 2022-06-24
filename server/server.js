@@ -82,13 +82,12 @@ server.post("/api/auth/login", (req, res) => {
 });
 
 server.get("/api/users", (req, res) => {
-  res.send(
-    fs.readFile("./users.json", (err, data) => {
-      data = JSON.parse(data.toString());
-      
-    })
-  ); 
-  res.status(200).json({ Message: "Users:" });
+  const rawData = fs.readFileSync("./users.json");
+  const users = JSON.parse(rawData);
+  console.log(users);
+
+  res.setHeader("Content-Type", "application/json");
+  res.end(JSON.stringify(users));
 });
 
 const port = 8080;
