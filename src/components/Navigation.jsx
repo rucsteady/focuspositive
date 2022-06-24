@@ -19,13 +19,14 @@ function Navigation() {
           }}
         >
           Focus Positive
-        </div>        
+        </div>
         <NavLink to="/dashboard">Dashboard</NavLink>
         <NavLink to="/chat">Random Chat</NavLink>
         <NavLink to="/journal">Journal</NavLink>
         <NavLink to="/account">Account</NavLink>
-        
-        <NavLink to="/login">Login</NavLink> 
+
+        <NavLink to="/login">Login</NavLink>
+        <NavLink to="/register">Registrieren</NavLink>
       </div>
     </>
   );
