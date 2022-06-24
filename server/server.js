@@ -81,6 +81,15 @@ server.post("/api/auth/login", (req, res) => {
   res.status(200).json({ access_token });
 });
 
+server.get("/api/users", (req, res) => {
+  fs.readFile("./users.json", (err, data) => {
+    data = JSON.parse(data.toString());
+    console.log(data);
+
+    return res.data;
+  });
+});
+
 const port = 8080;
 
 server.listen(port, () => {

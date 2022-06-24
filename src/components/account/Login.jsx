@@ -1,47 +1,21 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import axiox from "axios";
+
 import "./LoginStyle.css";
+import AuthContext from "../../context/AuthContext";
 
-function Login({ setUserLoggedIn }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  let navigate = useNavigate();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    axiox
-      .post("http://localhost:8080/api/auth/login", {
-        email,
-        password,
-      })
-      .then((response) => {
-        console.log("response", response);
-        localStorage.setItem(
-          "login",
-          JSON.stringify({
-            userLogin: true,
-            token: response.data.access_token,
-          })
-        );
-        setError("");
-        setEmail("");
-        setPassword("");
-        setUserLoggedIn(true);
-        navigate("/");
-      })
-      .catch((err) => setError(err.response.data.message));
-  };
+function Login() {
+  const { error, handleLogin, setPassword, setEmail } = useContext(AuthContext);
 
   return (
     <div>
       <div className="login">
         <div style={{ marginBottom: "10px" }}>Focus Positive Login</div>
         {error && <p style={{ color: "red", marginBottom: "10px" }}>{error}</p>}
-        <form noValidate onSubmit={handleSubmit}>
+      
+        <form noValidate onSubmit={handleLogin}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -70,7 +44,6 @@ function Login({ setUserLoggedIn }) {
           </div>
         </form>
       </div>
-      
     </div>
   );
 }

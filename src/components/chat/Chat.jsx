@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useContext } from "react";
+import AuthContext from "../../context/AuthContext";
 
 function Chat() {
-  return (
-    <div>Chat</div>
-  )
+  const { email } = useContext(AuthContext);
+  return <div>Login In as: { email } </div>;
 }
 
-export default Chat
+export default Chat;
