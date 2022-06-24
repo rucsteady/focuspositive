@@ -4,7 +4,7 @@ import AuthContext from "../context/AuthContext";
 
 function Dashboard() {
   // const user = JSON.parse(localStorage.getItem("user"));
-  const { users, currentEmail } = useContext(AuthContext); 
+  const { users, currentEmail } = useContext(AuthContext);
 
   return (
     <div className="dashboard">
