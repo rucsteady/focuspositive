@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import AuthContext from "../../context/AuthContext";
+
 
 function Chat() {
-  const { email } = useContext(AuthContext);
-  return <div>Login In as: { email } </div>;
+  
+  return <div>Login In as: </div>;
 }
 
 export default Chat;

@@ -1,0 +1,12 @@
+.register {
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;    
+    padding: 10px;
+}
+
+.button { 
+    margin-top: 10px;
+}

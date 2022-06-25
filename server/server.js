@@ -31,7 +31,7 @@ function isRegisterAuthenticated({ email }) {
 }
 
 server.post("/api/auth/register", (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, firstname, lastname } = req.body;
   if (isRegisterAuthenticated({ email })) {
     const status = 401;
     const message = "Email ist bereits registriert";
@@ -50,7 +50,13 @@ server.post("/api/auth/register", (req, res) => {
 
     let last_item_id = data.users[data.users.length - 1].id;
 
-    data.users.push({ id: last_item_id + 1, email: email, password: password });
+    data.users.push({
+      id: last_item_id + 1,
+      email: email,
+      password: password,
+      firstname: firstname,
+      lastname: lastname,
+    });
     let writeData = fs.writeFile(
       "./users.json",
       JSON.stringify(data),
@@ -89,8 +95,6 @@ server.get("/api/users", (req, res) => {
   res.setHeader("Content-Type", "application/json");
   res.end(JSON.stringify(users));
 });
-
-
 
 const port = 8080;
 
