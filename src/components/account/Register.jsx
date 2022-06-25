@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axi from "axios";
 import AuthContext from "../../context/AuthContext";
 import "./RegisterStyle.css";
@@ -10,6 +10,8 @@ function Register() {
   const { setLogoutUser } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
   const [error, setError] = useState("");
   let navigate = useNavigate();
 
@@ -19,6 +21,8 @@ function Register() {
       .post("http://localhost:8080/api/auth/register", {
         email,
         password,
+        firstname,
+        lastname,
       })
       .then((response) => {
         console.log("response", response);
@@ -32,6 +36,8 @@ function Register() {
         setError("");
         setEmail("");
         setPassword("");
+        setFirstName("");
+        setLastName("");
         setLogoutUser(false);
         navigate("/");
       })
@@ -44,6 +50,30 @@ function Register() {
         {error && <p style={{ color: "red" }}>{error}</p>}
 
         <form noValidate autoComplete="off" onSubmit={register}>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            id="firstname"
+            name="firstname"
+            label="Vorname"
+            type="text"
+            value={firstname}
+            onChange={(e) => setFirstName(e.target.value)}
+            sx={{ marginRight: 3 }}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            id="lastname"
+            name="lastname"
+            label="Nachname"
+            type="text"
+            value={lastname}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          <br />
           <TextField
             variant="outlined"
             margin="normal"
@@ -67,9 +97,10 @@ function Register() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+
           <div className="button">
             <Button variant="contained" type="submit">
-            Anlegen
+              Anlegen
             </Button>
           </div>
         </form>
