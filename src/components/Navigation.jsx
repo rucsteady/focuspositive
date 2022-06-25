@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import "./NavigationStyle.css";
+import AuthContext from "../context/AuthContext";
 
 function Navigation() {
-  // const user = JSON.parse(localStorage.getItem("user"));
+  const { userLoggedIn } = useContext(AuthContext);
+  
 
   return (
     <>
@@ -20,13 +22,14 @@ function Navigation() {
         >
           Focus Positive
         </div>
-        <NavLink to="/dashboard">Dashboard</NavLink>
-        <NavLink to="/chat">Random Chat</NavLink>
-        <NavLink to="/journal">Journal</NavLink>
-        <NavLink to="/account">Account</NavLink>
 
-        <NavLink to="/login">Login</NavLink>
-        <NavLink to="/register">Registrieren</NavLink>
+        <NavLink to="/dashboard">Dashboard</NavLink>
+        {userLoggedIn && <NavLink to="/chat">Random Chat</NavLink>}
+        {userLoggedIn && <NavLink to="/journal">Journal</NavLink>}
+        {userLoggedIn && <NavLink to="/account">Account</NavLink>}
+
+        {!userLoggedIn && <NavLink to="/login">Login</NavLink>}
+        {!userLoggedIn && <NavLink to="/register">Registrieren</NavLink>}
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Dashboard from "./components/Dashboard";
@@ -9,8 +9,11 @@ import NotFound from "./components/NotFound";
 import styles from "./App.module.css";
 import Login from "./components/account/Login";
 import Register from "./components/account/Register";
+import AuthContext from "./context/AuthContext";
 
 function App() {
+  const { userLoggedIn } = useContext(AuthContext);
+
   return (
     <>
       <div className={styles.app}>
@@ -19,11 +22,11 @@ function App() {
         <Routes>
           <Route index element={<Dashboard />} />
           <Route path="dashboard" element={<Dashboard />} />
-          <Route path="chat" element={<Chat />} />
-          <Route path="journal" element={<Journal />} />
-          <Route path="account" element={<Account />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+          {userLoggedIn && <Route path="chat" element={<Chat />} />}
+          {userLoggedIn && <Route path="journal" element={<Journal />} />}
+          {userLoggedIn && <Route path="account" element={<Account />} />}
+          {!userLoggedIn && <Route path="login" element={<Login />} />}
+          {!userLoggedIn && <Route path="register" element={<Register />} />}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
