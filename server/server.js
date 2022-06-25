@@ -50,7 +50,7 @@ server.post("/api/auth/register", (req, res) => {
 
     let last_item_id = data.users[data.users.length - 1].id;
 
-    data.users.push({ id: last_item_id + 1, email: email, password: password });
+    data.users.push({ id: last_item_id + 1, email: email, password: password});
     let writeData = fs.writeFile(
       "./users.json",
       JSON.stringify(data),
