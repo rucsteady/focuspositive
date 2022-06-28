@@ -39,13 +39,21 @@ export function AuthProvider({ children }) {
       .catch((err) => setError(err.response.data.message));
   };
 
+  const handleLogOut = () => {
+    setUserLoggedIn(false);
+    navigate("/login");
+  };
+
   useEffect(() => {
     axi
       .get("http://localhost:8080/api/users")
       .then((response) => setUsers(response.data.users));
   }, []);
 
-  console.log(users);
+  const currentUser = users
+    .filter((user) => user.email === currentEmail);
+
+  // console.log(users);
 
   return (
     <AuthContext.Provider
@@ -58,6 +66,8 @@ export function AuthProvider({ children }) {
         error,
         currentEmail,
         users,
+        handleLogOut,
+        currentUser,
       }}
     >
       {children}
