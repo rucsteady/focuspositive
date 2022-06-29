@@ -13,27 +13,25 @@ function Account() {
         <div>
           Eingeloggt als
           <p style={{ margin: 5 }}>
-            Vorname: 
+            Vorname:
             {users
               .filter((user) => user.email === currentEmail)
               .map((user) => user.firstname)}
           </p>
           <p style={{ margin: 5 }}>
-            Nachname: 
+            Nachname:
             {users
               .filter((user) => user.email === currentEmail)
               .map((user) => user.lastname)}
           </p>
         </div>
         <div>
-        <Button variant="contained" onClick={handleLogOut}>
-          {" "}
-          Logout
-        </Button>{" "}
+          <Button variant="contained" onClick={handleLogOut}>
+            {" "}
+            Logout
+          </Button>{" "}
+        </div>
       </div>
-      </div>
-
-    
     </>
   );
 }
