@@ -11,6 +11,7 @@ export function AuthProvider({ children }) {
   const [currentEmail, setCurrentEmail] = useState();
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [currentUser, setCurrentUser] = useState("");
   let navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -48,13 +49,16 @@ export function AuthProvider({ children }) {
     axi
       .get("http://localhost:8080/api/users")
       .then((response) => setUsers(response.data.users));
+    
   }, []);
-
-  const currentUser = users
-    .filter((user) => user.email === currentEmail);
 
   // console.log(users);
 
+  useEffect(() => {
+    setCurrentUser(users.filter((user) => user.email === currentEmail))
+    
+  }, [users, currentEmail]);
+  
   return (
     <AuthContext.Provider
       value={{
