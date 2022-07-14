@@ -19,17 +19,16 @@ function Account() {
               .map((user) => user.firstname)}
           </p>
           <p style={{ margin: 5 }}>
-            Nachname:
+            Nachname: 
             {users
               .filter((user) => user.email === currentEmail)
               .map((user) => user.lastname)}
           </p>
         </div>
         <div>
-          <Button variant="contained" onClick={handleLogOut}>
-            {" "}
+          <Button variant="contained" onClick={handleLogOut}>           
             Logout
-          </Button>{" "}
+          </Button>
         </div>
       </div>
     </>
