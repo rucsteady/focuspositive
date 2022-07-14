@@ -23,12 +23,7 @@ const socket = io.connect("http://localhost:3001");
 function RandomChat({ chatUser }) {
   const [message, setMessage] = useState("");
   const [room, setRoom] = useState("");
-  const [chatMessages, setChatMessages] = useState([
-    {
-      user: "",
-      message: "",
-    },
-  ]);
+  const [chatMessages, setChatMessages] = useState([]);
 
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
@@ -72,7 +67,7 @@ function RandomChat({ chatUser }) {
   const listChatMessages = chatMessages.map((chatMessageDto, index) => (
     <ListItem key={index}>
       <ListItemText
-        primary={`${chatMessageDto.user} ${chatMessageDto.message}`}
+        primary={`${chatMessageDto.user + ":"} ${chatMessageDto.message}`}
       />
     </ListItem>
   ));
