@@ -1,12 +1,12 @@
 import { Toolbar, Typography } from "@mui/material";
-import { Box, margin } from "@mui/system";
+import { Box } from "@mui/system";
 import React, { Fragment, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import Bar from "./Bar";
 import RandomChat from "./RandomChat";
 
 function Chat() {
-  const { users, currentUser, currentEmail } = useContext(AuthContext);
+  const {  currentUser } = useContext(AuthContext);
 
   console.log("currentUser:", currentUser[0].firstname);
 

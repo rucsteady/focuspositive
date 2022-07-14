@@ -30,6 +30,11 @@ function RandomChat({ chatUser }) {
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
   };
+  const sendMessage = () => {
+    if (chatUser && message) {
+      console.log("send");
+    }
+  };
 
   const listChatMessages = chatMessages.map((chatMessageDto, index) => (
     <ListItem key={index}>
@@ -39,13 +44,14 @@ function RandomChat({ chatUser }) {
     </ListItem>
   ));
 
+  
   return (
     <Fragment>
       <Container>
         <Paper elevation={5}>
           <Box p={3}>
             <Typography variant="h5" gutterBottom>
-              Happy Chatting!
+              Random Chat Topic Generator Placeholder =)
             </Typography>
             <Divider />
             <Grid container spacing={4} alignItems="center">
@@ -68,7 +74,11 @@ function RandomChat({ chatUser }) {
                 </FormControl>
               </Grid>
               <Grid xs={1} item>
-                <IconButton aria-label="send" collor="primary">
+                <IconButton
+                  onClick={sendMessage}
+                  aria-label="send"
+                  color="primary"
+                >
                   <SendIcon />
                 </IconButton>
               </Grid>
