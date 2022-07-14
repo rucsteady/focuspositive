@@ -1,9 +1,11 @@
+import SendIcon from "@mui/icons-material/Send";
 import {
   Box,
   Container,
   Divider,
   FormControl,
   Grid,
+  IconButton,
   List,
   ListItem,
   ListItemText,
@@ -21,6 +23,8 @@ function RandomChat({ chatUser }) {
       message: "Hi",
     },
   ]);
+
+  const [message, setMessage] = useState("");
 
   const listChatMessages = chatMessages.map((chatMessageDto, index) => (
     <ListItem key={index}>
@@ -45,13 +49,25 @@ function RandomChat({ chatUser }) {
                   {listChatMessages}
                 </List>
               </Grid>
-              <Grid item>
+              <Grid xs={4} item>
                 <FormControl fullWidth>
-                  <TextField value={chatUser} />
+                  <TextField value={chatUser} label="Name" variant="outlined" />
                 </FormControl>
               </Grid>
-              <Grid item></Grid>
-              <Grid item></Grid>
+              <Grid xs={9} item>
+                <FormControl fullWidth>
+                  <TextField
+                    value={message}
+                    label="Nachricht eingeben..."
+                    variant="outlined"
+                  />
+                </FormControl>
+              </Grid>
+              <Grid xs={1} item>
+                <IconButton aria-label="send" collor="primary">
+                    <SendIcon />
+                </IconButton>
+              </Grid>
             </Grid>
           </Box>
         </Paper>

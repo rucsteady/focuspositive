@@ -17,7 +17,7 @@ function Chat() {
       <Toolbar>
         <Box mr={2}>
           <Typography variant="h6">
-            {currentUser[0].firstname} Random Chat
+          Random Chat von {chatUser}
           </Typography>
         </Box>
       </Toolbar>
