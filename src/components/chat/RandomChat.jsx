@@ -44,7 +44,7 @@ function RandomChat({ chatUser }) {
     </ListItem>
   ));
 
-  
+
   return (
     <Fragment>
       <Container>
@@ -61,7 +61,7 @@ function RandomChat({ chatUser }) {
                 </List>
               </Grid>
               <Grid xs={4} item>
-                <Chip label={`${chatUser}:`} Filled />
+                <Chip label={`${chatUser}:`} />
               </Grid>
               <Grid xs={9} item>
                 <FormControl fullWidth>
