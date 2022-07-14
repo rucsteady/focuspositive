@@ -2,20 +2,22 @@ import {
   Box,
   Container,
   Divider,
+  FormControl,
   Grid,
   List,
   ListItem,
   ListItemText,
   Paper,
+  TextField,
   Typography,
 } from "@mui/material";
 import React, { Fragment, useState } from "react";
-import { ChatMessageDto } from "./ChatMessageDto";
+import "./RandomChatStyle.css";
 
-function RandomChat() {
+function RandomChat({ chatUser }) {
   const [chatMessages, setChatMessages] = useState([
     {
-      user: "John",
+      user: "Nils",
       message: "Hi",
     },
   ]);
@@ -38,10 +40,16 @@ function RandomChat() {
             </Typography>
             <Divider />
             <Grid container spacing={4} alignItems="center">
-              <Grid item>
-                <List>{listChatMessages}</List>
+              <Grid id="chat-window" xs={12} item>
+                <List id="chat-window-messages" xs={12}>
+                  {listChatMessages}
+                </List>
               </Grid>
-              <Grid item></Grid>
+              <Grid item>
+                <FormControl fullWidth>
+                  <TextField value={chatUser} />
+                </FormControl>
+              </Grid>
               <Grid item></Grid>
               <Grid item></Grid>
             </Grid>

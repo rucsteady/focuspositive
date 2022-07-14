@@ -10,6 +10,8 @@ function Chat() {
 
   console.log("currentUser:", currentUser[0].firstname);
 
+  const chatUser = currentUser[0].firstname;
+
   return (
     <Fragment>
       <Toolbar>
@@ -21,7 +23,7 @@ function Chat() {
       </Toolbar>
 
       <Bar />
-      <RandomChat />
+      <RandomChat chatUser={chatUser}/>
     </Fragment>
   );
 }
