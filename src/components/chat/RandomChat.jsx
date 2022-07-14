@@ -25,8 +25,8 @@ function RandomChat({ chatUser }) {
   const [room, setRoom] = useState("");
   const [chatMessages, setChatMessages] = useState([
     {
-      user: "Nils",
-      message: "Hi",
+      user: "",
+      message: "",
     },
   ]);
 
@@ -42,21 +42,37 @@ function RandomChat({ chatUser }) {
     }
   };
 
-  const sendMessage = () => {
-    if (chatUser && message) {
+  const sendMessage = async () => {
+    if (chatUser && message !== "") {
       console.log("send");
+      const messageData = { room: room, user: chatUser, message: message };
+
+      await socket.emit("send_message", messageData);
+      setChatMessages((list) => [...list, messageData]);
     }
+    setMessage("");
   };
 
   useEffect(() => {
     console.log("Open Socket", room);
-    console.log(room);
   }, [room]);
+
+  useEffect(() => {
+    socket.on("receive_message", (data) => {
+      setChatMessages([
+        ...chatMessages,
+        {
+          user: chatUser,
+          message: data.message,
+        },
+      ]);
+    });
+  }, [chatMessages]);
 
   const listChatMessages = chatMessages.map((chatMessageDto, index) => (
     <ListItem key={index}>
       <ListItemText
-        primary={`${chatMessageDto.user}: ${chatMessageDto.message}`}
+        primary={`${chatMessageDto.user} ${chatMessageDto.message}`}
       />
     </ListItem>
   ));
@@ -86,6 +102,7 @@ function RandomChat({ chatUser }) {
                     value={room}
                     label="Room ID"
                     variant="outlined"
+                    maxLength={10}
                   />
                 </FormControl>
               </Grid>
@@ -96,6 +113,7 @@ function RandomChat({ chatUser }) {
                     value={message}
                     label="Nachricht eingeben..."
                     variant="outlined"
+                    maxLength={300}
                   />
                 </FormControl>
               </Grid>
