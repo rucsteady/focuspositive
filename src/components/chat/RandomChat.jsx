@@ -14,13 +14,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "./RandomChatStyle.css";
 import io from "socket.io-client";
 
 const socket = io.connect("http://localhost:3001");
 
 function RandomChat({ chatUser }) {
+  const [message, setMessage] = useState("");
+  const [room, setRoom] = useState("");
   const [chatMessages, setChatMessages] = useState([
     {
       user: "Nils",
@@ -28,16 +30,28 @@ function RandomChat({ chatUser }) {
     },
   ]);
 
-  const [message, setMessage] = useState("");
-
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
   };
+
+  const handleRoom = (event) => {
+    event.preventDefault();
+    setRoom(event.target.value);
+    if (chatUser !== "" && room !== "") {
+      socket.emit("join_room", room);
+    }
+  };
+
   const sendMessage = () => {
     if (chatUser && message) {
       console.log("send");
     }
   };
+
+  useEffect(() => {
+    console.log("Open Socket", room);
+    console.log(room);
+  }, [room]);
 
   const listChatMessages = chatMessages.map((chatMessageDto, index) => (
     <ListItem key={index}>
@@ -64,6 +78,16 @@ function RandomChat({ chatUser }) {
               </Grid>
               <Grid xs={4} item>
                 <Chip label={`${chatUser}:`} />
+              </Grid>
+              <Grid xs={3} item>
+                <FormControl>
+                  <TextField
+                    onChange={handleRoom}
+                    value={room}
+                    label="Room ID"
+                    variant="outlined"
+                  />
+                </FormControl>
               </Grid>
               <Grid xs={9} item>
                 <FormControl fullWidth>
