@@ -16,6 +16,9 @@ import {
 } from "@mui/material";
 import React, { Fragment, useState } from "react";
 import "./RandomChatStyle.css";
+import io from "socket.io-client";
+
+const socket = io.connect("http://localhost:3001");
 
 function RandomChat({ chatUser }) {
   const [chatMessages, setChatMessages] = useState([
@@ -43,7 +46,6 @@ function RandomChat({ chatUser }) {
       />
     </ListItem>
   ));
-
 
   return (
     <Fragment>
