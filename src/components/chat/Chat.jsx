@@ -19,8 +19,9 @@ function Chat() {
           </Typography>
         </Box>
       </Toolbar>
-      <RandomChat />
+
       <Bar />
+      <RandomChat />
     </Fragment>
   );
 }
