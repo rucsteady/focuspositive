@@ -29,6 +29,32 @@ function RandomChat({ chatUser }) {
     setMessage(event.target.value);
   };
 
+  const sendMessage = async () => {
+    if (chatUser && message !== "") {
+      const messageData = {
+        room: room,
+        user: chatUser,
+        message: message,
+        time:
+          new Date(Date.now()).getHours() +
+          ":" +
+          new Date(Date.now()).getMinutes(),
+      };
+
+      console.log(messageData);
+      await socket.emit("send_message", messageData);
+      setChatMessages((list) => [...list, messageData]);
+    }
+    setMessage("");
+  };
+
+  useEffect(() => {
+    socket.on("receive_message", (data) => {
+      console.log(data);
+      setChatMessages((list) => [...list, data]);
+    });
+  }, [socket]);
+
   const handleRoom = (event) => {
     event.preventDefault();
     setRoom(event.target.value);
@@ -37,32 +63,12 @@ function RandomChat({ chatUser }) {
     }
   };
 
-  const sendMessage = async () => {
-    if (chatUser && message !== "") {
-      console.log("send");
-      const messageData = { room: room, user: chatUser, message: message };
-
-      await socket.emit("send_message", messageData);
-      setChatMessages((list) => [...list, messageData]);
-    }
-    setMessage("");
-  };
-
   useEffect(() => {
     console.log("Open Socket", room);
+    if (room !== "") {
+      socket.emit("join_room", room);
+    }
   }, [room]);
-
-  useEffect(() => {
-    socket.on("receive_message", (data) => {
-      setChatMessages([
-        ...chatMessages,
-        {
-          user: chatUser,
-          message: data.message,
-        },
-      ]);
-    });
-  }, [chatMessages]);
 
   const listChatMessages = chatMessages.map((chatMessageDto, index) => (
     <ListItem key={index}>
@@ -101,6 +107,7 @@ function RandomChat({ chatUser }) {
                   />
                 </FormControl>
               </Grid>
+
               <Grid xs={9} item>
                 <FormControl fullWidth>
                   <TextField
@@ -109,6 +116,9 @@ function RandomChat({ chatUser }) {
                     label="Nachricht eingeben..."
                     variant="outlined"
                     maxLength={300}
+                    onKeyPress={(event) => {
+                      event.key === "Enter" && sendMessage();
+                    }}
                   />
                 </FormControl>
               </Grid>
