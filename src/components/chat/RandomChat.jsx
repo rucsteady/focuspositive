@@ -14,7 +14,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useRef } from "react";
 import "./RandomChatStyle.css";
 import io from "socket.io-client";
 
@@ -24,6 +24,8 @@ function RandomChat({ chatUser }) {
   const [message, setMessage] = useState("");
   const [room, setRoom] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
+
+  const scrollBottomRef = useRef(null);
 
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
@@ -44,6 +46,9 @@ function RandomChat({ chatUser }) {
       console.log(messageData);
       await socket.emit("send_message", messageData);
       setChatMessages((list) => [...list, messageData]);
+      if (scrollBottomRef.current) {
+        scrollBottomRef.current.scrollIntoView({ behavior: "smooth" });
+      }
     }
     setMessage("");
   };
@@ -91,6 +96,7 @@ function RandomChat({ chatUser }) {
               <Grid id="chat-window" xs={12} item>
                 <List id="chat-window-messages" xs={12}>
                   {listChatMessages}
+                  <ListItem ref={scrollBottomRef} />
                 </List>
               </Grid>
               <Grid xs={4} item>
