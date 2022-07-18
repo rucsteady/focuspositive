@@ -6,7 +6,7 @@ import Bar from "./Bar";
 import RandomChat from "./RandomChat";
 
 function Chat() {
-  const {  currentUser } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
 
   console.log("currentUser:", currentUser[0].firstname);
 
@@ -16,14 +16,12 @@ function Chat() {
     <Fragment>
       <Toolbar>
         <Box mr={2}>
-          <Typography variant="h6">
-          Random Chat von {chatUser}
-          </Typography>
+          <Typography variant="h6">Random Chat von {chatUser}</Typography>
         </Box>
       </Toolbar>
 
       <Bar />
-      <RandomChat chatUser={chatUser}/>
+      <RandomChat chatUser={chatUser} />
     </Fragment>
   );
 }
