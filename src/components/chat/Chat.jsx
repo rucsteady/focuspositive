@@ -11,7 +11,7 @@ function Chat() {
   console.log("currentUser:", currentUser[0].firstname);
 
   const chatUser = currentUser[0].firstname;
-
+  
   return (
     <Fragment>
       <Container fixed>

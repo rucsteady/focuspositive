@@ -5,8 +5,7 @@ import { NavLink } from "react-router-dom";
 
 function Dashboard() {
   // const user = JSON.parse(localStorage.getItem("user"));
-  const { users, currentEmail, userLoggedIn, currentUser } =
-    useContext(AuthContext);
+  const { userLoggedIn } = useContext(AuthContext);
 
   return (
     <div className="dashboard">
