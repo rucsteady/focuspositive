@@ -15,12 +15,12 @@ function Chat() {
   return (
     <Fragment>
       <Container fixed>
-        <Grid container spacing={0.5}>
-          <Grid item >
+        <Grid container spacing={0.5} >
+          <Grid item maxWidth="350px" sx={{marginLeft: 3}}>
             <RandomChatInfo />
           </Grid>
           <Grid item xs={6}>
-            <Container sx={{ width: 500, marginTop:"20px" }}>
+            <Container sx={{ width: 500, marginTop: "20px" }}>
               {/* <Bar /> */}
               <RandomChat chatUser={chatUser} />
             </Container>

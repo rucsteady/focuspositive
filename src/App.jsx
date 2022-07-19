@@ -16,7 +16,7 @@ function App() {
 
   return (
     <>
-      <div className={styles.app}>
+      <div className={styles.app} >
         <Navigation />
 
         <Routes>
