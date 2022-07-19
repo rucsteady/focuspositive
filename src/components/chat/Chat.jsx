@@ -1,9 +1,9 @@
-import { Toolbar, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Grid } from "@mui/material";
+import { Container } from "@mui/system";
 import React, { Fragment, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
-import Bar from "./Bar";
 import RandomChat from "./RandomChat";
+import RandomChatInfo from "./RandomChatInfo";
 
 function Chat() {
   const { currentUser } = useContext(AuthContext);
@@ -14,14 +14,19 @@ function Chat() {
 
   return (
     <Fragment>
-      <Toolbar>
-        <Box mr={2}>
-          <Typography variant="h6">Random Chat von {chatUser}</Typography>
-        </Box>
-      </Toolbar>
-
-      <Bar />
-      <RandomChat chatUser={chatUser} />
+      <Container fixed>
+        <Grid container spacing={0.5}>
+          <Grid item >
+            <RandomChatInfo />
+          </Grid>
+          <Grid item xs={6}>
+            <Container sx={{ width: 500, marginTop:"20px" }}>
+              {/* <Bar /> */}
+              <RandomChat chatUser={chatUser} />
+            </Container>
+          </Grid>
+        </Grid>
+      </Container>
     </Fragment>
   );
 }

@@ -12,6 +12,7 @@ import {
   ListItemText,
   Paper,
   TextField,
+  Toolbar,
   Typography,
 } from "@mui/material";
 import React, { Fragment, useEffect, useState, useRef } from "react";
@@ -58,7 +59,7 @@ function RandomChat({ chatUser }) {
       console.log(data);
       setChatMessages((list) => [...list, data]);
     });
-  }, [socket]);
+  }, []);
 
   const handleRoom = (event) => {
     event.preventDefault();
@@ -86,10 +87,15 @@ function RandomChat({ chatUser }) {
   return (
     <Fragment>
       <Container>
-        <Paper elevation={5}>
+        <Toolbar>
+          <Box mr={2}>
+            <Typography variant="h6">Random Chat von {chatUser}</Typography>
+          </Box>
+        </Toolbar>
+        <Paper elevation={2}>
           <Box p={3}>
             <Typography variant="h5" gutterBottom>
-              Random Chat Topic Generator Placeholder =)
+              Coffee Chat
             </Typography>
             <Divider />
             <Grid container spacing={4} alignItems="center">

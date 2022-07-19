@@ -10,9 +10,7 @@ function Bar() {
       <Box mb={4}>
         <AppBar position="static">
           <Toolbar>
-            <Box mr={2}>
-              <ChatIcon fontSize={"large"} />
-            </Box>
+           
             <Typography variant="h6">Chat</Typography>
           </Toolbar>
         </AppBar>
