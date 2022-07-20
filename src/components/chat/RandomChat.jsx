@@ -87,15 +87,11 @@ function RandomChat({ chatUser }) {
   return (
     <Fragment>
       <Container>
-        <Toolbar>
-          <Box mr={2}>
-            <Typography variant="h6">Random Chat von {chatUser}</Typography>
-          </Box>
-        </Toolbar>
-        <Paper elevation={2}>
+        
+        <Paper elevation={0}>
           <Box p={3}>
             <Typography variant="h5" gutterBottom>
-              Coffee Chat
+              Coffee Chat von {chatUser}
             </Typography>
             <Divider />
             <Grid container spacing={4} alignItems="center">

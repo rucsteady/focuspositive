@@ -1,26 +1,30 @@
 import { Grid } from "@mui/material";
 import { Container } from "@mui/system";
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import RandomChat from "./RandomChat";
 import RandomChatInfo from "./RandomChatInfo";
+import RandomChatSearch from "./RandomChatSearch";
 
 function Chat() {
   const { currentUser } = useContext(AuthContext);
-
   console.log("currentUser:", currentUser[0].firstname);
-
   const chatUser = currentUser[0].firstname;
-  
+  const [isSearchingForChat, setIsSearchingForChat] = useState(false);
+
   return (
     <Fragment>
       <Container fixed>
-        <Grid container spacing={0.5} >
-          <Grid item maxWidth="350px" sx={{marginLeft: 3}}>
-            <RandomChatInfo />
+        <Grid container spacing={1} >
+          <Grid item >
+            {!isSearchingForChat ? (
+              <RandomChatInfo setIsSearchingForChat={setIsSearchingForChat} />
+            ) : (
+              <RandomChatSearch />
+            )}
           </Grid>
           <Grid item xs={6}>
-            <Container sx={{ width: 500, marginTop: "20px" }}>
+            <Container >
               {/* <Bar /> */}
               <RandomChat chatUser={chatUser} />
             </Container>
