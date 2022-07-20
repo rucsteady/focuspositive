@@ -5,7 +5,7 @@
       "themen": "Filme & Serien",
       "user1": "user1@test.de",
       "user2": "user2@test.de",
-      "date": "2022-08-18T14:00:00+00:00",
+      "date": "2022-08-18T14:30:00+00:00",
       "room": "room-001",
       "isOpen": true,
       "startReady": false
@@ -13,17 +13,17 @@
     {
       "name": "Nachmittags Tee",
       "themen": "Dies & das",
-      "user1": "user1@test.de",
+      "user1": "user3@test.de",
       "user2": "",
-      "date": "2022-10-01T11:00:00+00:00",
+      "date": "2022-10-01T11:30:00+00:00",
       "room": "room-002",
       "isOpen": false,
       "startReady": false
     },
     {
-      "name": "Frühstücks Kaffee",
+      "name": "Frühstückschat",
       "themen": "News des Tages",
-      "user1": "user1@test.de",
+      "user1": "user3@test.de",
       "user2": "",
       "date": "2022-11-01T15:30:00+00:00",
       "room": "room-003",
@@ -31,9 +31,9 @@
       "startReady": false
     },
     {
-      "name": "Kaffee Kuchen",
+      "name": "Kaffee/Kuchen",
       "themen": "Neue Rezepte",
-      "user1": "user1@test.de",
+      "user1": "user3@test.de",
       "user2": "",
       "date": "2022-11-06T08:45:00+00:00",
       "room": "room-004",

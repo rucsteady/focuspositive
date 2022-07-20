@@ -8,6 +8,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  ListSubheader,
   Paper,
   Typography,
 } from "@mui/material";
@@ -18,13 +19,23 @@ function RandomChatSearch({ randomChats, setIsSearchingForChat }) {
 
   const randomChatItems = randomChats.map((randomChatDto, index) => (
     <ListItem key={index}>
-      <ListItemButton divider>
+      <ListItemButton divider selected>
+        <ListSubheader
+          disableSticky
+          disableGutters
+          sx={{ marginRight: 2, fontSize: 16, color: "#000" }}
+        >
+          {randomChatDto.name}:
+        </ListSubheader>
         <ListItemText
-          primary={`${randomChatDto.name + " am "} ${new Date(
+          sx={{ fontSize: 12, color: "#000" }}
+          primary={`${new Date(randomChatDto.date).getUTCDate()}.${new Date(
             randomChatDto.date
-          ).getUTCDate()}.${new Date(
+          ).getMonth()}.${new Date(randomChatDto.date).getFullYear()} um     
+
+          ${new Date(randomChatDto.date).getHours()}:${new Date(
             randomChatDto.date
-          ).getMonth()}`}
+          ).getMinutes()}`}
         />
       </ListItemButton>
     </ListItem>
@@ -51,18 +62,18 @@ function RandomChatSearch({ randomChats, setIsSearchingForChat }) {
                 worden sind. Grüne Random Chats sind noch verfügbar. Blaue
                 Random Chats hast du bereits zugesagt.
               </Typography>
-              <Divider style={{ margin: 10 }} />
+              {/* <Divider style={{ margin: 10 }} /> */}
 
               <Card elevation={0}>
                 <List>{randomChatItems}</List>
               </Card>
 
-              <Divider style={{ margin: 10 }} />
-              <Card elevation={0}>
+              {/* <Divider style={{ margin: 10 }} /> */}
+              {/* <Card elevation={0}>
                 <Typography>
                   Aktuell hast du keine aktiven Random Chats
                 </Typography>
-              </Card>
+              </Card> */}
               <Divider style={{ margin: 10 }} />
               <Button onClick={() => setIsSearchingForChat(false)}>
                 Zurück
