@@ -1,0 +1,36 @@
+{
+  "chats": [
+    {
+      "user1": "user1@test.de",
+      "user2": "user2@test.de",
+      "date": "2022-08-18T14:00:00+00:00",
+      "room": "room-001",
+      "isOpen": true,
+      "startReady": false
+    },
+    {
+      "user1": "user1@test.de",
+      "user2": "",
+      "date": "2022-010-01T11:00:00+00:00",
+      "room": "room-002",
+      "isOpen": false,
+      "startReady": false
+    },
+    {
+      "user1": "user1@test.de",
+      "user2": "",
+      "date": "2022-011-01T15:30:00+00:00",
+      "room": "room-003",
+      "isOpen": false,
+      "startReady": false
+    },
+    {
+      "user1": "user1@test.de",
+      "user2": "",
+      "date": "2022-011-06T08:45:00+00:00",
+      "room": "room-004",
+      "isOpen": false,
+      "startReady": false
+    }
+  ]
+}
