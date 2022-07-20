@@ -19,7 +19,10 @@ function Chat() {
             {!isSearchingForChat ? (
               <RandomChatInfo setIsSearchingForChat={setIsSearchingForChat} />
             ) : (
-              <RandomChatSearch randomChats={randomChats} />
+              <RandomChatSearch
+                randomChats={randomChats}
+                setIsSearchingForChat={setIsSearchingForChat}
+              />
             )}
           </Grid>
           <Grid item xs={12} md={5} xl={7}>
@@ -27,7 +30,6 @@ function Chat() {
             <RandomChat chatUser={chatUser} />
           </Grid>
         </Grid>
-     
       </Container>
     </Fragment>
   );

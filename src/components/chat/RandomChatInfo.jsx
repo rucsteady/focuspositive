@@ -30,7 +30,10 @@ function RandomChatInfo({ setIsSearchingForChat }) {
               <Button variant="contained">Neuen Random Chat erstellen.</Button>
             </Grid>
             <Grid item mt={4} maxWidth={"350px"}>
-              <Button onClick={setIsSearchingForChat} variant="contained">
+              <Button
+                onClick={() => setIsSearchingForChat(true)}
+                variant="contained"
+              >
                 Suche nach einen Random Chat.
               </Button>
             </Grid>

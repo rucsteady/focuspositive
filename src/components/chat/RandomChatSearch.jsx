@@ -1,4 +1,5 @@
 import {
+  Button,
   Card,
   Container,
   Divider,
@@ -9,18 +10,18 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import React, { Fragment, useContext } from "react";
+import React, { Fragment } from "react";
 
-function RandomChatSearch({ randomChats }) {
+function RandomChatSearch({ randomChats, setIsSearchingForChat }) {
+  const date = new Date(randomChats[0].date);
+
   const randomChatItems = randomChats.map((randomChatDto, index) => (
     <ListItem key={index}>
-      <ListItemText
-        primary={`${randomChatDto.user1 + ":"} ${randomChatDto.date}`}
-      />
+      <ListItemText primary={`${randomChatDto.user1 + ":"} ${date}`} />
     </ListItem>
   ));
 
-  // TODO On Click Item 
+  // TODO On Click Item
 
   return (
     <Fragment>
@@ -53,6 +54,10 @@ function RandomChatSearch({ randomChats }) {
                   Aktuell hast du keine aktiven Random Chats
                 </Typography>
               </Card>
+              <Divider style={{ margin: 10 }} />
+              <Button onClick={() => setIsSearchingForChat(false)}>
+                Zurück
+              </Button>
             </Grid>
           </Grid>
         </Paper>
