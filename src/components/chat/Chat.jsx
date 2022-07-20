@@ -15,8 +15,8 @@ function Chat() {
   return (
     <Fragment>
       <Container fixed>
-        <Grid container spacing={1} >
-          <Grid item >
+        <Grid container spacing={8}>
+          <Grid item xs={6}>
             {!isSearchingForChat ? (
               <RandomChatInfo setIsSearchingForChat={setIsSearchingForChat} />
             ) : (
@@ -24,7 +24,7 @@ function Chat() {
             )}
           </Grid>
           <Grid item xs={6}>
-            <Container >
+            <Container>
               {/* <Bar /> */}
               <RandomChat chatUser={chatUser} />
             </Container>
