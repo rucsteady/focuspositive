@@ -12,7 +12,6 @@ import {
   ListItemText,
   Paper,
   TextField,
-  Toolbar,
   Typography,
 } from "@mui/material";
 import React, { Fragment, useEffect, useState, useRef } from "react";
@@ -87,7 +86,6 @@ function RandomChat({ chatUser }) {
   return (
     <Fragment>
       <Container>
-        
         <Paper elevation={0}>
           <Box p={3}>
             <Typography variant="h6" gutterBottom>

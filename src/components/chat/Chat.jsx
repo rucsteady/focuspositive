@@ -8,7 +8,6 @@ import RandomChatSearch from "./RandomChatSearch";
 
 function Chat() {
   const { currentUser } = useContext(AuthContext);
-  console.log("currentUser:", currentUser[0].firstname);
   const chatUser = currentUser[0].firstname;
   const [isSearchingForChat, setIsSearchingForChat] = useState(false);
 
