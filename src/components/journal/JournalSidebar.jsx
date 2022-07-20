@@ -34,7 +34,7 @@ function JournalSidebar({
           }}
         >
           <Typography variant="h6">Einträge</Typography>
-          {sortedNotes.map(({ id, title, body, lastModified }, note) => (
+          {sortedNotes.map(({ id, title, body, lastModified, index }, note) => (
             <Card>
               <List
                 sx={{
@@ -44,6 +44,7 @@ function JournalSidebar({
                   paddingTop: 0,
                   paddingBottom: 0,
                 }}
+                key={index}
               >
                 <ListItem
                   alignItems="flex-start"
@@ -60,7 +61,7 @@ function JournalSidebar({
                           variant="body2"
                           color="text.primary"
                         >
-                          {body && body.substr(0, 100) + "..."}
+                          {body && body.substr(0, 40) + "..."}
                         </Typography>
                         <Typography sx={{ fontSize: 10 }}>
                           {" "}
@@ -69,13 +70,13 @@ function JournalSidebar({
                             hour: "2-digit",
                             minute: "2-digit",
                           })}
+                          <IconButton
+                            aria-label="delete"
+                            onClick={(e) => onDeleteNote(id)}
+                          >
+                            <DeleteIcon />
+                          </IconButton>
                         </Typography>
-                        <IconButton
-                          aria-label="delete"
-                          onClick={(e) => onDeleteNote(id)}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
                       </Fragment>
                     }
                   />
