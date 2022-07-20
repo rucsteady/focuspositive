@@ -6,6 +6,7 @@ import {
   Grid,
   List,
   ListItem,
+  ListItemButton,
   ListItemText,
   Paper,
   Typography,
@@ -17,7 +18,15 @@ function RandomChatSearch({ randomChats, setIsSearchingForChat }) {
 
   const randomChatItems = randomChats.map((randomChatDto, index) => (
     <ListItem key={index}>
-      <ListItemText primary={`${randomChatDto.user1 + ":"} ${date}`} />
+      <ListItemButton divider>
+        <ListItemText
+          primary={`${randomChatDto.name + " am "} ${new Date(
+            randomChatDto.date
+          ).getUTCDate()}.${new Date(
+            randomChatDto.date
+          ).getMonth()}`}
+        />
+      </ListItemButton>
     </ListItem>
   ));
 
