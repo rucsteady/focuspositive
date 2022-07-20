@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Card, Grid, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import React, { Fragment, useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext";
@@ -7,7 +7,7 @@ import RandomChatInfo from "./RandomChatInfo";
 import RandomChatSearch from "./RandomChatSearch";
 
 function Chat() {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, randomChats } = useContext(AuthContext);
   const chatUser = currentUser[0].firstname;
   const [isSearchingForChat, setIsSearchingForChat] = useState(false);
 
@@ -19,7 +19,7 @@ function Chat() {
             {!isSearchingForChat ? (
               <RandomChatInfo setIsSearchingForChat={setIsSearchingForChat} />
             ) : (
-              <RandomChatSearch />
+              <RandomChatSearch randomChats={randomChats} />
             )}
           </Grid>
           <Grid item xs={12} md={5} xl={7}>
@@ -27,6 +27,7 @@ function Chat() {
             <RandomChat chatUser={chatUser} />
           </Grid>
         </Grid>
+     
       </Container>
     </Fragment>
   );
