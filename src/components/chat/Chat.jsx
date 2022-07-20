@@ -1,5 +1,5 @@
-import { Card, Grid, Typography } from "@mui/material";
-import { Container } from "@mui/system";
+import { Grid } from "@mui/material";
+
 import React, { Fragment, useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import RandomChat from "./RandomChat";
@@ -13,7 +13,7 @@ function Chat() {
 
   return (
     <Fragment>
-      <Grid container spacing={1} sx={{marginLeft: 14}}>
+      <Grid container spacing={1} sx={{ marginLeft: 14 }}>
         <Grid item>
           {!isSearchingForChat ? (
             <RandomChatInfo setIsSearchingForChat={setIsSearchingForChat} />

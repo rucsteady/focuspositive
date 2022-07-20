@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import { Container } from "@mui/system";
 import React, { Fragment } from "react";
 import JournalMain from "./JournalMain";
