@@ -12,6 +12,7 @@ export function AuthProvider({ children }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [currentUser, setCurrentUser] = useState("");
+  const [randomChats, setRandomChats] = useState([]);
   let navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -49,16 +50,20 @@ export function AuthProvider({ children }) {
     axi
       .get("http://localhost:8080/api/users")
       .then((response) => setUsers(response.data.users));
-    
   }, []);
 
-  // console.log(users);
+  useEffect(() => {
+    axi
+      .get("http://localhost:8080/api/chats")
+      .then((response) => setRandomChats(response.data.chats));
+  }, []);
+
+  console.log("Chats from Authcontext", randomChats);
 
   useEffect(() => {
-    setCurrentUser(users.filter((user) => user.email === currentEmail))
-    
+    setCurrentUser(users.filter((user) => user.email === currentEmail));
   }, [users, currentEmail]);
-  
+
   return (
     <AuthContext.Provider
       value={{
@@ -72,6 +77,7 @@ export function AuthProvider({ children }) {
         users,
         handleLogOut,
         currentUser,
+        randomChats
       }}
     >
       {children}

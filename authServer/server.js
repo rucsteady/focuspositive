@@ -4,7 +4,7 @@ const jsonServer = require("json-server");
 const jwt = require("jsonwebtoken");
 
 const server = jsonServer.create();
-const userdb = JSON.parse(fs.readFileSync("./users.json", "utf-8"));
+const userdb = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
 
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
@@ -39,7 +39,7 @@ server.post("/api/auth/register", (req, res) => {
     return;
   }
 
-  fs.readFile("./users.json", (err, data) => {
+  fs.readFile("./db.json", (err, data) => {
     if (err) {
       const status = 401;
       const message = err;
@@ -58,7 +58,7 @@ server.post("/api/auth/register", (req, res) => {
       lastname: lastname,
     });
     let writeData = fs.writeFile(
-      "./users.json",
+      "./db.json",
       JSON.stringify(data),
       (err, result) => {
         if (err) {
@@ -88,12 +88,21 @@ server.post("/api/auth/login", (req, res) => {
 });
 
 server.get("/api/users", (req, res) => {
-  const rawData = fs.readFileSync("./users.json");
+  const rawData = fs.readFileSync("./db.json");
   const users = JSON.parse(rawData);
   console.log(users);
 
   res.setHeader("Content-Type", "application/json");
   res.end(JSON.stringify(users));
+});
+
+server.get("/api/chats", (req, res) => {
+  const rawData = fs.readFileSync("./chats.json");
+  const chats = JSON.parse(rawData);
+  console.log(chats);
+
+  res.setHeader("Content-Type", "application/json");
+  res.end(JSON.stringify(chats));
 });
 
 const port = 8080;

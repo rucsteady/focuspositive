@@ -5,7 +5,6 @@ import AuthContext from "../context/AuthContext";
 
 function Navigation() {
   const { userLoggedIn } = useContext(AuthContext);
-  
 
   return (
     <>

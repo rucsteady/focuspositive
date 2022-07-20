@@ -11,7 +11,7 @@ import {
   ListItem,
   ListItemText,
   Paper,
-  TextField,
+  TextField,  
   Typography,
 } from "@mui/material";
 import React, { Fragment, useEffect, useState, useRef } from "react";
@@ -46,9 +46,9 @@ function RandomChat({ chatUser }) {
       console.log(messageData);
       await socket.emit("send_message", messageData);
       setChatMessages((list) => [...list, messageData]);
-      if (scrollBottomRef.current) {
-        scrollBottomRef.current.scrollIntoView({ behavior: "smooth" });
-      }
+      // if (scrollBottomRef.current) {
+      //   scrollBottomRef.current.scrollIntoView({ behavior: "smooth" });
+      // }
     }
     setMessage("");
   };
@@ -58,7 +58,7 @@ function RandomChat({ chatUser }) {
       console.log(data);
       setChatMessages((list) => [...list, data]);
     });
-  }, [socket]);
+  }, []);
 
   const handleRoom = (event) => {
     event.preventDefault();
@@ -86,10 +86,11 @@ function RandomChat({ chatUser }) {
   return (
     <Fragment>
       <Container>
-        <Paper elevation={5}>
+        
+        <Paper elevation={0}>
           <Box p={3}>
-            <Typography variant="h5" gutterBottom>
-              Random Chat Topic Generator Placeholder =)
+            <Typography variant="h6" gutterBottom>
+              Coffee Chat von {chatUser}
             </Typography>
             <Divider />
             <Grid container spacing={4} alignItems="center">

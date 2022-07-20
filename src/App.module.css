@@ -7,4 +7,15 @@
 
 .app {
     font-family: 'Roboto', sans-serif;
+
+    background-image: url("./img/Munnar4.jpg");
+
+    /* Full height */
+    height: 1000px;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+

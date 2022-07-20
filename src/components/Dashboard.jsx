@@ -5,19 +5,18 @@ import { NavLink } from "react-router-dom";
 
 function Dashboard() {
   // const user = JSON.parse(localStorage.getItem("user"));
-  const { users, currentEmail, userLoggedIn, currentUser } =
-    useContext(AuthContext);
+  const { userLoggedIn } = useContext(AuthContext);
 
   return (
     <div className="dashboard">
       <div className="bg">
-        <div style={{ backgroundColor: "#fff", padding: "10px" }}>
+        {/* <div style={{ backgroundColor: "#fff", padding: "10px" }}>
           Wilkommen{" "}
           {currentUser.lastname}
           {users
             .filter((user) => user.email === currentEmail)
             .map((user) => user.firstname)}
-        </div>
+        </div> */}
         <div className="link">
           {!userLoggedIn && (
             <NavLink to="/login" className="link">
