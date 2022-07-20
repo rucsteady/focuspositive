@@ -13,24 +13,22 @@ function Chat() {
 
   return (
     <Fragment>
-      <Container fixed>
-        <Grid container spacing={2}>
-          <Grid item>
-            {!isSearchingForChat ? (
-              <RandomChatInfo setIsSearchingForChat={setIsSearchingForChat} />
-            ) : (
-              <RandomChatSearch
-                randomChats={randomChats}
-                setIsSearchingForChat={setIsSearchingForChat}
-              />
-            )}
-          </Grid>
-          <Grid item xs={12} md={5} xl={7}>
-            {/* <Bar /> */}
-            <RandomChat chatUser={chatUser} />
-          </Grid>
+      <Grid container spacing={1} sx={{marginLeft: 14}}>
+        <Grid item>
+          {!isSearchingForChat ? (
+            <RandomChatInfo setIsSearchingForChat={setIsSearchingForChat} />
+          ) : (
+            <RandomChatSearch
+              randomChats={randomChats}
+              setIsSearchingForChat={setIsSearchingForChat}
+            />
+          )}
         </Grid>
-      </Container>
+        <Grid item xs={12} md={5} xl={7}>
+          {/* <Bar /> */}
+          <RandomChat chatUser={chatUser} />
+        </Grid>
+      </Grid>
     </Fragment>
   );
 }

@@ -23,7 +23,7 @@ function RandomChatSearch({ randomChats, setIsSearchingForChat }) {
         <ListSubheader
           disableSticky
           disableGutters
-          sx={{ marginRight: 2, fontSize: 16, color: "#000" }}
+          sx={{ marginRight: 1, fontSize: 16, color: "#000" }}
         >
           {randomChatDto.name}:
         </ListSubheader>
@@ -45,43 +45,40 @@ function RandomChatSearch({ randomChats, setIsSearchingForChat }) {
 
   return (
     <Fragment>
-      <Container>
-        <Paper
-          elevation={0}
-          sx={{
-            width: 350,
-            padding: 4,
-          }}
-        >
-          <Typography variant="h6">Suche nach einem Random Chat</Typography>
+      <Paper
+        elevation={0}
+        sx={{
+          width: 350,
+          padding: 4,
+          marginLeft: 3,
+        }}
+      >
+        <Typography variant="h6">Suche nach einem Random Chat</Typography>
 
-          <Grid container>
-            <Grid item mt={4} maxWidth={"350px"}>
-              <Typography>
-                Hier findest du eine Liste von Random Chat, die bereits erstellt
-                worden sind. Grüne Random Chats sind noch verfügbar. Blaue
-                Random Chats hast du bereits zugesagt.
-              </Typography>
-              {/* <Divider style={{ margin: 10 }} /> */}
+        <Grid container>
+          <Grid item mt={4} maxWidth={"350px"}>
+            <Typography>
+              Hier findest du eine Liste von Random Chat, die bereits erstellt
+              worden sind. Grüne Random Chats sind noch verfügbar. Blaue Random
+              Chats hast du bereits zugesagt.
+            </Typography>
+            {/* <Divider style={{ margin: 10 }} /> */}
 
-              <Card elevation={0}>
-                <List>{randomChatItems}</List>
-              </Card>
+            <Card elevation={0}>
+              <List>{randomChatItems}</List>
+            </Card>
 
-              {/* <Divider style={{ margin: 10 }} /> */}
-              {/* <Card elevation={0}>
+            {/* <Divider style={{ margin: 10 }} /> */}
+            {/* <Card elevation={0}>
                 <Typography>
                   Aktuell hast du keine aktiven Random Chats
                 </Typography>
               </Card> */}
-              <Divider style={{ margin: 10 }} />
-              <Button onClick={() => setIsSearchingForChat(false)}>
-                Zurück
-              </Button>
-            </Grid>
+            <Divider style={{ margin: 10 }} />
+            <Button onClick={() => setIsSearchingForChat(false)}>Zurück</Button>
           </Grid>
-        </Paper>
-      </Container>
+        </Grid>
+      </Paper>
     </Fragment>
   );
 }
