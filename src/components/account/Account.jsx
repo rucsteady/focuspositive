@@ -1,14 +1,15 @@
-import React, { useContext } from "react";
+import React, { Fragment, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import Button from "@mui/material/Button";
 import "./AccountStyle.css";
+import { Container } from "@mui/material";
 
 function Account() {
   const { users, handleLogOut, currentEmail } = useContext(AuthContext);
 
   return (
-    <>
-      <div className="account">
+    <Fragment>
+      <Container className="account" maxWidth>
         <div>Account</div>
         <div>
           Eingeloggt als
@@ -30,8 +31,8 @@ function Account() {
             Logout
           </Button>
         </div>
-      </div>
-    </>
+      </Container>
+    </Fragment>
   );
 }
 
