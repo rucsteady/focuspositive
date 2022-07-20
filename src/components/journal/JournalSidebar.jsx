@@ -21,6 +21,7 @@ function JournalSidebar({
   setActiveNote,
 }) {
   const sortedNotes = notes.sort((a, b) => b.lastModified - a.lastModified);
+  console.log(sortedNotes);
   return (
     <Fragment>
       <Container>
@@ -33,36 +34,57 @@ function JournalSidebar({
           }}
         >
           <Typography variant="h6">Einträge</Typography>
+          {sortedNotes.map(({ id, title, body, lastModified }, note) => (
+            <Card>
+              <List
+                sx={{
+                  width: "100%",
+                  maxWidth: 360,
+                  bgcolor: "background.paper",
+                  paddingTop: 0,
+                  paddingBottom: 0,
+                }}
+              >
+                <ListItem
+                  alignItems="flex-start"
+                  button
+                  onClick={() => setActiveNote(id)}
+                >
+                  <ListItemText
+                    primary={`${title}`}
+                    secondary={
+                      <Fragment>
+                        <Typography
+                          sx={{ display: "inline" }}
+                          component="span"
+                          variant="body2"
+                          color="text.primary"
+                        >
+                          {body && body.substr(0, 100) + "..."}
+                        </Typography>
+                        <Typography sx={{ fontSize: 10 }}>
+                          {" "}
+                          Zuletzt bearbeitet{" "}
+                          {new Date(lastModified).toLocaleDateString("de-DE", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
+                        </Typography>
+                        <IconButton
+                          aria-label="delete"
+                          onClick={(e) => onDeleteNote(id)}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </Fragment>
+                    }
+                  />
+                </ListItem>
+                {/* <Divider component="li" /> */}
+              </List>
+            </Card>
+          ))}
 
-          <Card>
-            <List
-              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-            >
-              <ListItem alignItems="flex-start" button>
-                <ListItemText
-                  primary="Titel des Eintrags"
-                  secondary={
-                    <Fragment>
-                      <Typography
-                        sx={{ display: "inline" }}
-                        component="span"
-                        variant="body2"
-                        color="text.primary"
-                      >
-                        Textvorschau vom Eintrag der hier steht...
-                      </Typography>
-                      {" — Zuletzt bearbeitet [date]"}
-                      <IconButton aria-label="delete">
-                        <DeleteIcon />
-                      </IconButton>
-                    </Fragment>
-                  }
-                />
-              </ListItem>
-              <Divider component="li" />
-             
-            </List>
-          </Card>
           <Button onClick={onAddNote}>Neuer Eintrag</Button>
         </Paper>
       </Container>
