@@ -16,8 +16,10 @@ function App() {
 
   return (
     <>
-      <div className={styles.app} >
-        <Navigation />
+      <div className={styles.app}>
+        <div style={{ marginBottom: 15 }}>
+          <Navigation />
+        </div>
 
         <Routes>
           <Route index element={<Dashboard />} />

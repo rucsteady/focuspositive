@@ -90,7 +90,7 @@ function RandomChat({ chatUser }) {
         
         <Paper elevation={0}>
           <Box p={3}>
-            <Typography variant="h5" gutterBottom>
+            <Typography variant="h6" gutterBottom>
               Coffee Chat von {chatUser}
             </Typography>
             <Divider />
