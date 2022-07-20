@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material";
+import { Button, Paper, TextField } from "@mui/material";
 
 import { Container } from "@mui/system";
 import React, { Fragment, useState } from "react";
@@ -26,33 +26,35 @@ function JournalMain() {
   };
   return (
     <Fragment>
-      <Container size="sm" >
-        <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-          <TextField
-            onChange={(e) => setTitle(e.target.value)}
-            label="Note Title"
-            variant="outlined"
-            color="secondary"
-            fullWidth
-            required
-            error={titleError}
-          />
-          <TextField
-            onChange={(e) => setDetails(e.target.value)}
-            label="Details"
-            variant="outlined"
-            color="secondary"
-            multiline
-            rows={4}
-            fullWidth
-            required
-            error={detailsError}
-          />
+      <Container size="sm">
+        <Paper sx={{ padding: 4, marginLeft: -4 }}>
+          <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+            <TextField
+              onChange={(e) => setTitle(e.target.value)}
+              label="Titel"
+              variant="outlined"
+              fullWidth
+              required
+              error={titleError}
+              sx={{ marginBottom: 2 }}
+            />
+            <TextField
+              onChange={(e) => setDetails(e.target.value)}
+              label="Dein Dankbarkeitstext"
+              variant="outlined"
+              multiline
+              rows={4}
+              fullWidth
+              required
+              error={detailsError}
+              sx={{ marginBottom: 2 }}
+            />
 
-          <Button type="submit" color="secondary" variant="contained">
-            Submit
-          </Button>
-        </form>
+            <Button type="submit" variant="contained">
+              Speichern
+            </Button>
+          </form>
+        </Paper>
       </Container>
     </Fragment>
   );
