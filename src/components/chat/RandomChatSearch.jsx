@@ -1,7 +1,6 @@
 import {
   Button,
   Card,
-  Container,
   Divider,
   Grid,
   List,
@@ -15,8 +14,6 @@ import {
 import React, { Fragment } from "react";
 
 function RandomChatSearch({ randomChats, setIsSearchingForChat }) {
-  const date = new Date(randomChats[0].date);
-
   const randomChatItems = randomChats.map((randomChatDto, index) => (
     <ListItem key={index}>
       <ListItemButton divider selected>

@@ -13,7 +13,6 @@ function RandomChatInfo({ setIsSearchingForChat }) {
           }}
         >
           <Typography variant="h6">Wilkommen beim Random Chat</Typography>
-
           <Grid container>
             <Grid item mt={4} maxWidth={"350px"}>
               <Typography>

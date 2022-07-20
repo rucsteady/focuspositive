@@ -85,8 +85,7 @@ function RandomChat({ chatUser }) {
 
   return (
     <Fragment>
-      <Container>
-        
+      <Container>        
         <Paper elevation={0}>
           <Box p={3}>
             <Typography variant="h6" gutterBottom>
