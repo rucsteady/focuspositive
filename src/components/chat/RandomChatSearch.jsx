@@ -20,6 +20,7 @@ function RandomChatSearch({
   handleShowChatNew,
 }) {
   const [refreshedRandomChats, setRefreshedRandomChats] = useState([]);
+  
   const randomChatItems = refreshedRandomChats.map((randomChatDto, index) => (
     <ListItem key={index}>
       <ListItemButton divider selected>

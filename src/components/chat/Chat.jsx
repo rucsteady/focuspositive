@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 
 import React, { Fragment, useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext";
@@ -36,7 +36,6 @@ function Chat() {
     <Fragment>
       <Grid container spacing={1} sx={{ marginLeft: 14 }}>
         <Grid item>
-         
           {showChatInfo && (
             <RandomChatInfo
               handleShowChatSearch={handleShowChatSearch}
@@ -61,14 +60,12 @@ function Chat() {
               handleShowChatNew={handleShowChatNew}
             />
           )}
-       
         </Grid>
-        
+
         <Grid item xs={12} md={5} xl={7}>
           {/* <Bar /> */}
           <RandomChat chatUser={chatUser} />
         </Grid>
-        
       </Grid>
     </Fragment>
   );

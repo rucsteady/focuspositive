@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Container,
-  Divider,
   Grid,
   Paper,
   TextField,
@@ -16,11 +15,7 @@ import axi from "axios";
 
 import React, { Fragment, useContext, useEffect, useState } from "react";
 
-function RandomChatCreate({
-  handleShowChatSearch,
-  handleShowChatInfo,
-  handleShowChatNew,
-}) {
+function RandomChatCreate({ handleShowChatInfo }) {
   const { currentUser } = useContext(AuthContext);
 
   const [name, setName] = useState("");
@@ -28,9 +23,7 @@ function RandomChatCreate({
   const [user1, setUser1] = useState("");
   const [user2, setUser2] = useState("");
   const [date, setDate] = useState(null);
-  const [room, setRoom] = useState("");
-  const [isOpen, setIsOpen] = useState(true);
-  const [isReady, setIsReady] = useState(false);
+
   const [error, setError] = useState("");
 
   let navigate = useNavigate();
@@ -58,18 +51,17 @@ function RandomChatCreate({
         setName("");
         setTopic("");
         setDate("");
-        setRoom("");
-        setIsOpen(false);
-        setIsReady(false);
+        setUser2("");
+
         navigate("/");
       })
-      .catch((error) => setError(error.response.data.message));
+      .catch(() => setError(error.response.data.message));
   };
 
-  useEffect((currentUser) => {
-    setUser1(currentUser);
+  useEffect(() => {
+    setUser1(currentUser.email);
     console.log("user1", user1);
-  }, []);
+  }, [currentUser.email, user1]);
 
   return (
     <Fragment>
