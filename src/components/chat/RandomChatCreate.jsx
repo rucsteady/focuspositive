@@ -28,6 +28,8 @@ function RandomChatCreate({ handleShowChatInfo }) {
 
   let navigate = useNavigate();
 
+  const userMail = currentUser[0].email;
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axi
@@ -58,10 +60,11 @@ function RandomChatCreate({ handleShowChatInfo }) {
       .catch(() => setError(error.response.data.message));
   };
 
+  console.log(userMail);
+
   useEffect(() => {
-    setUser1(currentUser.email);
-    console.log("user1", user1);
-  }, [currentUser.email, user1]);
+    setUser1(userMail);
+  }, [userMail, user1]);
 
   return (
     <Fragment>
