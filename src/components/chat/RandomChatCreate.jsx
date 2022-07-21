@@ -32,32 +32,26 @@ function RandomChatCreate({ handleShowChatInfo }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axi
-      .post("http://localhost:8080/api/chats", {
-        name,
-        topic,
-        user1,
-        user2,
-        date,
-      })
-      .then((response) => {
-        console.log("response", response);
-        localStorage.setItem(
-          "login",
-          JSON.stringify({
-            userLogin: true,
-            token: response.data.access_token,
-          })
-        );
-        setError("");
-        setName("");
-        setTopic("");
-        setDate("");
-        setUser2("");
 
-        navigate("/");
-      })
-      .catch(() => setError(error.response.data.message));
+    if (name !== "" && topic !== "") {
+      axi
+        .post("http://localhost:8080/api/chats", {
+          name,
+          topic,
+          user1,
+          user2,
+          date,
+        })
+        .then((response) => {
+          setError("");
+          setName("");
+          setTopic("");
+          setDate("");
+          setUser2("");
+          navigate("/");
+        })
+        .catch(() => setError(error.response.data.message));
+    }
   };
 
   console.log(userMail);
@@ -122,6 +116,9 @@ function RandomChatCreate({ handleShowChatInfo }) {
                 <Grid item xs={12}>
                   <LocalizationProvider dateAdapter={AdapterMoment}>
                     <DateTimePicker
+                      okLabel="Text"
+                      clearLabel="Text"
+                      cancelLabel="Text"
                       label="Datum"
                       value={date}
                       onChange={(newDate) => {

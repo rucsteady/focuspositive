@@ -39,15 +39,6 @@
       "room": 100004,
       "isOpen": true,
       "isReady": false
-    },
-    {
-      "name": "AAA",
-      "room": 100005,
-      "user2": "",
-      "topic": "AAA",
-      "date": "2022-07-22T02:20:00.000Z",
-      "isOpen": true,
-      "isReady": false
     }
   ]
 }
