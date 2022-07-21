@@ -1,6 +1,6 @@
 import {
   Button,
-  Card,  
+  Card,
   Grid,
   List,
   ListItem,
@@ -76,7 +76,7 @@ function RandomChatSearch({
                   Aktuell hast du keine aktiven Random Chats
                 </Typography>
               </Card> */}
-           
+
             <Button
               size="small"
               variant="text"

@@ -61,14 +61,7 @@ function Chat() {
               handleShowChatNew={handleShowChatNew}
             />
           )}
-           <ButtonGroup
-            variant="contained"
-            aria-label="outlined primary button group"
-          >
-            <Button onClick={handleShowChatInfo}>Chat</Button>
-            <Button onClick={handleShowChatSearch}>Search</Button>
-            <Button onClick={handleShowChatNew}>New</Button>
-          </ButtonGroup>
+       
         </Grid>
         
         <Grid item xs={12} md={5} xl={7}>

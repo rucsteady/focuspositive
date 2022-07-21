@@ -2,67 +2,49 @@
   "chats": [
     {
       "name": "Serientalk",
-      "topics": "Filme & Serien",
+      "topic": "Filme & Serien",
       "user1": "user1@test.de",
       "user2": "user2@test.de",
       "date": "2022-08-18T14:30:00+00:00",
-      "room": "room-001",
-      "isOpen": true,
-      "startReady": false
+      "room": 100001,
+      "isOpen": false,
+      "isReady": false
     },
     {
       "name": "Nachmittags Tee",
-      "topics": "Dies & das",
+      "topic": "Dies & das",
       "user1": "user3@test.de",
       "user2": "",
       "date": "2022-10-01T11:30:00+00:00",
-      "room": "room-002",
-      "isOpen": false,
-      "startReady": false
+      "room": 100002,
+      "isOpen": true,
+      "isReady": false
     },
     {
       "name": "Frühstückschat",
-      "topics": "News des Tages",
+      "topic": "News des Tages",
       "user1": "user3@test.de",
       "user2": "",
       "date": "2022-11-01T15:30:00+00:00",
-      "room": "room-003",
-      "isOpen": false,
-      "startReady": false
-    },
-    {
-      "name": "Kaffee/Kuchen",
-      "topics": "Neue Rezepte",
-      "user1": "user3@test.de",
-      "user2": "",
-      "date": "2022-11-06T08:45:00+00:00",
-      "room": "room-004",
-      "isOpen": false,
-      "startReady": false
-    },
-    {
-      "name": "Kaffee/Kuchen",
-      "topics": "Neue Rezepte",
-      "user1": "user3@test.de",
-      "user2": "",
-      "date": "2022-11-06T08:45:00+00:00",
-      "room": "room-005",
-      "isOpen": false,
-      "startReady": false
-    },
-    {
-      "name": "",
-      "room": "room-0041",
-      "user2": "",
-      "date": "2022-07-28T00:17:00.000Z",
+      "room": 100003,
       "isOpen": true,
-      "startReady": false
+      "isReady": false
     },
     {
-      "name": "Neuer Chat Name",
-      "room": "room-00411",
+      "name": "Kaffee/Kuchen",
+      "topic": "Neue Rezepte",
+      "user1": "user3@test.de",
       "user2": "",
-      "date": "2022-07-21T22:01:00.000Z",
+      "date": "2022-11-06T08:45:00+00:00",
+      "room": 100004,
+      "isOpen": true,
+      "isReady": false
+    },
+    {
+      "name": "Bier mit Jannis",
+      "room": 100005,
+      "user2": "",
+      "date": "2022-07-25T22:01:00.000Z",
       "isOpen": true,
       "startReady": false
     }

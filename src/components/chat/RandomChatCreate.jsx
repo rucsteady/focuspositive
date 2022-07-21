@@ -24,14 +24,14 @@ function RandomChatCreate({
   const { currentUser } = useContext(AuthContext);
 
   const [name, setName] = useState("");
-  const [topics, setTopics] = useState("");
+  const [topic, setTopic] = useState("");
   const [user1, setUser1] = useState("");
+  const [user2, setUser2] = useState("");
   const [date, setDate] = useState(null);
   const [room, setRoom] = useState("");
   const [isOpen, setIsOpen] = useState(true);
-  const [startReady, setStartReady] = useState(false);
+  const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState("");
-  const [value, setValue] = useState(null);
 
   let navigate = useNavigate();
 
@@ -40,8 +40,9 @@ function RandomChatCreate({
     axi
       .post("http://localhost:8080/api/chats", {
         name,
-        topics,
+        topic,
         user1,
+        user2,
         date,
       })
       .then((response) => {
@@ -55,11 +56,11 @@ function RandomChatCreate({
         );
         setError("");
         setName("");
-        setTopics("");
+        setTopic("");
         setDate("");
         setRoom("");
         setIsOpen(false);
-        startReady(false);
+        setIsReady(false);
         navigate("/");
       })
       .catch((error) => setError(error.response.data.message));
@@ -114,12 +115,12 @@ function RandomChatCreate({
                   <TextField
                     required
                     fullWidth
-                    name="topics"
+                    name="topic"
                     label="Gesprächsthemen"
-                    id="topics"
-                    value={topics}
+                    id="topic"
+                    value={topic}
                     onChange={(e) => {
-                      setTopics(e.target.value);
+                      setTopic(e.target.value);
                     }}
                   />
                 </Grid>
