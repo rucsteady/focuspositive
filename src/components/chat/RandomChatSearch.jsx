@@ -77,8 +77,13 @@ function RandomChatSearch({
                   Aktuell hast du keine aktiven Random Chats
                 </Typography>
               </Card> */}
-            <Divider style={{ margin: 10 }} />
-            <Button onClick={handleShowChatInfo} sx={{ marginRight: 2 }}>
+           
+            <Button
+              size="small"
+              variant="text"
+              onClick={handleShowChatInfo}
+              sx={{ marginTop: 2 }}
+            >
               Zurück
             </Button>
           </Grid>

@@ -1,4 +1,4 @@
-import { Button, Grid } from "@mui/material";
+import { Button, ButtonGroup, Grid } from "@mui/material";
 
 import React, { Fragment, useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext";
@@ -36,6 +36,14 @@ function Chat() {
     <Fragment>
       <Grid container spacing={1} sx={{ marginLeft: 14 }}>
         <Grid item>
+          <ButtonGroup
+            variant="contained"
+            aria-label="outlined primary button group"
+          >
+            <Button onClick={handleShowChatInfo}>Chat</Button>
+            <Button onClick={handleShowChatSearch}>Search</Button>
+            <Button onClick={handleShowChatNew}>New</Button>
+          </ButtonGroup>
           {showChatInfo && (
             <RandomChatInfo
               handleShowChatSearch={handleShowChatSearch}
@@ -55,9 +63,9 @@ function Chat() {
           {showChatSearch && (
             <RandomChatSearch
               randomChats={randomChats}
-              setShowChatInfo={setShowChatInfo}
-              setShowChatSearch={setShowChatSearch}
-              setShowChatNew={setShowChatNew}
+              handleShowChatSearch={handleShowChatSearch}
+              handleShowChatInfo={handleShowChatInfo}
+              handleShowChatNew={handleShowChatNew}
             />
           )}
         </Grid>
@@ -66,9 +74,6 @@ function Chat() {
           <RandomChat chatUser={chatUser} />
         </Grid>
       </Grid>
-      <Button onClick={handleShowChatInfo}>Home Chat</Button>
-      <Button onClick={handleShowChatSearch}>Home Search</Button>
-      <Button onClick={handleShowChatNew}>Home New</Button>
     </Fragment>
   );
 }

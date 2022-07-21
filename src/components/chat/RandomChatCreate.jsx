@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Container,
+  Divider,
   Grid,
   Paper,
   TextField,
@@ -84,7 +85,6 @@ function RandomChatCreate({
                     />
                   </LocalizationProvider>
                 </Grid>
-                
               </Grid>
               <Button
                 type="submit"
@@ -95,6 +95,9 @@ function RandomChatCreate({
                 erstellen
               </Button>
             </Box>
+            <Button size="small" variant="text" onClick={handleShowChatInfo}>
+              Zurück
+            </Button>
           </Grid>
         </Paper>
       </Container>
