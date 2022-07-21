@@ -10,8 +10,8 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import React, { Fragment } from "react";
-
+import React, { Fragment, useEffect, useState } from "react";
+import axi from "axios";
 
 function RandomChatSearch({
   randomChats,
@@ -19,7 +19,8 @@ function RandomChatSearch({
   handleShowChatInfo,
   handleShowChatNew,
 }) {
-  const randomChatItems = randomChats.map((randomChatDto, index) => (
+  const [refreshedRandomChats, setRefreshedRandomChats] = useState([]);
+  const randomChatItems = refreshedRandomChats.map((randomChatDto, index) => (
     <ListItem key={index}>
       <ListItemButton divider selected>
         <ListSubheader
@@ -44,6 +45,12 @@ function RandomChatSearch({
   ));
 
   // TODO On Click Item
+
+  useEffect(() => {
+    axi
+      .get("http://localhost:8080/api/chats")
+      .then((response) => setRefreshedRandomChats(response.data.chats));
+  }, []);
 
   return (
     <Fragment>
