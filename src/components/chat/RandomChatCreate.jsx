@@ -10,6 +10,8 @@ import {
 } from "@mui/material";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { useNavigate } from "react-router-dom";
+import axi from "axios";
 
 import React, { Fragment, useState } from "react";
 
@@ -18,11 +20,46 @@ function RandomChatCreate({
   handleShowChatInfo,
   handleShowChatNew,
 }) {
+  const [name, setName] = useState("");
+  const [topics, setTopics] = useState("");
+  const [user1, setUser1] = useState("");
+  const [date, setDate] = useState(null);
+  const [room, setRoom] = useState("");
+  const [isOpen, setIsOpen] = useState(true);
+  const [startReady, setStartReady] = useState(false);
+  const [error, setError] = useState("");
   const [value, setValue] = useState(null);
 
-  console.log("value", value);
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  let navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axi
+      .post("http://localhost:8080/api/chats", {
+        name,
+        topics,
+        user1,
+        date,
+      })
+      .then((response) => {
+        console.log("response", response);
+        localStorage.setItem(
+          "login",
+          JSON.stringify({
+            userLogin: true,
+            token: response.data.access_token,
+          })
+        );
+        setError("");
+        setName("");
+        setTopics("");
+        setDate("");
+        setRoom("");
+        setIsOpen(false);
+        startReady(false)
+        navigate("/");
+      })
+      .catch((error) => setError(error.response.data.message));
   };
 
   return (
@@ -78,8 +115,8 @@ function RandomChatCreate({
                     <DateTimePicker
                       label="Datum"
                       value={value}
-                      onChange={(newValue) => {
-                        setValue(newValue);
+                      onChange={(newDate) => {
+                        setName(newDate);
                       }}
                       renderInput={(params) => <TextField {...params} />}
                     />

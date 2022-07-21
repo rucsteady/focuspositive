@@ -36,14 +36,7 @@ function Chat() {
     <Fragment>
       <Grid container spacing={1} sx={{ marginLeft: 14 }}>
         <Grid item>
-          <ButtonGroup
-            variant="contained"
-            aria-label="outlined primary button group"
-          >
-            <Button onClick={handleShowChatInfo}>Chat</Button>
-            <Button onClick={handleShowChatSearch}>Search</Button>
-            <Button onClick={handleShowChatNew}>New</Button>
-          </ButtonGroup>
+         
           {showChatInfo && (
             <RandomChatInfo
               handleShowChatSearch={handleShowChatSearch}
@@ -68,11 +61,21 @@ function Chat() {
               handleShowChatNew={handleShowChatNew}
             />
           )}
+           <ButtonGroup
+            variant="contained"
+            aria-label="outlined primary button group"
+          >
+            <Button onClick={handleShowChatInfo}>Chat</Button>
+            <Button onClick={handleShowChatSearch}>Search</Button>
+            <Button onClick={handleShowChatNew}>New</Button>
+          </ButtonGroup>
         </Grid>
+        
         <Grid item xs={12} md={5} xl={7}>
           {/* <Bar /> */}
           <RandomChat chatUser={chatUser} />
         </Grid>
+        
       </Grid>
     </Fragment>
   );

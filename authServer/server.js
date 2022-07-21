@@ -99,7 +99,7 @@ server.get("/api/users", (req, res) => {
 // Chats
 
 server.post("/api/chats", (req, res) => {
-  const { name, topics, user, date } = req.body;
+  const { name, topics, user1, date } = req.body;
 
   fs.readFile("./chats.json", (err, data) => {
     if (err) {
@@ -115,8 +115,9 @@ server.post("/api/chats", (req, res) => {
     data.chats.push({
       name: name,
       room: last_room_id + 1,
-      user1: user,
+      user1: user1,
       user2: "",
+      topics: topics,
       date: date,
       isOpen: true,
       startReady: false,

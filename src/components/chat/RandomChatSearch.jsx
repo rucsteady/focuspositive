@@ -12,7 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { Fragment } from "react";
-import { useNavigate } from "react-router-dom";
+
 
 function RandomChatSearch({
   randomChats,
