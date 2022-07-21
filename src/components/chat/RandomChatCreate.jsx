@@ -7,14 +7,19 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 
 function RandomChatCreate({
   handleShowChatSearch,
   handleShowChatInfo,
   handleShowChatNew,
 }) {
+  const [value, setValue] = useState(null);
+
+  console.log("value", value);
   const handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -68,17 +73,18 @@ function RandomChatCreate({
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DatePicker
-                      label="Basic example"
+                  <LocalizationProvider dateAdapter={AdapterMoment}>
+                    <DateTimePicker
+                      label="Datum"
                       value={value}
                       onChange={(newValue) => {
                         setValue(newValue);
                       }}
                       renderInput={(params) => <TextField {...params} />}
                     />
-                  </LocalizationProvider> */}
+                  </LocalizationProvider>
                 </Grid>
+                
               </Grid>
               <Button
                 type="submit"
