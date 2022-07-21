@@ -12,8 +12,14 @@ import {
   Typography,
 } from "@mui/material";
 import React, { Fragment } from "react";
+import { useNavigate } from "react-router-dom";
 
-function RandomChatSearch({ randomChats, setIsSearchingForChat }) {
+function RandomChatSearch({
+  randomChats,
+  handleShowChatSearch,
+  handleShowChatInfo,
+  handleShowChatNew,
+}) {
   const randomChatItems = randomChats.map((randomChatDto, index) => (
     <ListItem key={index}>
       <ListItemButton divider selected>
@@ -72,7 +78,9 @@ function RandomChatSearch({ randomChats, setIsSearchingForChat }) {
                 </Typography>
               </Card> */}
             <Divider style={{ margin: 10 }} />
-            <Button onClick={() => setIsSearchingForChat(false)}>Zurück</Button>
+            <Button onClick={handleShowChatInfo} sx={{ marginRight: 2 }}>
+              Zurück
+            </Button>
           </Grid>
         </Grid>
       </Paper>

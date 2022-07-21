@@ -1,7 +1,7 @@
 import React, { Fragment, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import Button from "@mui/material/Button";
-import { Card, Container, Divider, Paper, Typography } from "@mui/material";
+import { Card, Container, Divider, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
 function Account() {
