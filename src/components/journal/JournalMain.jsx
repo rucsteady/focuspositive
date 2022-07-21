@@ -1,7 +1,7 @@
 import { Button, Paper, TextField } from "@mui/material";
 
 import { Container } from "@mui/system";
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 
 function JournalMain({ activeNote, onUpdateNote }) {
   const onEditField = (field, value) => {

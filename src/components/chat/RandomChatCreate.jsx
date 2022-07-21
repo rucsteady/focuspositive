@@ -11,15 +11,18 @@ import {
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../../context/AuthContext";
 import axi from "axios";
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 
 function RandomChatCreate({
   handleShowChatSearch,
   handleShowChatInfo,
   handleShowChatNew,
 }) {
+  const { currentUser } = useContext(AuthContext);
+
   const [name, setName] = useState("");
   const [topics, setTopics] = useState("");
   const [user1, setUser1] = useState("");
@@ -62,6 +65,11 @@ function RandomChatCreate({
       .catch((error) => setError(error.response.data.message));
   };
 
+  useEffect((currentUser) => {
+    setUser1(currentUser);
+    console.log("user1", user1);
+  }, []);
+
   return (
     <Fragment>
       <Container>
@@ -95,8 +103,11 @@ function RandomChatCreate({
                     id="name"
                     label="Random Chat Name"
                     name="name"
-                    autoComplete="name"
                     autoFocus
+                    value={name}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -105,9 +116,11 @@ function RandomChatCreate({
                     fullWidth
                     name="topics"
                     label="Gesprächsthemen"
-                    type="password"
-                    id="password"
-                    autoComplete="new-password"
+                    id="topics"
+                    value={topics}
+                    onChange={(e) => {
+                      setTopics(e.target.value);
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
