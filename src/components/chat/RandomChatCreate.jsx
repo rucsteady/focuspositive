@@ -56,7 +56,7 @@ function RandomChatCreate({
         setDate("");
         setRoom("");
         setIsOpen(false);
-        startReady(false)
+        startReady(false);
         navigate("/");
       })
       .catch((error) => setError(error.response.data.message));
@@ -114,9 +114,9 @@ function RandomChatCreate({
                   <LocalizationProvider dateAdapter={AdapterMoment}>
                     <DateTimePicker
                       label="Datum"
-                      value={value}
+                      value={date}
                       onChange={(newDate) => {
-                        setName(newDate);
+                        setDate(newDate);
                       }}
                       renderInput={(params) => <TextField {...params} />}
                     />
