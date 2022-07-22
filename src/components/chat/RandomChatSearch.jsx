@@ -1,14 +1,11 @@
 import {
   Button,
   Card,
-  CardActions,
-  CardContent,
   Grid,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
-  ListSubheader,
   Paper,
   Typography,
 } from "@mui/material";
@@ -29,8 +26,8 @@ function RandomChatSearch({ handleShowChatInfo }) {
         {randomChatDto.isOpen && "open"}
         {randomChatDto.isReady && "ready"}
         <Card
-          sx={{ minWidth: 250, padding: 0, backgroundColor: "#1565C0" }}
-          className={`banner ${randomChatDto.isOpen ? "root" : ""}`}
+          sx={{ minWidth: 250, padding: 1 }}
+          className={randomChatDto.isOpen ? "open" : "ready"}
         >
           <Typography sx={{ fontSize: 12 }}>{randomChatDto.topic}</Typography>
           <Typography variant="h6" component="div">
@@ -38,13 +35,11 @@ function RandomChatSearch({ handleShowChatInfo }) {
           </Typography>
           <Typography>
             <ListItemText
-              sx={{ fontSize: 10, color: "#000", paddingBottom: 0 }}
               primary={`${new Date(randomChatDto.date).getUTCDate()}.${new Date(
                 randomChatDto.date
               ).getMonth()}.${new Date(
                 randomChatDto.date
               ).getFullYear()} um     
-
           ${
             new Date(randomChatDto.date).getHours() + (24 % 12) || 12
           }:${new Date(randomChatDto.date).getMinutes()}`}

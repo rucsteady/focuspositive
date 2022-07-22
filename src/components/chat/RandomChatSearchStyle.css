@@ -1,3 +1,12 @@
 .root {
     padding: 0
 }
+
+.ready {
+    background-color: #1565C0;
+}
+
+.open {
+    background-color: #6AC87C;
+    color: white;
+}
