@@ -21,17 +21,10 @@ function RandomChatSearch({ handleShowChatInfo }) {
   // edit able eigener chat oder gejoined
   //
 
-  const handleRandomChatClick = () => {
-    return function (randomChatDto) {
-      if (randomChatDto) {
-        console.log(randomChatDto);
-        // user1 user2 start chat socket io
-        // randomChatDto wird übergeben an funktion
-        // wenn ready?? wenn open ist nicht ready
-        // state für chat fenster aus Chat übergeben, wird dann geöffnet und übergeben
-      }
-    };
-  };
+  // user1 user2 start chat socket io
+  // randomChatDto wird übergeben an funktion
+  // wenn ready?? wenn open ist nicht ready
+  // state für chat fenster aus Chat übergeben, wird dann geöffnet und übergeben
 
   const randomChatItems = refreshedRandomChats.map((randomChatDto, index) => (
     <ListItem key={index} sx={{ paddingBottom: 0 }}>
@@ -44,9 +37,19 @@ function RandomChatSearch({ handleShowChatInfo }) {
             color: "white",
           }}
           className={randomChatDto.isOpen ? "open" : "ready"}
-          onClick={handleRandomChatClick()}
+          onClick={() => {
+            if (randomChatDto.isReady) {
+              console.log("is ready", randomChatDto);
+            } else if (randomChatDto.isOpen) {
+              console.log("is open", randomChatDto);
+            }
+          }}
         >
-          <Typography sx={{ fontSize: 12 }}>{randomChatDto.topic}</Typography>
+          <Typography sx={{ fontSize: 12 }}>
+            {randomChatDto.topic}
+            {randomChatDto.user1}
+          </Typography>
+
           <Typography variant="h6">{randomChatDto.name}</Typography>
           <Typography component={"span"}>
             <ListItemText
