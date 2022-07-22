@@ -14,14 +14,14 @@ import { Container } from "@mui/system";
 import React, { Fragment } from "react";
 
 function JournalSidebar({
-  notes,
-  onAddNote,
-  onDeleteNote,
-  activeNote,
-  setActiveNote,
+  entrys,
+  onAddEntry,
+  onDeleteEntry,
+  activeEntry,
+  setActiveEntry,
 }) {
-  const sortedNotes = notes.sort((a, b) => b.lastModified - a.lastModified);
-  console.log(sortedNotes);
+  const sortedEntrys = entrys.sort((a, b) => b.lastModified - a.lastModified);
+  console.log(sortedEntrys);
   return (
     <Fragment>
       <Container>
@@ -34,7 +34,7 @@ function JournalSidebar({
           }}
         >
           <Typography variant="h6">Einträge</Typography>
-          {sortedNotes.map(({ id, title, body, lastModified, index }, note) => (
+          {sortedEntrys.map(({ id, title, body, lastModified, index }) => (
             <Card>
               <List
                 sx={{
@@ -49,7 +49,7 @@ function JournalSidebar({
                 <ListItem
                   alignItems="flex-start"
                   button
-                  onClick={() => setActiveNote(id)}
+                  onClick={() => setActiveEntry(id)}
                 >
                   <ListItemText
                     primary={`${title}`}
@@ -72,7 +72,7 @@ function JournalSidebar({
                           })}
                           <IconButton
                             aria-label="delete"
-                            onClick={(e) => onDeleteNote(id)}
+                            onClick={(e) => onDeleteEntry(id)}
                           >
                             <DeleteIcon />
                           </IconButton>
@@ -86,7 +86,7 @@ function JournalSidebar({
             </Card>
           ))}
 
-          <Button onClick={onAddNote}>Neuer Eintrag</Button>
+          <Button onClick={onAddEntry}>Neuer Eintrag</Button>
         </Paper>
       </Container>
     </Fragment>
