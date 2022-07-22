@@ -47,8 +47,7 @@ function RandomChatSearch({ handleShowChatInfo }) {
           }}
         >
           <Typography sx={{ fontSize: 12 }}>
-            {randomChatDto.topic} von {" "}
-            {randomChatDto.user1}
+            {randomChatDto.topic} von {randomChatDto.user1}
           </Typography>
 
           <Typography variant="h6">{randomChatDto.name}</Typography>
@@ -66,15 +65,27 @@ function RandomChatSearch({ handleShowChatInfo }) {
           </Typography>
           {randomChatDto.isReady && (
             <Typography
-              sx={{ backgroundColor: "white", color: "black", float: "right" }}
+              sx={{
+                borderRadius: "15px",
+                paddingLeft: "6px",
+                paddingRight: "6px",
+                fontSize: "12px",
+                backgroundColor: "white",
+                color: "black",
+                float: "right",
+              }}
             >
-              Startklar - jetzt los chatten - hier klicken
+              Startklar! - jetzt los chatten - hier klicken
             </Typography>
           )}
           {randomChatDto.isOpen && (
             <Typography
               sx={{
-                backgroundColor: "#EE7702",
+                borderRadius: "15px",
+                paddingLeft: "6px",
+                paddingRight: "6px",
+                fontSize: "12px",
+                backgroundColor: "#FF6347",
                 color: "white",
                 float: "right",
               }}
