@@ -23,24 +23,19 @@ function RandomChatSearch({ handleShowChatInfo }) {
 
   const handleRandomChatClick = () => {
     return function (randomChatDto) {
-      if (randomChatDto.isReady) {
-        console.log("is ready");
+      if (randomChatDto) {
+        console.log(randomChatDto);
         // user1 user2 start chat socket io
         // randomChatDto wird übergeben an funktion
         // wenn ready?? wenn open ist nicht ready
         // state für chat fenster aus Chat übergeben, wird dann geöffnet und übergeben
-      } else {
-        console.log("is not ready");
       }
     };
   };
 
   const randomChatItems = refreshedRandomChats.map((randomChatDto, index) => (
     <ListItem key={index} sx={{ paddingBottom: 0 }}>
-      <ListItemButton
-        sx={{ padding: 0 }}
-        onClick={handleRandomChatClick(randomChatDto)}
-      >
+      <ListItemButton sx={{ padding: 0 }}>
         <Card
           sx={{
             padding: "4px",
@@ -49,6 +44,7 @@ function RandomChatSearch({ handleShowChatInfo }) {
             color: "white",
           }}
           className={randomChatDto.isOpen ? "open" : "ready"}
+          onClick={handleRandomChatClick()}
         >
           <Typography sx={{ fontSize: 12 }}>{randomChatDto.topic}</Typography>
           <Typography variant="h6">{randomChatDto.name}</Typography>

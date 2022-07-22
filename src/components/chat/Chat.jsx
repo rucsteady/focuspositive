@@ -63,7 +63,7 @@ function Chat() {
         </Grid>
 
         <Grid item xs={12} md={5} xl={7}>
-          {/* <Bar /> */}
+    
           <RandomChat chatUser={chatUser} />
         </Grid>
       </Grid>
