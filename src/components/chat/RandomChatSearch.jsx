@@ -32,28 +32,24 @@ function RandomChatSearch({ handleShowChatInfo }) {
           sx={{ minWidth: 250, padding: 0, backgroundColor: "#1565C0" }}
           className={`banner ${randomChatDto.isOpen ? "root" : ""}`}
         >
-          <CardContent className="root">
-            <Typography sx={{ fontSize: 12 }}>{randomChatDto.topic}</Typography>
-            <Typography variant="h6" component="div">
-              {randomChatDto.name}
-            </Typography>
-            <Typography>
-              <ListItemText
-                sx={{ fontSize: 10, color: "#000", paddingBottom: 0 }}
-                primary={`${new Date(
-                  randomChatDto.date
-                ).getUTCDate()}.${new Date(
-                  randomChatDto.date
-                ).getMonth()}.${new Date(
-                  randomChatDto.date
-                ).getFullYear()} um     
+          <Typography sx={{ fontSize: 12 }}>{randomChatDto.topic}</Typography>
+          <Typography variant="h6" component="div">
+            {randomChatDto.name}
+          </Typography>
+          <Typography>
+            <ListItemText
+              sx={{ fontSize: 10, color: "#000", paddingBottom: 0 }}
+              primary={`${new Date(randomChatDto.date).getUTCDate()}.${new Date(
+                randomChatDto.date
+              ).getMonth()}.${new Date(
+                randomChatDto.date
+              ).getFullYear()} um     
 
           ${
             new Date(randomChatDto.date).getHours() + (24 % 12) || 12
           }:${new Date(randomChatDto.date).getMinutes()}`}
-              />
-            </Typography>
-          </CardContent>
+            />
+          </Typography>
         </Card>
       </ListItemButton>
     </ListItem>
