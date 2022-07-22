@@ -21,7 +21,7 @@ import io from "socket.io-client";
 
 const socket = io.connect("http://localhost:3001");
 
-function RandomChat({ chatUser, setShowRandomChat }) {
+function RandomChat({ chatUser, setShowRandomChat, activeRoom }) {
   const [message, setMessage] = useState("");
   const [room, setRoom] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
@@ -63,7 +63,7 @@ function RandomChat({ chatUser, setShowRandomChat }) {
 
   const handleRoom = (event) => {
     event.preventDefault();
-    setRoom(event.target.value);
+    setRoom(activeRoom);
     if (chatUser !== "" && room !== "") {
       socket.emit("join_room", room);
     }
@@ -71,6 +71,7 @@ function RandomChat({ chatUser, setShowRandomChat }) {
 
   useEffect(() => {
     console.log("Open Socket", room);
+    setRoom(activeRoom);
     if (room !== "") {
       socket.emit("join_room", room);
     }
@@ -103,7 +104,7 @@ function RandomChat({ chatUser, setShowRandomChat }) {
               <Grid xs={4} item>
                 <Chip label={`${chatUser}:`} />
               </Grid>
-              <Grid xs={3} item>
+              <Grid xs={5} item>
                 <FormControl>
                   <TextField
                     onChange={handleRoom}
@@ -140,15 +141,14 @@ function RandomChat({ chatUser, setShowRandomChat }) {
               </Grid>
             </Grid>
             <Button
-            size="small"
-            variant="text"
-            onClick={() => setShowRandomChat(false)}
-            sx={{ marginTop: 2 }}
-          >
-            Schließen
-          </Button>
+              size="small"
+              variant="text"
+              onClick={() => setShowRandomChat(false)}
+              sx={{ marginTop: 2 }}
+            >
+              Schließen
+            </Button>
           </Box>
-          
         </Paper>
       </Container>
     </Fragment>

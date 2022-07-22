@@ -67,6 +67,7 @@ function Chat() {
           {showRandomChat && (
             <RandomChat
               chatUser={chatUser}
+              activeRoom={activeRoom}
               setShowRandomChat={setShowRandomChat}
             />
           )}
