@@ -17,8 +17,8 @@
       "user2": "",
       "date": "2022-10-01T11:30:00+00:00",
       "room": 100002,
-      "isOpen": false,
-      "isReady": true
+      "isOpen": true,
+      "isReady": false
     },
     {
       "name": "Frühstückschat",
