@@ -1,6 +1,7 @@
 import {
   Button,
   Card,
+  CircularProgress,
   Grid,
   List,
   ListItem,
@@ -38,10 +39,18 @@ function RandomChatSearch({ handleShowChatInfo }) {
         sx={{ padding: 0 }}
         onClick={handleRandomChatClick(randomChatDto)}
       >
-        <Card className="ready">
+        <Card
+          sx={{
+            padding: "4px",
+            minWidth: "300px",
+            backgroundColor: "#1565C0",
+            color: "white",
+          }}
+          className={randomChatDto.isOpen ? "open" : "ready"}
+        >
           <Typography sx={{ fontSize: 12 }}>{randomChatDto.topic}</Typography>
           <Typography variant="h6">{randomChatDto.name}</Typography>
-          <Typography component={'span'}>
+          <Typography component={"span"}>
             <ListItemText
               primary={`${new Date(randomChatDto.date).getUTCDate()}.${new Date(
                 randomChatDto.date
@@ -53,8 +62,16 @@ function RandomChatSearch({ handleShowChatInfo }) {
               ).getMinutes()}`}
             />
           </Typography>
-          {randomChatDto.isReady && "Jetzt los chatten"}
-          {randomChatDto.isOpen && "Offen - jetzt registrieren"}
+          {randomChatDto.isReady && (
+            <Typography sx={{ backgroundColor: "white", color: "black", float: "right"}}>
+              Startklar - jetzt los chatten - hier klicken
+            </Typography>
+          )}
+          {randomChatDto.isOpen && (
+            <Typography sx={{ backgroundColor: "#EE7702", color: "white", float: "right" }}>
+              Offen - jetzt registrieren
+            </Typography>
+          )}
         </Card>
       </ListItemButton>
     </ListItem>
@@ -68,7 +85,11 @@ function RandomChatSearch({ handleShowChatInfo }) {
       .then((response) => setRefreshedRandomChats(response.data.chats));
   }, []);
 
-  return (
+  return !refreshedRandomChats ? (
+    <div>
+      <CircularProgress />
+    </div>
+  ) : (
     <Fragment>
       <Paper
         elevation={0}
