@@ -38,13 +38,10 @@ function RandomChatSearch({ handleShowChatInfo }) {
         sx={{ padding: 0 }}
         onClick={handleRandomChatClick(randomChatDto)}
       >
-        <Card
-          sx={{ minWidth: 250, padding: 1 }}
-          className="ready"
-        >
+        <Card className="ready">
           <Typography sx={{ fontSize: 12 }}>{randomChatDto.topic}</Typography>
           <Typography variant="h6">{randomChatDto.name}</Typography>
-          <Typography>
+          <Typography component={'span'}>
             <ListItemText
               primary={`${new Date(randomChatDto.date).getUTCDate()}.${new Date(
                 randomChatDto.date
