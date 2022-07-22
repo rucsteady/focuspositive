@@ -6,46 +6,46 @@ import JournalMain from "./JournalMain";
 import JournalSidebar from "./JournalSidebar";
 
 function Journal() {
-  const [notes, setNotes] = useState(
-    localStorage.notes ? JSON.parse(localStorage.notes) : []
+  const [entrys, setEntrys] = useState(
+    localStorage.entrys? JSON.parse(localStorage.entrys) : []
   );
 
-  const [activeNote, setActiveNote] = useState(false);
+  const [activeEntry, setActiveEntry] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("notes", JSON.stringify(notes));
-  }, [notes]);
+    localStorage.setItem("entrys", JSON.stringify(entrys));
+  }, [entrys]);
 
-  const onAddNote = () => {
-    const newNote = {
+  const onAddEntry = () => {
+    const newEntry = {
       id: nanoid(),
       title: "Eintrag ohne Titel",
       body: "",
       lastModified: Date.now(),
     };
 
-    setNotes([newNote, ...notes]);
-    setActiveNote(newNote.id);
+    setEntrys([newEntry, ...entrys]);
+    setActiveEntry(newEntry.id);
   };
 
-  const onDeleteNote = (noteId) => {
-    setNotes(notes.filter(({ id }) => id !== noteId));
+  const onDeleteEntry = (entryId) => {
+    setEntrys(entrys.filter(({ id }) => id !== entryId));
   };
 
-  const onUpdateNote = (updatedNote) => {
-    const updatedNotesArr = notes.map((note) => {
-      if (note.id === updatedNote.id) {
-        return updatedNote;
+  const onUpdateEntry = (updatedEntry) => {
+    const updatedEntrysArr = entrys.map((entry) => {
+      if (entry.id === updatedEntry.id) {
+        return updatedEntry;
       }
 
-      return note;
+      return entry;
     });
 
-    setNotes(updatedNotesArr);
+    setEntrys(updatedEntrysArr);
   };
 
-  const getActiveNote = () => {
-    return notes.find(({ id }) => id === activeNote);
+  const getActiveEntry = () => {
+    return entrys.find(({ id }) => id === activeEntry);
   };
 
   return (
@@ -54,17 +54,17 @@ function Journal() {
         <Grid container spacing={2}>
           <Grid item>
             <JournalSidebar
-              notes={notes}
-              onAddNote={onAddNote}
-              onDeleteNote={onDeleteNote}
-              activeNote={activeNote}
-              setActiveNote={setActiveNote}
+              entrys={entrys}
+              onAddEntry={onAddEntry}
+              onDeleteEntry={onDeleteEntry}
+              activeEntry={activeEntry}
+              setActiveEntry={setActiveEntry}
             />
           </Grid>
           <Grid item>
             <JournalMain
-              activeNote={getActiveNote()}
-              onUpdateNote={onUpdateNote}
+              activeEntry={getActiveEntry()}
+              onUpdateEntry={onUpdateEntry}
             />
           </Grid>
         </Grid>

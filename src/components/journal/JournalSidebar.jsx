@@ -21,7 +21,7 @@ function JournalSidebar({
   setActiveEntry,
 }) {
   const sortedEntrys = entrys.sort((a, b) => b.lastModified - a.lastModified);
-  console.log(sortedEntrys);
+ 
   return (
     <Fragment>
       <Container>
@@ -40,7 +40,7 @@ function JournalSidebar({
                 sx={{
                   width: "100%",
                   maxWidth: 360,
-                  bgcolor: "background.paper",
+                  bgcolor: "#fff",
                   paddingTop: 0,
                   paddingBottom: 0,
                 }}
