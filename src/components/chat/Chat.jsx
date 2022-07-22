@@ -9,10 +9,10 @@ import RandomChatCreate from "./RandomChatCreate";
 
 function Chat() {
   const { currentUser, randomChats } = useContext(AuthContext);
-  const chatUser = currentUser[0].firstname;
   const [showChatInfo, setShowChatInfo] = useState(true);
   const [showChatSearch, setShowChatSearch] = useState(false);
   const [showChatNew, setShowChatNew] = useState(false);
+  const chatUser = currentUser[0].firstname;
 
   const handleShowChatInfo = () => {
     setShowChatNew(false);

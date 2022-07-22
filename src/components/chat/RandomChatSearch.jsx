@@ -25,6 +25,8 @@ function RandomChatSearch({ handleShowChatInfo }) {
   // wenn ready?? wenn open ist nicht ready
   // state für chat fenster aus Chat übergeben, wird dann geöffnet und übergeben
 
+  const handleStartRandomChat = () => {};
+
   const randomChatItems = refreshedRandomChats.map((randomChatDto, index) => (
     <ListItem key={index} sx={{ paddingBottom: 0 }}>
       <ListItemButton sx={{ padding: 0 }}>
@@ -45,7 +47,7 @@ function RandomChatSearch({ handleShowChatInfo }) {
           }}
         >
           <Typography sx={{ fontSize: 12 }}>
-            {randomChatDto.topic}
+            {randomChatDto.topic} von {" "}
             {randomChatDto.user1}
           </Typography>
 
