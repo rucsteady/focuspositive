@@ -1,7 +1,6 @@
 import {
   Button,
   Card,
- 
   IconButton,
   List,
   ListItem,
@@ -21,7 +20,7 @@ function JournalSidebar({
   setActiveEntry,
 }) {
   const sortedEntrys = entrys.sort((a, b) => b.lastModified - a.lastModified);
- 
+
   return (
     <Fragment>
       <Container>
@@ -86,7 +85,13 @@ function JournalSidebar({
             </Card>
           ))}
 
-          <Button onClick={onAddEntry}>Neuer Eintrag</Button>
+          <Button
+            variant="contained"
+            sx={{ marginTop: 3 }}
+            onClick={onAddEntry}
+          >
+            Neuer Eintrag
+          </Button>
         </Paper>
       </Container>
     </Fragment>

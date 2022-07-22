@@ -1,6 +1,8 @@
 import {
   Button,
   Card,
+  CardActions,
+  CardContent,
   Grid,
   List,
   ListItem,
@@ -20,27 +22,34 @@ function RandomChatSearch({
   handleShowChatNew,
 }) {
   const [refreshedRandomChats, setRefreshedRandomChats] = useState([]);
-  
+
   const randomChatItems = refreshedRandomChats.map((randomChatDto, index) => (
-    <ListItem key={index}>
-      <ListItemButton divider selected>
-        <ListSubheader
-          disableSticky
-          disableGutters
-          sx={{ marginRight: 1, fontSize: 16, color: "#000" }}
-        >
-          {randomChatDto.name}:
-        </ListSubheader>
-        <ListItemText
-          sx={{ fontSize: 12, color: "#000" }}
-          primary={`${new Date(randomChatDto.date).getUTCDate()}.${new Date(
-            randomChatDto.date
-          ).getMonth()}.${new Date(randomChatDto.date).getFullYear()} um     
+    <ListItem key={index} sx={{ paddingBottom: 0 }}>
+      <ListItemButton sx={{ padding: 0 }}>
+        <Card sx={{ minWidth: 250, padding: 0 }}>
+          <CardContent>
+            <Typography sx={{ fontSize: 12 }}>{randomChatDto.topic}</Typography>
+            <Typography variant="h6" component="div">
+              {randomChatDto.name}
+            </Typography>
+            <Typography>
+              <ListItemText
+                sx={{ fontSize: 10, color: "#000", paddingBottom: 0 }}
+                primary={`${new Date(
+                  randomChatDto.date
+                ).getUTCDate()}.${new Date(
+                  randomChatDto.date
+                ).getMonth()}.${new Date(
+                  randomChatDto.date
+                ).getFullYear()} um     
 
           ${new Date(randomChatDto.date).getHours()}:${new Date(
-            randomChatDto.date
-          ).getMinutes()}`}
-        />
+                  randomChatDto.date
+                ).getMinutes()}`}
+              />
+            </Typography>
+          </CardContent>
+        </Card>
       </ListItemButton>
     </ListItem>
   ));
@@ -72,18 +81,12 @@ function RandomChatSearch({
               worden sind. Grüne Random Chats sind noch verfügbar. Blaue Random
               Chats hast du bereits zugesagt.
             </Typography>
-            {/* <Divider style={{ margin: 10 }} /> */}
 
             <Card elevation={0}>
-              <List>{randomChatItems}</List>
+              <List sx={{ maxHeight: "300px", overflow: "auto", padding: 0 }}>
+                {randomChatItems}
+              </List>
             </Card>
-
-            {/* <Divider style={{ margin: 10 }} /> */}
-            {/* <Card elevation={0}>
-                <Typography>
-                  Aktuell hast du keine aktiven Random Chats
-                </Typography>
-              </Card> */}
 
             <Button
               size="small"
