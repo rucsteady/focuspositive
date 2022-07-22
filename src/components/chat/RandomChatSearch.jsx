@@ -19,7 +19,6 @@ function RandomChatSearch({ handleShowChatInfo }) {
 
   // TODO is joinable
   // edit able eigener chat oder gejoined
-  //
 
   // user1 user2 start chat socket io
   // randomChatDto wird übergeben an funktion
