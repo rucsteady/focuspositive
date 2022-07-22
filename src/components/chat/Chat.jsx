@@ -40,7 +40,6 @@ function Chat() {
           {showChatInfo && (
             <RandomChatInfo
               handleShowChatSearch={handleShowChatSearch}
-              handleShowChatInfo={handleShowChatInfo}
               handleShowChatNew={handleShowChatNew}
             />
           )}
@@ -49,16 +48,12 @@ function Chat() {
             <RandomChatCreate
               handleShowChatSearch={handleShowChatSearch}
               handleShowChatInfo={handleShowChatInfo}
-              handleShowChatNew={handleShowChatNew}
             />
           )}
 
           {showChatSearch && (
             <RandomChatSearch
-              randomChats={randomChats}
-              handleShowChatSearch={handleShowChatSearch}
               handleShowChatInfo={handleShowChatInfo}
-              handleShowChatNew={handleShowChatNew}
               setShowRandomChat={setShowRandomChat}
             />
           )}
