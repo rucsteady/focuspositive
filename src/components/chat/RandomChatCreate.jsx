@@ -66,7 +66,7 @@ function RandomChatCreate({ handleShowChatInfo }) {
         <Paper
           elevation={0}
           sx={{
-            width: 350,
+            width: 400,
             padding: 4,
           }}
         >

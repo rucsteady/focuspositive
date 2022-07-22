@@ -14,20 +14,25 @@ import {
 } from "@mui/material";
 import React, { Fragment, useEffect, useState } from "react";
 import axi from "axios";
+import "./RandomChatSearchStyle.css";
 
-function RandomChatSearch({
-  randomChats,
-  handleShowChatSearch,
-  handleShowChatInfo,
-  handleShowChatNew,
-}) {
+function RandomChatSearch({ handleShowChatInfo }) {
   const [refreshedRandomChats, setRefreshedRandomChats] = useState([]);
+
+  // TODO is joinable
+  // edit able eigener chat oder gejoined
+  //
 
   const randomChatItems = refreshedRandomChats.map((randomChatDto, index) => (
     <ListItem key={index} sx={{ paddingBottom: 0 }}>
       <ListItemButton sx={{ padding: 0 }}>
-        <Card sx={{ minWidth: 250, padding: 0 }}>
-          <CardContent>
+        {randomChatDto.isOpen && "open"}
+        {randomChatDto.isReady && "ready"}
+        <Card
+          sx={{ minWidth: 250, padding: 0, backgroundColor: "#1565C0" }}
+          className={`banner ${randomChatDto.isOpen ? "root" : ""}`}
+        >
+          <CardContent className="root">
             <Typography sx={{ fontSize: 12 }}>{randomChatDto.topic}</Typography>
             <Typography variant="h6" component="div">
               {randomChatDto.name}
@@ -43,9 +48,9 @@ function RandomChatSearch({
                   randomChatDto.date
                 ).getFullYear()} um     
 
-          ${new Date(randomChatDto.date).getHours()}:${new Date(
-                  randomChatDto.date
-                ).getMinutes()}`}
+          ${
+            new Date(randomChatDto.date).getHours() + (24 % 12) || 12
+          }:${new Date(randomChatDto.date).getMinutes()}`}
               />
             </Typography>
           </CardContent>
@@ -67,7 +72,7 @@ function RandomChatSearch({
       <Paper
         elevation={0}
         sx={{
-          width: 350,
+          width: 400,
           padding: 4,
           marginLeft: 3,
         }}
@@ -75,11 +80,10 @@ function RandomChatSearch({
         <Typography variant="h6">Suche nach einem Random Chat</Typography>
 
         <Grid container>
-          <Grid item mt={4} maxWidth={"350px"}>
-            <Typography>
+          <Grid item mt={2} maxWidth={"350px"}>
+            <Typography mb={2}>
               Hier findest du eine Liste von Random Chat, die bereits erstellt
-              worden sind. Grüne Random Chats sind noch verfügbar. Blaue Random
-              Chats hast du bereits zugesagt.
+              worden sind.
             </Typography>
 
             <Card elevation={0}>
