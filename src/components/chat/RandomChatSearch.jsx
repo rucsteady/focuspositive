@@ -21,16 +21,18 @@ function RandomChatSearch({ handleShowChatInfo }) {
   // edit able eigener chat oder gejoined
   //
 
-  const handleRandomChatClick = (randomChatDto) => {
-    if (randomChatDto.isReady) {
-      console.log("is ready");
-      // user1 user2 start chat socket io
-      // randomChatDto wird übergeben an funktion
-      // wenn ready?? wenn open ist nicht ready
-      // state für chat fenster aus Chat übergeben, wird dann geöffnet und übergeben
-    } else {
-      console.log("is not ready");
-    }
+  const handleRandomChatClick = () => {
+    return function (randomChatDto) {
+      if (randomChatDto.isReady) {
+        console.log("is ready");
+        // user1 user2 start chat socket io
+        // randomChatDto wird übergeben an funktion
+        // wenn ready?? wenn open ist nicht ready
+        // state für chat fenster aus Chat übergeben, wird dann geöffnet und übergeben
+      } else {
+        console.log("is not ready");
+      }
+    };
   };
 
   const randomChatItems = refreshedRandomChats.map((randomChatDto, index) => (
@@ -63,12 +65,20 @@ function RandomChatSearch({ handleShowChatInfo }) {
             />
           </Typography>
           {randomChatDto.isReady && (
-            <Typography sx={{ backgroundColor: "white", color: "black", float: "right"}}>
+            <Typography
+              sx={{ backgroundColor: "white", color: "black", float: "right" }}
+            >
               Startklar - jetzt los chatten - hier klicken
             </Typography>
           )}
           {randomChatDto.isOpen && (
-            <Typography sx={{ backgroundColor: "#EE7702", color: "white", float: "right" }}>
+            <Typography
+              sx={{
+                backgroundColor: "#EE7702",
+                color: "white",
+                float: "right",
+              }}
+            >
               Offen - jetzt registrieren
             </Typography>
           )}
@@ -78,7 +88,6 @@ function RandomChatSearch({ handleShowChatInfo }) {
   ));
 
   // TODO On Click Item
-
   useEffect(() => {
     axi
       .get("http://localhost:8080/api/chats")
