@@ -8,11 +8,12 @@ import RandomChatSearch from "./RandomChatSearch";
 import RandomChatCreate from "./RandomChatCreate";
 
 function Chat() {
-  const { currentUser, randomChats } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
   const [showChatInfo, setShowChatInfo] = useState(true);
   const [showChatSearch, setShowChatSearch] = useState(false);
   const [showChatNew, setShowChatNew] = useState(false);
   const [showRandomChat, setShowRandomChat] = useState(false);
+  const [activeRoom, setActiveRoom] = useState(0);
   const chatUser = currentUser[0].firstname;
 
   const handleShowChatInfo = () => {
@@ -32,6 +33,8 @@ function Chat() {
     setShowChatSearch(false);
     setShowChatNew(true);
   };
+
+  console.log(activeRoom);
 
   return (
     <Fragment>
@@ -55,6 +58,7 @@ function Chat() {
             <RandomChatSearch
               handleShowChatInfo={handleShowChatInfo}
               setShowRandomChat={setShowRandomChat}
+              setActiveRoom={setActiveRoom}
             />
           )}
         </Grid>
