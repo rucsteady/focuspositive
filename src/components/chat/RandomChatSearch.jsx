@@ -20,19 +20,30 @@ function RandomChatSearch({ handleShowChatInfo }) {
   // edit able eigener chat oder gejoined
   //
 
+  const handleRandomChatClick = (randomChatDto) => {
+    if (randomChatDto.isReady) {
+      console.log("is ready");
+      // user1 user2 start chat socket io
+      // randomChatDto wird übergeben an funktion
+      // wenn ready?? wenn open ist nicht ready
+      // state für chat fenster aus Chat übergeben, wird dann geöffnet und übergeben
+    } else {
+      console.log("is not ready");
+    }
+  };
+
   const randomChatItems = refreshedRandomChats.map((randomChatDto, index) => (
     <ListItem key={index} sx={{ paddingBottom: 0 }}>
-      <ListItemButton sx={{ padding: 0 }}>
-        {randomChatDto.isOpen && "open"}
-        {randomChatDto.isReady && "ready"}
+      <ListItemButton
+        sx={{ padding: 0 }}
+        onClick={handleRandomChatClick(randomChatDto)}
+      >
         <Card
           sx={{ minWidth: 250, padding: 1 }}
-          className={randomChatDto.isOpen ? "open" : "ready"}
+          className="ready"
         >
           <Typography sx={{ fontSize: 12 }}>{randomChatDto.topic}</Typography>
-          <Typography variant="h6" component="div">
-            {randomChatDto.name}
-          </Typography>
+          <Typography variant="h6">{randomChatDto.name}</Typography>
           <Typography>
             <ListItemText
               primary={`${new Date(randomChatDto.date).getUTCDate()}.${new Date(
@@ -40,11 +51,13 @@ function RandomChatSearch({ handleShowChatInfo }) {
               ).getMonth()}.${new Date(
                 randomChatDto.date
               ).getFullYear()} um     
-          ${
-            new Date(randomChatDto.date).getHours() + (24 % 12) || 12
-          }:${new Date(randomChatDto.date).getMinutes()}`}
+          ${new Date(randomChatDto.date).getHours()}:${new Date(
+                randomChatDto.date
+              ).getMinutes()}`}
             />
           </Typography>
+          {randomChatDto.isReady && "Jetzt los chatten"}
+          {randomChatDto.isOpen && "Offen - jetzt registrieren"}
         </Card>
       </ListItemButton>
     </ListItem>
@@ -78,7 +91,7 @@ function RandomChatSearch({ handleShowChatInfo }) {
             </Typography>
 
             <Card elevation={0}>
-              <List sx={{ maxHeight: "300px", overflow: "auto", padding: 0 }}>
+              <List sx={{ maxHeight: "500px", overflow: "auto", padding: 0 }}>
                 {randomChatItems}
               </List>
             </Card>
