@@ -1,6 +1,7 @@
 import SendIcon from "@mui/icons-material/Send";
 import {
   Box,
+  Button,
   Chip,
   Container,
   Divider,
@@ -20,7 +21,7 @@ import io from "socket.io-client";
 
 const socket = io.connect("http://localhost:3001");
 
-function RandomChat({ chatUser }) {
+function RandomChat({ chatUser, setShowRandomChat }) {
   const [message, setMessage] = useState("");
   const [room, setRoom] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
@@ -138,7 +139,16 @@ function RandomChat({ chatUser }) {
                 </IconButton>
               </Grid>
             </Grid>
+            <Button
+            size="small"
+            variant="text"
+            onClick={() => setShowRandomChat(false)}
+            sx={{ marginTop: 2 }}
+          >
+            Schließen
+          </Button>
           </Box>
+          
         </Paper>
       </Container>
     </Fragment>

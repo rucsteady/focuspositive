@@ -12,6 +12,7 @@ function Chat() {
   const [showChatInfo, setShowChatInfo] = useState(true);
   const [showChatSearch, setShowChatSearch] = useState(false);
   const [showChatNew, setShowChatNew] = useState(false);
+  const [showRandomChat, setShowRandomChat] = useState(false);
   const chatUser = currentUser[0].firstname;
 
   const handleShowChatInfo = () => {
@@ -58,12 +59,18 @@ function Chat() {
               handleShowChatSearch={handleShowChatSearch}
               handleShowChatInfo={handleShowChatInfo}
               handleShowChatNew={handleShowChatNew}
+              setShowRandomChat={setShowRandomChat}
             />
           )}
         </Grid>
 
         <Grid item xs={12} md={5} xl={7}>
-          <RandomChat chatUser={chatUser} />
+          {showRandomChat && (
+            <RandomChat
+              chatUser={chatUser}
+              setShowRandomChat={setShowRandomChat}
+            />
+          )}
         </Grid>
       </Grid>
     </Fragment>

@@ -14,7 +14,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import axi from "axios";
 import "./RandomChatSearchStyle.css";
 
-function RandomChatSearch({ handleShowChatInfo }) {
+function RandomChatSearch({ handleShowChatInfo, setShowRandomChat }) {
   const [refreshedRandomChats, setRefreshedRandomChats] = useState([]);
 
   // TODO is joinable
@@ -25,7 +25,13 @@ function RandomChatSearch({ handleShowChatInfo }) {
   // wenn ready?? wenn open ist nicht ready
   // state für chat fenster aus Chat übergeben, wird dann geöffnet und übergeben
 
-  const handleStartRandomChat = () => {};
+  const handleStartRandomChat = () => {
+    return setShowRandomChat(true);
+  };
+
+  const handleRegisterRandomChat = () => {
+    return console.log("handle register");
+  };
 
   const randomChatItems = refreshedRandomChats.map((randomChatDto, index) => (
     <ListItem key={index} sx={{ paddingBottom: 0 }}>
@@ -41,8 +47,10 @@ function RandomChatSearch({ handleShowChatInfo }) {
           onClick={() => {
             if (randomChatDto.isReady) {
               console.log("is ready", randomChatDto);
+              handleStartRandomChat();
             } else if (randomChatDto.isOpen) {
               console.log("is open", randomChatDto);
+              handleRegisterRandomChat();
             }
           }}
         >
