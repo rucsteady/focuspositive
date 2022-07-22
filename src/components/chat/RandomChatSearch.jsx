@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Card,
   CircularProgress,
@@ -7,6 +8,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Modal,
   Paper,
   Typography,
 } from "@mui/material";
@@ -20,22 +22,9 @@ function RandomChatSearch({
   setActiveRoom,
 }) {
   const [refreshedRandomChats, setRefreshedRandomChats] = useState([]);
-
-  // TODO is joinable
-  // edit able eigener chat oder gejoined
-
-  // user1 user2 start chat socket io
-  // randomChatDto wird übergeben an funktion
-  // wenn ready?? wenn open ist nicht ready
-  // state für chat fenster aus Chat übergeben, wird dann geöffnet und übergeben
-
-  const handleStartRandomChat = (id) => {
-    return setShowRandomChat(true);
-  };
-
-  const handleRegisterRandomChat = () => {
-    return console.log("handle register");
-  };
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const randomChatItems = refreshedRandomChats.map((randomChatDto, index) => (
     <ListItem key={index} sx={{ paddingBottom: 0 }}>
@@ -51,7 +40,7 @@ function RandomChatSearch({
           onClick={() => {
             if (randomChatDto.isReady) {
               console.log("is ready", randomChatDto);
-              handleStartRandomChat();
+              handleOpen();
               setActiveRoom(randomChatDto.room);
             } else if (randomChatDto.isOpen) {
               console.log("is open", randomChatDto);
@@ -118,6 +107,20 @@ function RandomChatSearch({
       .then((response) => setRefreshedRandomChats(response.data.chats));
   }, []);
 
+  const handleStartRandomChat = () => {
+    setShowRandomChat(true);
+    setOpen(false);
+  };
+
+  const handleStopRandomChat = () => {
+    setShowRandomChat(false);
+    setOpen(false);
+  };
+
+  const handleRegisterRandomChat = () => {
+    return console.log("handle register");
+  };
+
   return !refreshedRandomChats ? (
     <div>
       <CircularProgress />
@@ -158,6 +161,33 @@ function RandomChatSearch({
           </Grid>
         </Grid>
       </Paper>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 400,
+            bgcolor: "background.paper",
+
+            p: 4,
+          }}
+        >
+          <Typography id="modal-modal-title" variant="h6" component="h2"sx={{ paddingBottom: 2}}>
+            Random Chat Starten?
+          </Typography>
+          <Button variant="contained" onClick={handleStartRandomChat}>
+            Starten
+          </Button>
+          <Button onClick={handleStopRandomChat}>Abbrechen</Button>
+        </Box>
+      </Modal>
     </Fragment>
   );
 }
