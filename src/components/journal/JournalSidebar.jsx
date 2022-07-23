@@ -1,7 +1,6 @@
 import {
   Button,
   Card,
-  Divider,
   IconButton,
   List,
   ListItem,
@@ -14,14 +13,14 @@ import { Container } from "@mui/system";
 import React, { Fragment } from "react";
 
 function JournalSidebar({
-  notes,
-  onAddNote,
-  onDeleteNote,
-  activeNote,
-  setActiveNote,
+  entrys,
+  onAddEntry,
+  onDeleteEntry,
+  activeEntry,
+  setActiveEntry,
 }) {
-  const sortedNotes = notes.sort((a, b) => b.lastModified - a.lastModified);
-  console.log(sortedNotes);
+  const sortedEntrys = entrys.sort((a, b) => b.lastModified - a.lastModified);
+
   return (
     <Fragment>
       <Container>
@@ -34,13 +33,13 @@ function JournalSidebar({
           }}
         >
           <Typography variant="h6">Einträge</Typography>
-          {sortedNotes.map(({ id, title, body, lastModified, index }, note) => (
+          {sortedEntrys.map(({ id, title, body, lastModified, index }) => (
             <Card>
               <List
                 sx={{
                   width: "100%",
                   maxWidth: 360,
-                  bgcolor: "background.paper",
+                  bgcolor: "#fff",
                   paddingTop: 0,
                   paddingBottom: 0,
                 }}
@@ -49,7 +48,7 @@ function JournalSidebar({
                 <ListItem
                   alignItems="flex-start"
                   button
-                  onClick={() => setActiveNote(id)}
+                  onClick={() => setActiveEntry(id)}
                 >
                   <ListItemText
                     primary={`${title}`}
@@ -72,7 +71,7 @@ function JournalSidebar({
                           })}
                           <IconButton
                             aria-label="delete"
-                            onClick={(e) => onDeleteNote(id)}
+                            onClick={(e) => onDeleteEntry(id)}
                           >
                             <DeleteIcon />
                           </IconButton>
@@ -86,7 +85,13 @@ function JournalSidebar({
             </Card>
           ))}
 
-          <Button onClick={onAddNote}>Neuer Eintrag</Button>
+          <Button
+            variant="contained"
+            sx={{ marginTop: 3 }}
+            onClick={onAddEntry}
+          >
+            Neuer Eintrag
+          </Button>
         </Paper>
       </Container>
     </Fragment>

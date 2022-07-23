@@ -1,18 +1,18 @@
-import { Button, Paper, TextField } from "@mui/material";
+import { Button, Card, Paper, TextField } from "@mui/material";
 
 import { Container } from "@mui/system";
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 
-function JournalMain({ activeNote, onUpdateNote }) {
+function JournalMain({ activeEntry, onUpdateEntry }) {
   const onEditField = (field, value) => {
-    onUpdateNote({
-      ...activeNote,
+    onUpdateEntry({
+      ...activeEntry,
       [field]: value,
       lastModified: Date.now(),
     });
   };
 
-  if (!activeNote) return <div className="no-active-note">No Active Note</div>;
+  if (!activeEntry) return <Card elevation={0}><Paper sx={{padding: 4}}>No Active Entry</Paper></Card>;
 
   return (
     <Fragment>
@@ -23,7 +23,7 @@ function JournalMain({ activeNote, onUpdateNote }) {
             label="Titel"
             variant="outlined"
             fullWidth
-            value={activeNote.title}
+            value={activeEntry.title}
             sx={{ marginBottom: 2 }}
           />
           <TextField
@@ -33,7 +33,7 @@ function JournalMain({ activeNote, onUpdateNote }) {
             multiline
             rows={12}
             fullWidth
-            value={activeNote.body}
+            value={activeEntry.body}
             sx={{ marginBottom: 2 }}
           />
 

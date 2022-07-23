@@ -1,14 +1,14 @@
 import { Button, Container, Grid, Paper, Typography } from "@mui/material";
 import React, { Fragment } from "react";
 
-function RandomChatInfo({ setIsSearchingForChat }) {
+function RandomChatInfo({ handleShowChatSearch, handleShowChatNew }) {
   return (
     <Fragment>
       <Container>
         <Paper
           elevation={0}
           sx={{
-            width: 350,
+            width: 400,
             padding: 4,
           }}
         >
@@ -26,13 +26,12 @@ function RandomChatInfo({ setIsSearchingForChat }) {
               </Typography>
             </Grid>
             <Grid item mt={4} maxWidth={"350px"}>
-              <Button variant="contained">Neuen Random Chat erstellen.</Button>
+              <Button onClick={handleShowChatNew} variant="contained">
+                Neuen Random Chat erstellen.
+              </Button>
             </Grid>
             <Grid item mt={4} maxWidth={"350px"}>
-              <Button
-                onClick={() => setIsSearchingForChat(true)}
-                variant="contained"
-              >
+              <Button onClick={handleShowChatSearch} variant="contained">
                 Suche nach einen Random Chat.
               </Button>
             </Grid>

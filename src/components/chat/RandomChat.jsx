@@ -1,6 +1,7 @@
 import SendIcon from "@mui/icons-material/Send";
 import {
   Box,
+  Button,
   Chip,
   Container,
   Divider,
@@ -11,7 +12,7 @@ import {
   ListItem,
   ListItemText,
   Paper,
-  TextField,  
+  TextField,
   Typography,
 } from "@mui/material";
 import React, { Fragment, useEffect, useState, useRef } from "react";
@@ -20,7 +21,7 @@ import io from "socket.io-client";
 
 const socket = io.connect("http://localhost:3001");
 
-function RandomChat({ chatUser }) {
+function RandomChat({ chatUser, setShowRandomChat, activeRoom }) {
   const [message, setMessage] = useState("");
   const [room, setRoom] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
@@ -62,7 +63,7 @@ function RandomChat({ chatUser }) {
 
   const handleRoom = (event) => {
     event.preventDefault();
-    setRoom(event.target.value);
+    setRoom(activeRoom);
     if (chatUser !== "" && room !== "") {
       socket.emit("join_room", room);
     }
@@ -70,6 +71,7 @@ function RandomChat({ chatUser }) {
 
   useEffect(() => {
     console.log("Open Socket", room);
+    setRoom(activeRoom);
     if (room !== "") {
       socket.emit("join_room", room);
     }
@@ -85,7 +87,7 @@ function RandomChat({ chatUser }) {
 
   return (
     <Fragment>
-      <Container>        
+      <Container>
         <Paper elevation={0}>
           <Box p={3}>
             <Typography variant="h6" gutterBottom>
@@ -102,7 +104,7 @@ function RandomChat({ chatUser }) {
               <Grid xs={4} item>
                 <Chip label={`${chatUser}:`} />
               </Grid>
-              <Grid xs={3} item>
+              <Grid xs={5} item>
                 <FormControl>
                   <TextField
                     onChange={handleRoom}
@@ -138,6 +140,14 @@ function RandomChat({ chatUser }) {
                 </IconButton>
               </Grid>
             </Grid>
+            <Button
+              size="small"
+              variant="text"
+              onClick={() => setShowRandomChat(false)}
+              sx={{ marginTop: 2 }}
+            >
+              Schließen
+            </Button>
           </Box>
         </Paper>
       </Container>

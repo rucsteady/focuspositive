@@ -96,6 +96,47 @@ server.get("/api/users", (req, res) => {
   res.end(JSON.stringify(users));
 });
 
+// Chats
+
+server.post("/api/chats", (req, res) => {
+  const { name, topic, user1, date } = req.body;
+
+  fs.readFile("./chats.json", (err, data) => {
+    if (err) {
+      const status = 401;
+      const message = err;
+      res.status(status).json({ status, message });
+      return;
+    }
+    data = JSON.parse(data.toString());
+
+    let last_room_id = data.chats[data.chats.length - 1].room;
+
+    data.chats.push({
+      name: name,
+      room: last_room_id + 1,
+      user1: user1,
+      user2: "",
+      topic: topic,
+      date: date,
+      isOpen: true,
+      isReady: false,
+    });
+    let writeData = fs.writeFile(
+      "./chats.json",
+      JSON.stringify(data),
+      (err, result) => {
+        if (err) {
+          const status = 401;
+          const message = err;
+          res.status(status).json({ status, message });
+          return;
+        }
+      }
+    );
+  });
+});
+
 server.get("/api/chats", (req, res) => {
   const rawData = fs.readFileSync("./chats.json");
   const chats = JSON.parse(rawData);

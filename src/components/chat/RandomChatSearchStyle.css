@@ -1,0 +1,14 @@
+.card {
+    padding: "1px";
+    min-width: "250px";
+}
+
+.ready {
+    background-color: #1565C0;
+    color: white;
+}
+
+.open {
+    background-color: #6AC87C;
+    color: black;
+}

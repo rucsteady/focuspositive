@@ -4,22 +4,22 @@
       "id": 1,
       "email": "user1@test.de",
       "password": "123456",
-      "firstname": "Sophie",
-      "lastname": "Albrecht"
+      "firstname": "user1",
+      "lastname": "One"
     },
     {
       "id": 2,
       "email": "user2@test.de",
       "password": "123456",
-      "firstname": "Inge",
-      "lastname": "Birkmann"
+      "firstname": "user2",
+      "lastname": "Two"
     },
     {
       "id": 3,
       "email": "user3@test.de",
       "password": "123456",
-      "firstname": "Petra",
-      "lastname": "Power"
+      "firstname": "user3",
+      "lastname": "three"
     }
   ]
 }

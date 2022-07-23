@@ -23,7 +23,6 @@ export function AuthProvider({ children }) {
         password,
       })
       .then((response) => {
-        console.log("response", response);
         localStorage.setItem(
           "login",
           JSON.stringify({
@@ -58,8 +57,6 @@ export function AuthProvider({ children }) {
       .then((response) => setRandomChats(response.data.chats));
   }, []);
 
-  console.log("Chats from Authcontext", randomChats);
-
   useEffect(() => {
     setCurrentUser(users.filter((user) => user.email === currentEmail));
   }, [users, currentEmail]);
@@ -77,7 +74,7 @@ export function AuthProvider({ children }) {
         users,
         handleLogOut,
         currentUser,
-        randomChats
+        randomChats,
       }}
     >
       {children}
