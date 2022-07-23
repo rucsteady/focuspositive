@@ -4,21 +4,23 @@ This project was build by Nils Rausch, Student of Hochschule für Wirtschaft und
 
 ### Setup the Focus Positive App
 
-Start a Terminal in these three Diretories
+Start a Terminal in each of these three Diretories
 
 `/`
 `authServer`
 `chatServer`
 
-install all dependencies with
+install all dependencies in each dir with
 
 ### `npm install`
 
-Start Service in
+Start Service in each dir
 
 `/`
 `authServer`
 `chatServer`
+
+### with `npm start`
 
 ## Available Scripts
 
