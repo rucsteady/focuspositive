@@ -14,9 +14,9 @@ function Journal() {
 
   const [updatedEntrys, setUpdatedEntrys] = useState();
 
-  // useEffect(() => {
-  //   localStorage.setItem('entrys', JSON.stringify(entrys));
-  // }, [entrys]);
+  useEffect(() => {
+    localStorage.setItem('entrys', JSON.stringify(entrys));
+  }, [entrys]);
 
   useEffect(() => {
     axios
@@ -34,7 +34,7 @@ function Journal() {
       lastModified: Date.now(),
     };
 
-    const response = await axios.post("http://localhost:8080/api/journal", newEntry)
+    // const response = await axios.post("http://localhost:8080/api/journal", newEntry)
     setEntrys([newEntry, ...entrys]);
     setActiveEntry(newEntry.id);
   };
