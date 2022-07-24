@@ -99,14 +99,9 @@ server.get("/api/users", (req, res) => {
 // Chats
 
 server.post("/api/chats", (req, res) => {
-    const {
-        name,
-        topic,
-        user1,
-        date,
-    } = req.body;
+    const { name, topic, user1, date } = req.body;
 
-    fs.readFile("./db.json", (err, data) => {
+    fs.readFile("./chats.json", (err, data) => {
         if (err) {
             const status = 401;
             const message = err;
@@ -127,8 +122,7 @@ server.post("/api/chats", (req, res) => {
             isOpen: true,
             isReady: false,
         });
-
-        fs.writeFile(
+        let writeData = fs.writeFile(
             "./chats.json",
             JSON.stringify(data),
             (err, result) => {
@@ -141,10 +135,7 @@ server.post("/api/chats", (req, res) => {
             }
         );
     });
-
-    res.status(200);
 });
-
 
 server.get("/api/chats", (req, res) => {
     const rawData = fs.readFileSync("./chats.json");
