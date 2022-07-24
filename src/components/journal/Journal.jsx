@@ -1,26 +1,26 @@
-import { Grid } from "@mui/material";
-import { Container } from "@mui/system";
-import { nanoid } from "nanoid";
-import React, { Fragment, useEffect, useState } from "react";
-import JournalMain from "./JournalMain";
-import JournalSidebar from "./JournalSidebar";
+import { Grid } from '@mui/material';
+import { Container } from '@mui/system';
+import { nanoid } from 'nanoid';
+import React, { Fragment, useEffect, useState } from 'react';
+import JournalMain from './JournalMain';
+import JournalSidebar from './JournalSidebar';
 
 function Journal() {
   const [entrys, setEntrys] = useState(
-    localStorage.entrys? JSON.parse(localStorage.entrys) : []
+    localStorage.entrys ? JSON.parse(localStorage.entrys) : []
   );
 
   const [activeEntry, setActiveEntry] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("entrys", JSON.stringify(entrys));
+    localStorage.setItem('entrys', JSON.stringify(entrys));
   }, [entrys]);
 
   const onAddEntry = () => {
     const newEntry = {
       id: nanoid(),
-      title: "Eintrag ohne Titel",
-      body: "",
+      title: 'Eintrag ohne Titel',
+      body: '',
       lastModified: Date.now(),
     };
 
@@ -49,9 +49,9 @@ function Journal() {
   };
 
   return (
-    <Fragment>
-      <Container fixed back>
-        <Grid container spacing={2}>
+    <div>
+      <Container>
+        <Grid container>
           <Grid item>
             <JournalSidebar
               entrys={entrys}
@@ -69,7 +69,7 @@ function Journal() {
           </Grid>
         </Grid>
       </Container>
-    </Fragment>
+    </div>
   );
 }
 

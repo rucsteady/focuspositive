@@ -22,7 +22,7 @@ function RandomChatCreate({ handleShowChatInfo }) {
   const [topic, setTopic] = useState('');
   const [user1, setUser1] = useState('');
   const [user2, setUser2] = useState('');
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState('');
 
   const [error, setError] = useState('');
 
@@ -33,7 +33,7 @@ function RandomChatCreate({ handleShowChatInfo }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (name !== '' && topic !== '') {
+    if (name !== '' && topic !== '' && date !== '') {
       axi
         .post('http://localhost:8080/api/chats', {
           name,
@@ -60,6 +60,14 @@ function RandomChatCreate({ handleShowChatInfo }) {
     setUser1(userMail);
   }, [userMail, user1]);
 
+  const handleClearNewChatForm = () => {
+    setError('');
+    setName('');
+    setTopic('');
+    setDate('');
+    setUser2('');
+  };
+
   return (
     <div>
       <Container elevation={0} maxWidth='md'>
@@ -79,6 +87,7 @@ function RandomChatCreate({ handleShowChatInfo }) {
               onSubmit={handleSubmit}
               sx={{ mt: 3 }}
             >
+              {error && <p style={{ color: 'red' }}>{error}</p>}
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
@@ -139,6 +148,7 @@ function RandomChatCreate({ handleShowChatInfo }) {
             >
               Zurück
             </Button>
+            <Button onClick={handleClearNewChatForm}>Zurücksetzen</Button>
           </Grid>
         </Paper>
       </Container>
