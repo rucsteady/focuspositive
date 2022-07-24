@@ -22,7 +22,7 @@ function RandomChatCreate({ handleShowChatInfo }) {
   const [topic, setTopic] = useState('');
   const [user1, setUser1] = useState('');
   const [user2, setUser2] = useState('');
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState('');
 
   const [error, setError] = useState('');
 
@@ -33,7 +33,7 @@ function RandomChatCreate({ handleShowChatInfo }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (name !== '' && topic !== '') {
+    if (name !== '' && topic !== '' && date !== '') {
       axi
         .post('http://localhost:8080/api/chats', {
           name,
@@ -43,6 +43,7 @@ function RandomChatCreate({ handleShowChatInfo }) {
           date,
         })
         .then((response) => {
+          console.log(response);
           setError('');
           setName('');
           setTopic('');
@@ -53,8 +54,6 @@ function RandomChatCreate({ handleShowChatInfo }) {
         .catch(() => setError(error.response.data.message));
     }
   };
-
-  console.log(userMail);
 
   useEffect(() => {
     setUser1(userMail);
