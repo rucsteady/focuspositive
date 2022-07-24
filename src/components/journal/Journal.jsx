@@ -1,26 +1,36 @@
-import { Grid } from '@mui/material';
-import { Container } from '@mui/system';
-import { nanoid } from 'nanoid';
-import React, { useEffect, useState } from 'react';
-import JournalMain from './JournalMain';
-import JournalSidebar from './JournalSidebar';
+import { Grid } from "@mui/material";
+import { Container } from "@mui/system";
+import { nanoid } from "nanoid";
+import React, { useEffect, useState } from "react";
+import JournalMain from "./JournalMain";
+import JournalSidebar from "./JournalSidebar";
+import axios from "axios";
 
 function Journal() {
   const [entrys, setEntrys] = useState(
     localStorage.entrys ? JSON.parse(localStorage.entrys) : []
   );
-
   const [activeEntry, setActiveEntry] = useState(false);
 
+  const [updatedEntrys, setUpdatedEntrys] = useState();
+
+  // useEffect(() => {
+  //   localStorage.setItem('entrys', JSON.stringify(entrys));
+  // }, [entrys]);
+
   useEffect(() => {
-    localStorage.setItem('entrys', JSON.stringify(entrys));
-  }, [entrys]);
+    axios
+      .get("http://localhost:8080/api/journal")
+      .then((response) => setUpdatedEntrys(response.data.journal));
+  }, []);
+
+  console.log(updatedEntrys);
 
   const onAddEntry = () => {
     const newEntry = {
       id: nanoid(),
-      title: 'Eintrag ohne Titel',
-      body: '',
+      title: "Eintrag ohne Titel",
+      body: "",
       lastModified: Date.now(),
     };
 

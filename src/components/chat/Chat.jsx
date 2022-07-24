@@ -35,9 +35,6 @@ function Chat() {
     setShowChatNew(true);
   };
 
-  console.log(activeRoom);
-  console.log('Active RC', activeRandomChat);
-
   return (
     <div>
       <Container elevation={0} maxWidth='md'>

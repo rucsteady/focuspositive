@@ -1,8 +1,8 @@
 {
     "journal": [{
         "id": 1,
-        "title": "user1@test.de",
-        "body": "123456",
-        "lastModified": "user1"
+        "title": "Test",
+        "body": "Hallo Inhalt",
+        "lastModified": ""
     }]
 }

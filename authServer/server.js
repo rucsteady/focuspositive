@@ -146,6 +146,15 @@ server.get("/api/chats", (req, res) => {
     res.end(JSON.stringify(chats));
 });
 
+server.get("/api/journal", (req, res) => {
+    const rawData = fs.readFileSync("./journal.json");
+    const journal = JSON.parse(rawData);
+    console.log(journal);
+
+    res.setHeader("Content-Type", "application/json");
+    res.end(JSON.stringify(journal));
+});
+
 const port = 8080;
 
 server.listen(port, () => {
