@@ -1,25 +1,31 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "email": "user1@test.de",
-      "password": "123456",
-      "firstname": "user1",
-      "lastname": "One"
-    },
-    {
-      "id": 2,
-      "email": "user2@test.de",
-      "password": "123456",
-      "firstname": "user2",
-      "lastname": "Two"
-    },
-    {
-      "id": 3,
-      "email": "user3@test.de",
-      "password": "123456",
-      "firstname": "user3",
-      "lastname": "three"
-    }
-  ]
+    "users": [{
+            "id": 1,
+            "email": "user1@test.de",
+            "password": "123456",
+            "firstname": "user1",
+            "lastname": "One"
+        },
+        {
+            "id": 2,
+            "email": "user2@test.de",
+            "password": "123456",
+            "firstname": "user2",
+            "lastname": "Two"
+        },
+        {
+            "id": 3,
+            "email": "user3@test.de",
+            "password": "123456",
+            "firstname": "user3",
+            "lastname": "three"
+        },
+        {
+            "id": 4,
+            "email": "user4@test.de",
+            "password": "123",
+            "firstname": "User4",
+            "lastname": "Test"
+        }
+    ]
 }

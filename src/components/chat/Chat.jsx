@@ -1,11 +1,11 @@
-import { Grid } from "@mui/material";
+import { Container, Grid, Paper } from '@mui/material';
 
-import React, { Fragment, useContext, useState } from "react";
-import AuthContext from "../../context/AuthContext";
-import RandomChat from "./RandomChat";
-import RandomChatInfo from "./RandomChatInfo";
-import RandomChatSearch from "./RandomChatSearch";
-import RandomChatCreate from "./RandomChatCreate";
+import React, { useContext, useState } from 'react';
+import AuthContext from '../../context/AuthContext';
+import RandomChat from './RandomChat';
+import RandomChatInfo from './RandomChatInfo';
+import RandomChatSearch from './RandomChatSearch';
+import RandomChatCreate from './RandomChatCreate';
 
 function Chat() {
   const { currentUser } = useContext(AuthContext);
@@ -14,6 +14,7 @@ function Chat() {
   const [showChatNew, setShowChatNew] = useState(false);
   const [showRandomChat, setShowRandomChat] = useState(false);
   const [activeRoom, setActiveRoom] = useState(0);
+  const [activeRandomChat, setActiveRandomChat] = useState();
   const chatUser = currentUser[0].firstname;
 
   const handleShowChatInfo = () => {
@@ -34,46 +35,52 @@ function Chat() {
     setShowChatNew(true);
   };
 
-  console.log(activeRoom);
-
   return (
-    <Fragment>
-      <Grid container spacing={1} sx={{ marginLeft: 14 }}>
-        <Grid item>
-          {showChatInfo && (
-            <RandomChatInfo
-              handleShowChatSearch={handleShowChatSearch}
-              handleShowChatNew={handleShowChatNew}
-            />
-          )}
+    <div>
+      <Container elevation={0} maxWidth='md'>
+        <Paper elevation={0} sx={{ padding: 4 }}>
+          <Grid>
+            <Grid item>
+              {showChatInfo && (
+                <RandomChatInfo
+                  handleShowChatSearch={handleShowChatSearch}
+                  handleShowChatNew={handleShowChatNew}
+                />
+              )}
 
-          {showChatNew && (
-            <RandomChatCreate
-              handleShowChatSearch={handleShowChatSearch}
-              handleShowChatInfo={handleShowChatInfo}
-            />
-          )}
+              {showChatNew && (
+                <RandomChatCreate
+                  handleShowChatSearch={handleShowChatSearch}
+                  handleShowChatInfo={handleShowChatInfo}
+                />
+              )}
 
-          {showChatSearch && (
-            <RandomChatSearch
-              handleShowChatInfo={handleShowChatInfo}
-              setShowRandomChat={setShowRandomChat}
-              setActiveRoom={setActiveRoom}
-            />
-          )}
-        </Grid>
+              {showChatSearch && (
+                <RandomChatSearch
+                  handleShowChatInfo={handleShowChatInfo}
+                  setShowRandomChat={setShowRandomChat}
+                  setActiveRoom={setActiveRoom}
+                  setShowChatSearch={setShowChatSearch}
+                  setActiveRandomChat={setActiveRandomChat}
+                />
+              )}
+            </Grid>
 
-        <Grid item xs={12} md={5} xl={7}>
-          {showRandomChat && (
-            <RandomChat
-              chatUser={chatUser}
-              activeRoom={activeRoom}
-              setShowRandomChat={setShowRandomChat}
-            />
-          )}
-        </Grid>
-      </Grid>
-    </Fragment>
+            <Grid item xs={12} md={5} xl={7}>
+              {showRandomChat && (
+                <RandomChat
+                  chatUser={chatUser}
+                  activeRoom={activeRoom}
+                  setShowRandomChat={setShowRandomChat}
+                  setShowChatInfo={setShowChatInfo}
+                  activeRandomChat={activeRandomChat}
+                />
+              )}
+            </Grid>
+          </Grid>
+        </Paper>
+      </Container>
+    </div>
   );
 }
 

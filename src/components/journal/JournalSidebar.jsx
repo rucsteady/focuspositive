@@ -7,10 +7,10 @@ import {
   ListItemText,
   Paper,
   Typography,
-} from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Container } from "@mui/system";
-import React, { Fragment } from "react";
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Container } from '@mui/system';
+import React from 'react';
 
 function JournalSidebar({
   entrys,
@@ -22,7 +22,7 @@ function JournalSidebar({
   const sortedEntrys = entrys.sort((a, b) => b.lastModified - a.lastModified);
 
   return (
-    <Fragment>
+    <div>
       <Container>
         <Paper
           elevation={0}
@@ -32,51 +32,53 @@ function JournalSidebar({
             marginLeft: 0,
           }}
         >
-          <Typography variant="h6">Einträge</Typography>
+          <Typography variant='h6' sx={{ marginBottom: 2 }}>
+            Einträge
+          </Typography>
           {sortedEntrys.map(({ id, title, body, lastModified, index }) => (
             <Card>
               <List
                 sx={{
-                  width: "100%",
+                  width: '100%',
                   maxWidth: 360,
-                  bgcolor: "#fff",
+                  bgcolor: '#fff',
                   paddingTop: 0,
                   paddingBottom: 0,
                 }}
                 key={index}
               >
                 <ListItem
-                  alignItems="flex-start"
+                  alignItems='flex-start'
                   button
                   onClick={() => setActiveEntry(id)}
                 >
                   <ListItemText
                     primary={`${title}`}
                     secondary={
-                      <Fragment>
+                      <div>
                         <Typography
-                          sx={{ display: "inline" }}
-                          component="span"
-                          variant="body2"
-                          color="text.primary"
+                          sx={{ display: 'inline' }}
+                          component='span'
+                          variant='body2'
+                          color='text.primary'
                         >
-                          {body && body.substr(0, 40) + "..."}
+                          {body && body.substr(0, 40) + '...'}
                         </Typography>
                         <Typography sx={{ fontSize: 10 }}>
-                          {" "}
-                          Zuletzt bearbeitet{" "}
-                          {new Date(lastModified).toLocaleDateString("de-DE", {
-                            hour: "2-digit",
-                            minute: "2-digit",
+                          {' '}
+                          Zuletzt bearbeitet{' '}
+                          {new Date(lastModified).toLocaleDateString('de-DE', {
+                            hour: '2-digit',
+                            minute: '2-digit',
                           })}
                           <IconButton
-                            aria-label="delete"
+                            aria-label='delete'
                             onClick={(e) => onDeleteEntry(id)}
                           >
                             <DeleteIcon />
                           </IconButton>
                         </Typography>
-                      </Fragment>
+                      </div>
                     }
                   />
                 </ListItem>
@@ -86,15 +88,15 @@ function JournalSidebar({
           ))}
 
           <Button
-            variant="contained"
-            sx={{ marginTop: 3 }}
+            variant='contained'
+            sx={{ marginTop: 3, boxShadow: 0 }}
             onClick={onAddEntry}
           >
             Neuer Eintrag
           </Button>
         </Paper>
       </Container>
-    </Fragment>
+    </div>
   );
 }
 

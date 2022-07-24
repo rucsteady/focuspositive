@@ -9,17 +9,18 @@ import {
   ListItemButton,
   ListItemText,
   Modal,
-  Paper,
   Typography,
 } from '@mui/material';
-import React, { Fragment, useEffect, useState } from 'react';
-import axi from 'axios';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import './RandomChatSearchStyle.css';
 
 function RandomChatSearch({
   handleShowChatInfo,
   setShowRandomChat,
   setActiveRoom,
+  setShowChatSearch,
+  setActiveRandomChat,
 }) {
   const [refreshedRandomChats, setRefreshedRandomChats] = useState([]);
   const [open, setOpen] = React.useState(false);
@@ -31,8 +32,8 @@ function RandomChatSearch({
       <ListItemButton sx={{ padding: 0 }}>
         <Card
           sx={{
-            padding: '4px',
-            minWidth: '300px',
+            padding: 2,
+            minWidth: '400px',
             backgroundColor: '#1565C0',
             color: 'white',
           }}
@@ -42,6 +43,7 @@ function RandomChatSearch({
               console.log('is ready', randomChatDto);
               handleOpen();
               setActiveRoom(randomChatDto.room);
+              setActiveRandomChat(randomChatDto);
             } else if (randomChatDto.isOpen) {
               console.log('is open', randomChatDto);
               handleRegisterRandomChat();
@@ -102,12 +104,13 @@ function RandomChatSearch({
 
   // TODO On Click Item
   useEffect(() => {
-    axi
+    axios
       .get('http://localhost:8080/api/chats')
       .then((response) => setRefreshedRandomChats(response.data.chats));
   }, []);
 
   const handleStartRandomChat = () => {
+    setShowChatSearch(false);
     setShowRandomChat(true);
     setOpen(false);
   };
@@ -126,41 +129,33 @@ function RandomChatSearch({
       <CircularProgress />
     </div>
   ) : (
-    <Fragment>
-      <Paper
-        elevation={0}
-        sx={{
-          width: 400,
-          padding: 4,
-          marginLeft: 3,
-        }}
-      >
-        <Typography variant='h6'>Suche nach einem Random Chat</Typography>
+    <div>
+      <Typography variant='h6'>Suche nach einem Random Chat</Typography>
 
-        <Grid container>
-          <Grid item mt={2} maxWidth={'350px'}>
-            <Typography mb={2}>
-              Hier findest du eine Liste von Random Chats, die bereits erstellt
-              worden sind.
-            </Typography>
+      <Grid container>
+        <Grid item mt={2}>
+          <Typography mb={2}>
+            Hier findest du eine Liste von Random Chats, die bereits erstellt
+            worden sind.
+          </Typography>
 
-            <Card elevation={0}>
-              <List sx={{ maxHeight: '500px', overflow: 'auto', padding: 0 }}>
-                {randomChatItems}
-              </List>
-            </Card>
+          <Card elevation={0}>
+            <List sx={{ maxHeight: '400px', overflow: 'auto', padding: 0 }}>
+              {randomChatItems}
+            </List>
+          </Card>
 
-            <Button
-              size='small'
-              variant='text'
-              onClick={handleShowChatInfo}
-              sx={{ marginTop: 2 }}
-            >
-              Zurück
-            </Button>
-          </Grid>
+          <Button
+            size='small'
+            variant='text'
+            onClick={handleShowChatInfo}
+            sx={{ marginTop: 2, boxShadow: 0 }}
+          >
+            Zurück
+          </Button>
         </Grid>
-      </Paper>
+      </Grid>
+
       <Modal
         open={open}
         onClose={handleClose}
@@ -190,10 +185,12 @@ function RandomChatSearch({
           <Button variant='contained' onClick={handleStartRandomChat}>
             Starten
           </Button>
-          <Button onClick={handleStopRandomChat}>Abbrechen</Button>
+          <Button onClick={handleStopRandomChat} sx={{ boxShadow: 0 }}>
+            Abbrechen
+          </Button>
         </Box>
       </Modal>
-    </Fragment>
+    </div>
   );
 }
 

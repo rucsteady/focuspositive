@@ -1,22 +1,32 @@
 import { Grid } from "@mui/material";
 import { Container } from "@mui/system";
 import { nanoid } from "nanoid";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import JournalMain from "./JournalMain";
 import JournalSidebar from "./JournalSidebar";
+import axios from "axios";
 
 function Journal() {
   const [entrys, setEntrys] = useState(
-    localStorage.entrys? JSON.parse(localStorage.entrys) : []
+    localStorage.entrys ? JSON.parse(localStorage.entrys) : []
   );
-
   const [activeEntry, setActiveEntry] = useState(false);
 
+  const [updatedEntrys, setUpdatedEntrys] = useState();
+
   useEffect(() => {
-    localStorage.setItem("entrys", JSON.stringify(entrys));
+    localStorage.setItem('entrys', JSON.stringify(entrys));
   }, [entrys]);
 
-  const onAddEntry = () => {
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/journal")
+      .then((response) => setUpdatedEntrys(response.data.journal));
+  }, []);
+
+  console.log(updatedEntrys);
+
+  const onAddEntry = async () => {
     const newEntry = {
       id: nanoid(),
       title: "Eintrag ohne Titel",
@@ -24,6 +34,7 @@ function Journal() {
       lastModified: Date.now(),
     };
 
+    // const response = await axios.post("http://localhost:8080/api/journal", newEntry)
     setEntrys([newEntry, ...entrys]);
     setActiveEntry(newEntry.id);
   };
@@ -49,9 +60,9 @@ function Journal() {
   };
 
   return (
-    <Fragment>
-      <Container fixed back>
-        <Grid container spacing={2}>
+    <div>
+      <Container>
+        <Grid container>
           <Grid item>
             <JournalSidebar
               entrys={entrys}
@@ -69,7 +80,7 @@ function Journal() {
           </Grid>
         </Grid>
       </Container>
-    </Fragment>
+    </div>
   );
 }
 
