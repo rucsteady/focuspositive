@@ -8,12 +8,13 @@ import RandomChatSearch from './RandomChatSearch';
 import RandomChatCreate from './RandomChatCreate';
 
 function Chat() {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, users } = useContext(AuthContext);
   const [showChatInfo, setShowChatInfo] = useState(true);
   const [showChatSearch, setShowChatSearch] = useState(false);
   const [showChatNew, setShowChatNew] = useState(false);
   const [showRandomChat, setShowRandomChat] = useState(false);
   const [activeRoom, setActiveRoom] = useState(0);
+  const [activeRandomChat, setActiveRandomChat] = useState();
   const chatUser = currentUser[0].firstname;
 
   const handleShowChatInfo = () => {
@@ -35,6 +36,7 @@ function Chat() {
   };
 
   console.log(activeRoom);
+  console.log('Active RC', activeRandomChat);
 
   return (
     <div>
@@ -62,6 +64,7 @@ function Chat() {
                   setShowRandomChat={setShowRandomChat}
                   setActiveRoom={setActiveRoom}
                   setShowChatSearch={setShowChatSearch}
+                  setActiveRandomChat={setActiveRandomChat}
                 />
               )}
             </Grid>
@@ -72,6 +75,8 @@ function Chat() {
                   chatUser={chatUser}
                   activeRoom={activeRoom}
                   setShowRandomChat={setShowRandomChat}
+                  setShowChatInfo={setShowChatInfo}
+                  activeRandomChat={activeRandomChat}
                 />
               )}
             </Grid>

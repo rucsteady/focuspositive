@@ -21,7 +21,13 @@ import io from 'socket.io-client';
 
 const socket = io.connect('http://localhost:3001');
 
-function RandomChat({ chatUser, setShowRandomChat, activeRoom }) {
+function RandomChat({
+  chatUser,
+  setShowRandomChat,
+  setShowChatInfo,
+  activeRoom,
+  activeRandomChat,
+}) {
   const [message, setMessage] = useState('');
   const [room, setRoom] = useState('');
   const [chatMessages, setChatMessages] = useState([]);
@@ -85,13 +91,19 @@ function RandomChat({ chatUser, setShowRandomChat, activeRoom }) {
     </ListItem>
   ));
 
+  const handleBackToChatSearch = () => {
+    setShowRandomChat(false);
+    setShowChatInfo(true);
+  };
+
   return (
     <Fragment>
       <Container>
         <Paper elevation={0}>
           <Box p={3}>
             <Typography variant='h6' gutterBottom>
-              Coffee Chat von {chatUser}
+              Verbunden: {activeRandomChat.name} von {activeRandomChat.user1}{' '}
+              mit {activeRandomChat.user2}
             </Typography>
             <Divider />
             <Grid container spacing={4} alignItems='center'>
@@ -101,9 +113,6 @@ function RandomChat({ chatUser, setShowRandomChat, activeRoom }) {
                   <ListItem ref={scrollBottomRef} />
                 </List>
               </Grid>
-              <Grid xs={4} item>
-                <Chip label={`${chatUser}:`} />
-              </Grid>
               <Grid xs={5} item>
                 <FormControl>
                   <TextField
@@ -112,6 +121,7 @@ function RandomChat({ chatUser, setShowRandomChat, activeRoom }) {
                     label='Room ID'
                     variant='outlined'
                     maxLength={10}
+                    disabled
                   />
                 </FormControl>
               </Grid>
@@ -143,7 +153,7 @@ function RandomChat({ chatUser, setShowRandomChat, activeRoom }) {
             <Button
               size='small'
               variant='text'
-              onClick={() => setShowRandomChat(false)}
+              onClick={handleBackToChatSearch}
               sx={{ marginTop: 2, boxShadow: 0 }}
             >
               Schließen

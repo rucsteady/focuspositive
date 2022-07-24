@@ -15,13 +15,16 @@ import {
 import React, { Fragment, useEffect, useState } from 'react';
 import axi from 'axios';
 import './RandomChatSearchStyle.css';
+import { useNavigate } from 'react-router-dom';
 
 function RandomChatSearch({
   handleShowChatInfo,
   setShowRandomChat,
   setActiveRoom,
   setShowChatSearch,
+  setActiveRandomChat,
 }) {
+  const navigate = useNavigate();
   const [refreshedRandomChats, setRefreshedRandomChats] = useState([]);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -43,6 +46,7 @@ function RandomChatSearch({
               console.log('is ready', randomChatDto);
               handleOpen();
               setActiveRoom(randomChatDto.room);
+              setActiveRandomChat(randomChatDto);
             } else if (randomChatDto.isOpen) {
               console.log('is open', randomChatDto);
               handleRegisterRandomChat();
@@ -117,7 +121,6 @@ function RandomChatSearch({
   const handleStopRandomChat = () => {
     setShowRandomChat(false);
     setOpen(false);
-    setShowChatSearch(true);
   };
 
   const handleRegisterRandomChat = () => {
