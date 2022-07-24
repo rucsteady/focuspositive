@@ -89,9 +89,8 @@ function JournalSidebar({
 
           <Button
             variant='contained'
-            sx={{ marginTop: 3 }}
+            sx={{ marginTop: 3, boxShadow: 0 }}
             onClick={onAddEntry}
-            sx={{ boxShadow: 0 }}
           >
             Neuer Eintrag
           </Button>

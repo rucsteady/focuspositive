@@ -61,6 +61,7 @@ function Chat() {
                   handleShowChatInfo={handleShowChatInfo}
                   setShowRandomChat={setShowRandomChat}
                   setActiveRoom={setActiveRoom}
+                  setShowChatSearch={setShowChatSearch}
                 />
               )}
             </Grid>
