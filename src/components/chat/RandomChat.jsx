@@ -32,7 +32,7 @@ function RandomChat({
   const [room, setRoom] = useState('');
   const [chatMessages, setChatMessages] = useState([]);
 
-  const scrollBottomRef = useRef(null);
+  const bottomRef = useRef(null);
 
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
@@ -54,7 +54,7 @@ function RandomChat({
       await socket.emit('send_message', messageData);
       setChatMessages((list) => [...list, messageData]);
       // if (scrollBottomRef.current) {
-      //   scrollBottomRef.current.scrollIntoView({ behavior: "smooth" });
+      //  scrollBottomRef.current.scrollIntoView({ behavior: 'smooth' });
       // }
     }
     setMessage('');
@@ -96,10 +96,20 @@ function RandomChat({
     setShowChatInfo(true);
   };
 
+  useEffect(() => {
+    // 👇️ scroll to bottom every time messages change
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatMessages]);
+
   return (
     <Fragment>
       <Container>
         <Paper elevation={0}>
+          <Typography
+            sx={{ fontSize: '11px', padding: 0, margin: 0, align: 'right' }}
+          >
+            Chatroom: {room}
+          </Typography>
           <Box p={3}>
             <Typography variant='h6' gutterBottom>
               Verbunden: {activeRandomChat.name} von {activeRandomChat.user1}{' '}
@@ -110,20 +120,9 @@ function RandomChat({
               <Grid id='chat-window' xs={12} item>
                 <List id='chat-window-messages' xs={12}>
                   {listChatMessages}
-                  <ListItem ref={scrollBottomRef} />
+                  <ListItem />
+                  <div ref={bottomRef} />
                 </List>
-              </Grid>
-              <Grid xs={5} item>
-                <FormControl>
-                  <TextField
-                    onChange={handleRoom}
-                    value={room}
-                    label='Room ID'
-                    variant='outlined'
-                    maxLength={10}
-                    disabled
-                  />
-                </FormControl>
               </Grid>
 
               <Grid xs={9} item>
