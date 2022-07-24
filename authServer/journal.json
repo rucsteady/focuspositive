@@ -1,8 +1,17 @@
 {
-    "journal": [{
-        "id": 1,
-        "title": "Test",
-        "body": "Hallo Inhalt",
-        "lastModified": ""
-    }]
+    "journal": [
+        { "id": 1, "title": "Test", "body": "Hallo Inhalt", "lastModified": "" },
+        {
+            "id": "XFr-Q1FulbwSsLs_UfWYW",
+            "title": "Eintrag ohne Titel",
+            "body": "",
+            "lastModified": 1658682467469
+        },
+        {
+            "id": "d2b00I0MTZEVio2B38Hpk",
+            "title": "Eintrag ohne Titel",
+            "body": "",
+            "lastModified": 1658682471006
+        }
+    ]
 }

@@ -26,7 +26,7 @@ function Journal() {
 
   console.log(updatedEntrys);
 
-  const onAddEntry = () => {
+  const onAddEntry = async () => {
     const newEntry = {
       id: nanoid(),
       title: "Eintrag ohne Titel",
@@ -34,6 +34,7 @@ function Journal() {
       lastModified: Date.now(),
     };
 
+    const response = await axios.post("http://localhost:8080/api/journal", newEntry)
     setEntrys([newEntry, ...entrys]);
     setActiveEntry(newEntry.id);
   };

@@ -146,6 +146,8 @@ server.get("/api/chats", (req, res) => {
     res.end(JSON.stringify(chats));
 });
 
+// Journal
+
 server.get("/api/journal", (req, res) => {
     const rawData = fs.readFileSync("./journal.json");
     const journal = JSON.parse(rawData);
@@ -153,6 +155,43 @@ server.get("/api/journal", (req, res) => {
 
     res.setHeader("Content-Type", "application/json");
     res.end(JSON.stringify(journal));
+});
+
+server.post("/api/journal", (req, res) => {
+    const { id, title, body, lastModified } = req.body;
+
+    fs.readFile("./journal.json", (err, data) => {
+        if (err) {
+            const status = 401;
+            const message = err;
+            res.status(status).json({ status, message });
+            return;
+        }
+        data = JSON.parse(data.toString());
+
+        let last_item_id = data.journal[data.journal.length - 1].id;
+
+        data.journal.push({
+            id: id,
+            title: title,
+            body: body,
+            lastModified: lastModified,
+        });
+        let writeData = fs.writeFile(
+            "./journal.json",
+            JSON.stringify(data),
+            (err, result) => {
+                if (err) {
+                    const status = 401;
+                    const message = err;
+                    res.status(status).json({ status, message });
+                    return;
+                }
+            }
+        );
+    });
+
+    res.status(200);
 });
 
 const port = 8080;
