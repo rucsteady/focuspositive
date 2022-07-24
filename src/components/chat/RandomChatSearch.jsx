@@ -9,13 +9,11 @@ import {
   ListItemButton,
   ListItemText,
   Modal,
-  Paper,
   Typography,
 } from '@mui/material';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axi from 'axios';
 import './RandomChatSearchStyle.css';
-import { useNavigate } from 'react-router-dom';
 
 function RandomChatSearch({
   handleShowChatInfo,
@@ -24,7 +22,6 @@ function RandomChatSearch({
   setShowChatSearch,
   setActiveRandomChat,
 }) {
-  const navigate = useNavigate();
   const [refreshedRandomChats, setRefreshedRandomChats] = useState([]);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);

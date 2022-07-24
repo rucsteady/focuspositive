@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
 import axi from 'axios';
 
-import React, { Fragment, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 function RandomChatCreate({ handleShowChatInfo }) {
   const { currentUser } = useContext(AuthContext);
@@ -33,7 +33,7 @@ function RandomChatCreate({ handleShowChatInfo }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (name !== '' && topic !== '' && date !== '') {
+    if (name !== '' && topic !== '') {
       axi
         .post('http://localhost:8080/api/chats', {
           name,

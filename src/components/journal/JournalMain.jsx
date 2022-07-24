@@ -1,7 +1,7 @@
 import { Button, Card, Paper, TextField } from '@mui/material';
 
 import { Container } from '@mui/system';
-import React, { Fragment } from 'react';
+import React from 'react';
 
 function JournalMain({ activeEntry, onUpdateEntry }) {
   const onEditField = (field, value) => {
@@ -22,7 +22,7 @@ function JournalMain({ activeEntry, onUpdateEntry }) {
     );
 
   return (
-    <Fragment>
+    <div>
       <Container size='sm'>
         <Paper sx={{ padding: 4 }}>
           <TextField
@@ -49,7 +49,7 @@ function JournalMain({ activeEntry, onUpdateEntry }) {
           </Button>
         </Paper>
       </Container>
-    </Fragment>
+    </div>
   );
 }
 

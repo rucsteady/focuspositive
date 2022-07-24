@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { useContext } from 'react';
 import './DashboardStyle.css';
 import AuthContext from '../context/AuthContext';
 import { NavLink } from 'react-router-dom';
@@ -9,7 +9,7 @@ function Dashboard() {
   const { userLoggedIn, users, currentEmail } = useContext(AuthContext);
 
   return (
-    <Fragment className='dashboard'>
+    <div className='dashboard'>
       <div className='bg'>
         {/* <div style={{ backgroundColor: "#fff", padding: "10px" }}>
           Wilkommen{" "}
@@ -55,7 +55,7 @@ function Dashboard() {
           </Paper>
         </Container>
       </div>
-    </Fragment>
+    </div>
   );
 }
 

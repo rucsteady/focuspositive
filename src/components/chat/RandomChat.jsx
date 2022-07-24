@@ -2,7 +2,6 @@ import SendIcon from '@mui/icons-material/Send';
 import {
   Box,
   Button,
-  Chip,
   Container,
   Divider,
   FormControl,
@@ -15,7 +14,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import React, { Fragment, useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './RandomChatStyle.css';
 import io from 'socket.io-client';
 
@@ -67,14 +66,6 @@ function RandomChat({
     });
   }, []);
 
-  const handleRoom = (event) => {
-    event.preventDefault();
-    setRoom(activeRoom);
-    if (chatUser !== '' && room !== '') {
-      socket.emit('join_room', room);
-    }
-  };
-
   useEffect(() => {
     console.log('Open Socket', room);
     setRoom(activeRoom);
@@ -102,7 +93,7 @@ function RandomChat({
   }, [chatMessages]);
 
   return (
-    <Fragment>
+    <div>
       <Container>
         <Paper elevation={0}>
           <Typography
@@ -160,7 +151,7 @@ function RandomChat({
           </Box>
         </Paper>
       </Container>
-    </Fragment>
+    </div>
   );
 }
 

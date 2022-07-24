@@ -1,6 +1,6 @@
 import { Container, Grid, Paper } from '@mui/material';
 
-import React, { Fragment, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import AuthContext from '../../context/AuthContext';
 import RandomChat from './RandomChat';
 import RandomChatInfo from './RandomChatInfo';
@@ -8,7 +8,7 @@ import RandomChatSearch from './RandomChatSearch';
 import RandomChatCreate from './RandomChatCreate';
 
 function Chat() {
-  const { currentUser, users } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
   const [showChatInfo, setShowChatInfo] = useState(true);
   const [showChatSearch, setShowChatSearch] = useState(false);
   const [showChatNew, setShowChatNew] = useState(false);

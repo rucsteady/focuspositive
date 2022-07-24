@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Container } from '@mui/system';
-import React, { Fragment } from 'react';
+import React from 'react';
 
 function JournalSidebar({
   entrys,
@@ -22,7 +22,7 @@ function JournalSidebar({
   const sortedEntrys = entrys.sort((a, b) => b.lastModified - a.lastModified);
 
   return (
-    <Fragment>
+    <div>
       <Container>
         <Paper
           elevation={0}
@@ -55,7 +55,7 @@ function JournalSidebar({
                   <ListItemText
                     primary={`${title}`}
                     secondary={
-                      <Fragment>
+                      <div>
                         <Typography
                           sx={{ display: 'inline' }}
                           component='span'
@@ -78,7 +78,7 @@ function JournalSidebar({
                             <DeleteIcon />
                           </IconButton>
                         </Typography>
-                      </Fragment>
+                      </div>
                     }
                   />
                 </ListItem>
@@ -96,7 +96,7 @@ function JournalSidebar({
           </Button>
         </Paper>
       </Container>
-    </Fragment>
+    </div>
   );
 }
 

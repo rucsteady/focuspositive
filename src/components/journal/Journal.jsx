@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 import { Container } from '@mui/system';
 import { nanoid } from 'nanoid';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import JournalMain from './JournalMain';
 import JournalSidebar from './JournalSidebar';
 
