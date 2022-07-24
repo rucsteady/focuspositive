@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
-import axi from 'axios';
+import axios from 'axios';
 import AuthContext from '../../context/AuthContext';
 import './RegisterStyle.css';
 import { Container, Paper } from '@mui/material';
@@ -18,7 +18,7 @@ function Register() {
 
   const register = (e) => {
     e.preventDefault();
-    axi
+    axios
       .post('http://localhost:8080/api/auth/register', {
         email,
         password,

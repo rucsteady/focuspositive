@@ -11,7 +11,7 @@ import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
-import axi from 'axios';
+import axios from 'axios';
 
 import React, { useContext, useEffect, useState } from 'react';
 
@@ -34,15 +34,15 @@ function RandomChatCreate({ handleShowChatInfo }) {
     e.preventDefault();
 
     if (name !== '' && topic !== '') {
-      axi
+      axios
         .post('http://localhost:8080/api/chats', {
           name,
           topic,
           user1,
-          user2,
           date,
         })
         .then((response) => {
+          console.log(response);
           setError('');
           setName('');
           setTopic('');
@@ -50,11 +50,11 @@ function RandomChatCreate({ handleShowChatInfo }) {
           setUser2('');
           navigate('/');
         })
-        .catch(() => setError(error.response.data.message));
+        .catch((error) => setError(error.response.data.message));
     }
   };
 
-  console.log(userMail);
+  console.log(name, topic);
 
   useEffect(() => {
     setUser1(userMail);

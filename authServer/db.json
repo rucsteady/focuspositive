@@ -19,6 +19,13 @@
             "password": "123456",
             "firstname": "user3",
             "lastname": "three"
+        },
+        {
+            "id": 4,
+            "email": "user4@test.de",
+            "password": "123",
+            "firstname": "User4",
+            "lastname": "Test"
         }
     ]
 }

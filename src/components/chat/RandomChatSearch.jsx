@@ -12,7 +12,7 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import axi from 'axios';
+import axios from 'axios';
 import './RandomChatSearchStyle.css';
 
 function RandomChatSearch({
@@ -104,7 +104,7 @@ function RandomChatSearch({
 
   // TODO On Click Item
   useEffect(() => {
-    axi
+    axios
       .get('http://localhost:8080/api/chats')
       .then((response) => setRefreshedRandomChats(response.data.chats));
   }, []);
