@@ -60,12 +60,24 @@ function RandomChatCreate({ handleShowChatInfo }) {
     setUser1(userMail);
   }, [userMail, user1]);
 
-  const handleClearNewChatForm = () => {
-    setError('');
-    setName('');
-    setTopic('');
-    setDate('');
-    setUser2('');
+  const createChat = (e) => {
+    e.preventDefault();
+    axios
+      .post('http://localhost:8080/api/chats', {
+        name,
+        topic,
+        user1,
+        date,
+      })
+      .then((response) => {
+        console.log('response', response);
+        setName('');
+        setTopic('');
+        setDate('');
+        setUser2('');
+        navigate('/');
+      })
+      .catch((error) => setError(error.response.data.message));
   };
 
   return (
@@ -81,65 +93,56 @@ function RandomChatCreate({ handleShowChatInfo }) {
                 über die du gerne sprechen möchtest.
               </Typography>
             </Grid>
-            <Box
-              component='form'
-              noValidate
-              onSubmit={handleSubmit}
-              sx={{ mt: 3 }}
-            >
-              {error && <p style={{ color: 'red' }}>{error}</p>}
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id='name'
-                    label='Random Chat Name'
-                    name='name'
-                    autoFocus
-                    value={name}
-                    onChange={(e) => {
-                      setName(e.target.value);
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    name='topic'
-                    label='Gesprächsthemen'
-                    id='topic'
-                    value={topic}
-                    onChange={(e) => {
-                      setTopic(e.target.value);
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <LocalizationProvider dateAdapter={AdapterMoment}>
-                    <DateTimePicker
-                      okLabel='Text'
-                      clearLabel='Text'
-                      cancelLabel='Text'
-                      label='Datum'
-                      value={date}
-                      onChange={(newDate) => {
-                        setDate(newDate);
-                      }}
-                      renderInput={(params) => <TextField {...params} />}
-                    />
-                  </LocalizationProvider>
-                </Grid>
-              </Grid>
-              <Button
-                type='submit'
-                variant='contained'
-                sx={{ mt: 3, mb: 2, boxShadow: 0 }}
-              >
-                erstellen
-              </Button>
-            </Box>
+
+            <div style={{ marginBottom: '10px' }}>Account-Registrierung</div>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+
+            <form noValidate autoComplete='off' onSubmit={createChat}>
+              <TextField
+                required
+                fullWidth
+                id='name'
+                label='Random Chat Name'
+                name='name'
+                autoFocus
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
+
+              <TextField
+                required
+                fullWidth
+                name='topic'
+                label='Gesprächsthemen'
+                id='topic'
+                value={topic}
+                onChange={(e) => {
+                  setTopic(e.target.value);
+                }}
+              />
+              <LocalizationProvider dateAdapter={AdapterMoment}>
+                <DateTimePicker
+                  okLabel='Text'
+                  clearLabel='Text'
+                  cancelLabel='Text'
+                  label='Datum'
+                  value={date}
+                  onChange={(newDate) => {
+                    setDate(newDate);
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
+
+              <div className='button'>
+                <Button variant='contained' type='submit' sx={{ boxShadow: 0 }}>
+                  Erstellen
+                </Button>
+              </div>
+            </form>
+
             <Button
               size='small'
               variant='text'
@@ -148,7 +151,6 @@ function RandomChatCreate({ handleShowChatInfo }) {
             >
               Zurück
             </Button>
-            <Button onClick={handleClearNewChatForm}>Zurücksetzen</Button>
           </Grid>
         </Paper>
       </Container>
