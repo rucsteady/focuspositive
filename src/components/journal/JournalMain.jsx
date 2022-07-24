@@ -44,9 +44,9 @@ function JournalMain({ activeEntry, onUpdateEntry }) {
             sx={{ marginBottom: 2 }}
           />
 
-          <Button type='submit' variant='contained' sx={{ boxShadow: 0 }}>
+          {/* <Button type='submit' variant='contained' sx={{ boxShadow: 0 }}>
             Speichern
-          </Button>
+          </Button> */}
         </Paper>
       </Container>
     </div>

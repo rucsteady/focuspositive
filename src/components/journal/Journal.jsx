@@ -28,7 +28,6 @@ function Journal() {
 
   const onAddEntry = async () => {
     const newEntry = {
-      id: nanoid(),
       title: "Eintrag ohne Titel",
       body: "",
       lastModified: Date.now(),
