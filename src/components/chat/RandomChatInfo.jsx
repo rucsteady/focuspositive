@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 
 function RandomChatInfo({ handleShowChatSearch, handleShowChatNew }) {
   return (
-    <Box elevation={0}>
+    <Box elevation={0} sx={{ minHeight: '300px' }}>
       <Typography variant='h6'>Wilkommen beim Random Chat</Typography>
       <Grid container>
         <Grid item mt={4}>
@@ -17,16 +17,26 @@ function RandomChatInfo({ handleShowChatSearch, handleShowChatNew }) {
             ein bisschen zu plaudern.
           </Typography>
         </Grid>
-        <Grid item mt={4}>
-          <Button onClick={handleShowChatNew} variant='contained'>
-            Neuen Random Chat erstellen.
-          </Button>
-        </Grid>
-        <Grid item mt={4}>
-          <Button onClick={handleShowChatSearch} variant='contained'>
-            Suche nach einen Random Chat.
-          </Button>
-        </Grid>
+        <Box sx={{ marginTop: 3 }}>
+          <Grid item mt={4} sx={{ paddingRight: 3 }}>
+            <Button
+              onClick={handleShowChatNew}
+              variant='contained'
+              sx={{ boxShadow: 0 }}
+            >
+              Neuen Random Chat erstellen
+            </Button>
+          </Grid>
+          <Grid item mt={4}>
+            <Button
+              onClick={handleShowChatSearch}
+              variant='contained'
+              sx={{ boxShadow: 0 }}
+            >
+              Suche nach einen Random Chat
+            </Button>
+          </Grid>
+        </Box>
       </Grid>
     </Box>
   );

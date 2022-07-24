@@ -102,7 +102,7 @@ function Register() {
               />
 
               <div className='button'>
-                <Button variant='contained' type='submit'>
+                <Button variant='contained' type='submit' sx={{ boxShadow: 0 }}>
                   Anlegen
                 </Button>
               </div>

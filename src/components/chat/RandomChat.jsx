@@ -144,7 +144,7 @@ function RandomChat({ chatUser, setShowRandomChat, activeRoom }) {
               size='small'
               variant='text'
               onClick={() => setShowRandomChat(false)}
-              sx={{ marginTop: 2 }}
+              sx={{ marginTop: 2, boxShadow: 0 }}
             >
               Schließen
             </Button>

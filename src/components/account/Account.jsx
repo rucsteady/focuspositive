@@ -33,7 +33,11 @@ function Account() {
               {currentEmail}
             </Typography>
             <div style={{ marginTop: 10 }}>
-              <Button variant='contained' onClick={handleLogOut}>
+              <Button
+                variant='contained'
+                onClick={handleLogOut}
+                sx={{ boxShadow: 0 }}
+              >
                 Logout
               </Button>
             </div>

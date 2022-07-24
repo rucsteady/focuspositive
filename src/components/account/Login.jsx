@@ -43,7 +43,7 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <div className='button'>
-                <Button variant='contained' type='submit'>
+                <Button variant='contained' type='submit' sx={{ boxShadow: 0 }}>
                   Login
                 </Button>
               </div>

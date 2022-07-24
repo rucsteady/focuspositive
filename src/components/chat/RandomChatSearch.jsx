@@ -155,6 +155,7 @@ function RandomChatSearch({
               variant='text'
               onClick={handleShowChatInfo}
               sx={{ marginTop: 2 }}
+              sx={{ boxShadow: 0 }}
             >
               Zurück
             </Button>
@@ -190,7 +191,9 @@ function RandomChatSearch({
           <Button variant='contained' onClick={handleStartRandomChat}>
             Starten
           </Button>
-          <Button onClick={handleStopRandomChat}>Abbrechen</Button>
+          <Button onClick={handleStopRandomChat} sx={{ boxShadow: 0 }}>
+            Abbrechen
+          </Button>
         </Box>
       </Modal>
     </Fragment>
