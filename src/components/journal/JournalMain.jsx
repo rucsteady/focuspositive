@@ -15,7 +15,9 @@ function JournalMain({ activeEntry, onUpdateEntry }) {
   if (!activeEntry)
     return (
       <Card elevation={0}>
-        <Paper sx={{ padding: 4 }}>Aktuell hast du keine Einträge.</Paper>
+        <Paper sx={{ padding: 4 }}>
+          Willkommen beim Journal. Aktuell hast du keine Einträge.
+        </Paper>
       </Card>
     );
 

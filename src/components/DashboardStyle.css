@@ -4,11 +4,8 @@ dashboard {
 }
 
 .bg {
-    
-
     /* Full height */
     height: 1000px;
-
     /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
@@ -16,5 +13,9 @@ dashboard {
 }
 
 a {
-    color: white
+    color: black
+}
+
+link {
+    margin-top: 20px;
 }
