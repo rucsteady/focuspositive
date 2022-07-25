@@ -21,7 +21,7 @@ function Journal() {
   var day = dateObj.getUTCDate();
   var year = dateObj.getUTCFullYear();
 
-  var newdate = day + "." + month + "." + year;
+  const newdate = day + "." + month + "." + year;
 
   const onAddEntry = () => {
     const newEntry = {

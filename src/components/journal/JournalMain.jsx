@@ -1,4 +1,4 @@
-import { Card, Paper, TextField, Typography } from "@mui/material";
+import { Card, Paper, TextField } from "@mui/material";
 
 import React from "react";
 
@@ -42,9 +42,7 @@ function JournalMain({ activeEntry, onUpdateEntry }) {
           value={activeEntry.body}
           sx={{ marginBottom: 2 }}
         />
-        <Typography fullWidth sx={{ marginBottom: 2 }}>         
-          Drei Positive Dinge des Tages
-        </Typography>
+        <div style={{marginBottom: 12, marginTop: 10}}>Drei Positive Dinge des Tages</div>
         <TextField
           onChange={(e) => onEditField("one", e.target.value)}
           label="Erster Eintrag"
@@ -75,7 +73,6 @@ function JournalMain({ activeEntry, onUpdateEntry }) {
           value={activeEntry.three}
           sx={{ marginBottom: 2 }}
         />
-
         {/* <Button type='submit' variant='contained' sx={{ boxShadow: 0 }}>
             Speichern
           </Button> */}

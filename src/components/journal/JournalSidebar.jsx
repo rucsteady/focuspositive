@@ -13,12 +13,7 @@ import { Container } from "@mui/system";
 import React from "react";
 import { nanoid } from "nanoid";
 
-function JournalSidebar({
-  entrys,
-  onAddEntry,
-  onDeleteEntry,
-  setActiveEntry,
-}) {
+function JournalSidebar({ entrys, onAddEntry, onDeleteEntry, setActiveEntry }) {
   const sortedEntrys = entrys.sort((a, b) => b.lastModified - a.lastModified);
 
   return (
@@ -33,7 +28,7 @@ function JournalSidebar({
             marginBottom: 4,
           }}
         >
-          <Typography variant="h6" sx={{ marginBottom: 2 }}>
+          <Typography variant="h6" sx={{ marginBottom: 2 }} component={"span"}>
             Einträge
           </Typography>
           {sortedEntrys.map(({ id, title, body, lastModified, index }) => (
@@ -46,7 +41,7 @@ function JournalSidebar({
                   paddingTop: 0,
                   paddingBottom: 0,
                 }}
-                key={index}
+                key={nanoid()}
               >
                 <ListItem
                   alignItems="flex-start"
@@ -60,13 +55,13 @@ function JournalSidebar({
                       <div>
                         <Typography
                           sx={{ display: "inline" }}
-                          component="span"
+                          component={"span"}
                           variant="body2"
                           color="text.primary"
                         >
-                          {body && body.substr(0, 40) + "..."}
+                          {body && body.substr(0, 40) + ""}
                         </Typography>
-                        <Typography sx={{ fontSize: 10 }}>
+                        <Typography sx={{ fontSize: 10 }} component={"span"}>
                           {" "}
                           Zuletzt bearbeitet{" "}
                           {new Date(lastModified).toLocaleDateString("de-DE", {
@@ -75,9 +70,10 @@ function JournalSidebar({
                           })}
                           <IconButton
                             aria-label="delete"
+                            edge={"end"}
                             onClick={(e) => onDeleteEntry(id)}
                           >
-                            <DeleteIcon />
+                            <DeleteIcon fontSize={"small"}/>
                           </IconButton>
                         </Typography>
                       </div>
