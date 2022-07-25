@@ -7,13 +7,12 @@ function RandomChatTimeUp() {
       {" "}
       <Container elevation={0} maxWidth="md">
         <Paper elevation={0} sx={{ padding: 4 }}>
-          <Typography variant="h6">
+          <Typography variant="h6" sx={{ margin: 4 }}>
             Danke für deine Teilnahme am Random Chat.
           </Typography>
-          <Typography>
+          <Typography sx={{ margin: 4 }}>
             Die Zeit ist abgelaufen. Der Random Chat ist zu Ende.
           </Typography>
-          
         </Paper>
       </Container>
     </div>
