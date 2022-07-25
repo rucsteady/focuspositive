@@ -16,11 +16,21 @@ function Journal() {
     localStorage.setItem("entrys", JSON.stringify(entrys));
   }, [entrys]);
 
+  var dateObj = new Date();
+  var month = dateObj.getUTCMonth() + 1; //months from 1-12
+  var day = dateObj.getUTCDate();
+  var year = dateObj.getUTCFullYear();
+
+  var newdate = day + "." + month + "." + year;
+
   const onAddEntry = () => {
     const newEntry = {
       id: nanoid(),
-      title: "Positive Dinge des Tages",
+      title: newdate,
       body: "Heute bin ich Dankbar für ...",
+      one: "",
+      two: "",
+      three: "",
       lastModified: Date.now(),
     };
 

@@ -37,7 +37,7 @@ function JournalMain({ activeEntry, onUpdateEntry }) {
           label="Dein Dankbarkeitstext"
           variant="outlined"
           multiline
-          rows={12}
+          rows={6}
           fullWidth
           value={activeEntry.body}
           sx={{ marginBottom: 2 }}
@@ -46,13 +46,33 @@ function JournalMain({ activeEntry, onUpdateEntry }) {
           Drei Positive Dinge des Tages
         </Typography>
         <TextField
-          onChange={(e) => onEditField("body", e.target.value)}
-          label="Dein Dankbarkeitstext"
+          onChange={(e) => onEditField("one", e.target.value)}
+          label="Erster Eintrag"
           variant="outlined"
           multiline
-          rows={12}
+          rows={1}
           fullWidth
-          value={activeEntry.body}
+          value={activeEntry.one}
+          sx={{ marginBottom: 2 }}
+        />
+        <TextField
+          onChange={(e) => onEditField("two", e.target.value)}
+          label="Zweiter Eintrag"
+          variant="outlined"
+          multiline
+          rows={1}
+          fullWidth
+          value={activeEntry.two}
+          sx={{ marginBottom: 2 }}
+        />
+        <TextField
+          onChange={(e) => onEditField("three", e.target.value)}
+          label="Dritter Eintrag"
+          variant="outlined"
+          multiline
+          rows={1}
+          fullWidth
+          value={activeEntry.three}
           sx={{ marginBottom: 2 }}
         />
 
