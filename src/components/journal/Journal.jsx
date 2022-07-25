@@ -27,7 +27,7 @@ function Journal() {
     const newEntry = {
       id: nanoid(),
       title: newdate,
-      body: "Heute bin ich Dankbar für ...",
+      body: "",
       one: "",
       two: "",
       three: "",

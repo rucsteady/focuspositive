@@ -59,7 +59,7 @@ function JournalSidebar({ entrys, onAddEntry, onDeleteEntry, setActiveEntry }) {
                           variant="body2"
                           color="text.primary"
                         >
-                          {body && body.substr(0, 40) + ""}
+                          {body && body.substr(0, 40) + "..."}
                         </Typography>
                         <Typography sx={{ fontSize: 10 }} component={"span"}>
                           {" "}
