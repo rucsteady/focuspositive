@@ -1,39 +1,29 @@
 import { Grid } from "@mui/material";
 import { Container } from "@mui/system";
-import { nanoid } from "nanoid";
 import React, { useEffect, useState } from "react";
 import JournalMain from "./JournalMain";
 import JournalSidebar from "./JournalSidebar";
-import axios from "axios";
+import { nanoid } from "nanoid";
 
 function Journal() {
   const [entrys, setEntrys] = useState(
     localStorage.entrys ? JSON.parse(localStorage.entrys) : []
   );
-  const [activeEntry, setActiveEntry] = useState(false);
 
-  const [updatedEntrys, setUpdatedEntrys] = useState();
+  const [activeEntry, setActiveEntry] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("entrys", JSON.stringify(entrys));
   }, [entrys]);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/journal")
-      .then((response) => setUpdatedEntrys(response.data.journal));
-  }, []);
-
-  console.log(updatedEntrys);
-
-  const onAddEntry = async () => {
+  const onAddEntry = () => {
     const newEntry = {
+      id: nanoid(),
       title: "Positive Dinge des Tages",
       body: "Heute bin ich Dankbar für ...",
       lastModified: Date.now(),
     };
 
-    // const response = await axios.post("http://localhost:8080/api/journal", newEntry)
     setEntrys([newEntry, ...entrys]);
     setActiveEntry(newEntry.id);
   };
