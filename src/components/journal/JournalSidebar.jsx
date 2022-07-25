@@ -31,6 +31,7 @@ function JournalSidebar({
             width: 300,
             padding: 4,
             marginLeft: 0,
+            marginBottom: 4,
           }}
         >
           <Typography variant="h6" sx={{ marginBottom: 2 }}>
