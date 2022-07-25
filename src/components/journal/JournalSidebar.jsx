@@ -17,7 +17,6 @@ function JournalSidebar({
   entrys,
   onAddEntry,
   onDeleteEntry,
-  activeEntry,
   setActiveEntry,
 }) {
   const sortedEntrys = entrys.sort((a, b) => b.lastModified - a.lastModified);
@@ -28,7 +27,7 @@ function JournalSidebar({
         <Paper
           elevation={0}
           sx={{
-            width: 300,
+            width: 220,
             padding: 4,
             marginLeft: 0,
             marginBottom: 4,
