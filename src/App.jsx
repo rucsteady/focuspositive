@@ -10,6 +10,7 @@ import styles from "./App.module.css";
 import Login from "./components/account/Login";
 import Register from "./components/account/Register";
 import AuthContext from "./context/AuthContext";
+import RandomChatTimeUp from "./components/chat/RandomChatTimeUp";
 
 function App() {
   const { userLoggedIn } = useContext(AuthContext);
@@ -27,6 +28,9 @@ function App() {
           {userLoggedIn && <Route path="chat" element={<Chat />} />}
           {userLoggedIn && <Route path="journal" element={<Journal />} />}
           {userLoggedIn && <Route path="account" element={<Account />} />}
+          {userLoggedIn && (
+            <Route path="chatover" element={<RandomChatTimeUp />} />
+          )}
           {!userLoggedIn && <Route path="login" element={<Login />} />}
           {!userLoggedIn && <Route path="register" element={<Register />} />}
           <Route path="*" element={<NotFound />} />
