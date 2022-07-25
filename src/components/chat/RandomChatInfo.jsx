@@ -1,6 +1,7 @@
 import { Box, Button, Grid, Typography } from '@mui/material';
 import React from 'react';
 
+
 function RandomChatInfo({ handleShowChatSearch, handleShowChatNew }) {
   return (
     <Box elevation={0} sx={{ minHeight: '300px' }}>

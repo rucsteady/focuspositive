@@ -15,7 +15,7 @@ function Journal() {
   const [updatedEntrys, setUpdatedEntrys] = useState();
 
   useEffect(() => {
-    localStorage.setItem('entrys', JSON.stringify(entrys));
+    localStorage.setItem("entrys", JSON.stringify(entrys));
   }, [entrys]);
 
   useEffect(() => {
@@ -28,8 +28,8 @@ function Journal() {
 
   const onAddEntry = async () => {
     const newEntry = {
-      title: "Eintrag ohne Titel",
-      body: "",
+      title: "Positive Dinge des Tages",
+      body: "Heute bin ich Dankbar für ...",
       lastModified: Date.now(),
     };
 
