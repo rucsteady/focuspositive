@@ -18,7 +18,6 @@ import React, { useEffect, useState, useRef } from "react";
 import "./RandomChatStyle.css";
 import io from "socket.io-client";
 import Countdown from "react-countdown";
-import RandomChatTimeUp from "./RandomChatTimeUp";
 import { Navigate } from "react-router-dom";
 
 const socket = io.connect("http://localhost:3001");
@@ -91,7 +90,6 @@ function RandomChat({
   };
 
   useEffect(() => {
-    // 👇️ scroll to bottom every time messages change
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chatMessages]);
 
