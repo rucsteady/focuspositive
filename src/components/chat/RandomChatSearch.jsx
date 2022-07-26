@@ -105,7 +105,7 @@ function RandomChatSearch({
   // TODO On Click Item
   useEffect(() => {
     axios
-      .get('http://localhost:8080/api/chats')
+      .get('https://fpauthserver.herokuapp.com/api/chats')
       .then((response) => setRefreshedRandomChats(response.data.chats));
   }, []);
 
