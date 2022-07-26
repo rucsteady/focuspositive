@@ -96,7 +96,7 @@ function RandomChat({
   return (
     <div>
       <Container>
-        <Countdown date={Date.now() + 5000}>
+        <Countdown date={Date.now() + 15000}>
           <Navigate to="/chatover" replace={true} />
         </Countdown>
 
