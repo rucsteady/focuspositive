@@ -55,7 +55,7 @@ function JournalSidebar({ entrys, onAddEntry, onDeleteEntry, setActiveEntry }) {
                       <div>
                         <Typography
                           sx={{ display: "inline" }}
-                          component={"span"}
+                          component={"div"}
                           variant="body2"
                           color="text.primary"
                         >
@@ -73,7 +73,7 @@ function JournalSidebar({ entrys, onAddEntry, onDeleteEntry, setActiveEntry }) {
                             edge={"end"}
                             onClick={(e) => onDeleteEntry(id)}
                           >
-                            <DeleteIcon fontSize={"small"}/>
+                            <DeleteIcon fontSize={"small"} />
                           </IconButton>
                         </Typography>
                       </div>
@@ -84,14 +84,15 @@ function JournalSidebar({ entrys, onAddEntry, onDeleteEntry, setActiveEntry }) {
               </List>
             </Card>
           ))}
-
-          <Button
-            variant="contained"
-            sx={{ marginTop: 3, boxShadow: 0 }}
-            onClick={onAddEntry}
-          >
-            Neuer Eintrag
-          </Button>
+          <Card sx={{ marginTop: 1, boxShadow: 0 }}>
+            <Button
+              variant="contained"
+              sx={{ marginTop: 3, boxShadow: 0 }}
+              onClick={onAddEntry}
+            >
+              Neuer Eintrag
+            </Button>
+          </Card>
         </Paper>
       </Container>
     </div>
