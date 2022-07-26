@@ -20,7 +20,7 @@ import io from "socket.io-client";
 import Countdown from "react-countdown";
 import { Navigate } from "react-router-dom";
 
-const socket = io.connect("http://localhost:3001");
+const socket = io.connect("https://fpchatserver.herokuapp.com/");
 
 function RandomChat({
   chatUser,
