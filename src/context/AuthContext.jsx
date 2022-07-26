@@ -15,7 +15,7 @@ export function AuthProvider({ children }) {
   const [randomChats, setRandomChats] = useState([]);
   let navigate = useNavigate();
 
-  const port = process.env.PORT || 8080;
+  // const port = process.env.PORT || 8080;
 
   // axios
   //   .post('http://localhost:8080/api/auth/login', {
