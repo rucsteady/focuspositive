@@ -25,7 +25,7 @@ export function AuthProvider({ children }) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    axios
+    await axios
       .post("https://fpauthserver.herokuapp.com/api/auth/login", {
         email,
         password,
@@ -53,16 +53,23 @@ export function AuthProvider({ children }) {
     navigate("/login");
   };
 
-  useEffect(() => {
-    axios
+  const getUsers = async () => {
+    await axios
       .get("https://fpauthserver.herokuapp.com/api/users")
       .then((response) => setUsers(response.data.users));
+  };
+  useEffect(() => {
+    getUsers();
   }, []);
 
-  useEffect(() => {
-    axios
+  const getChats = async () => {
+    await axios
       .get("https://fpauthserver.herokuapp.com/api/chats")
       .then((response) => setRandomChats(response.data.chats));
+  };
+
+  useEffect(() => {
+    getChats();
   }, []);
 
   useEffect(() => {

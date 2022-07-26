@@ -22,11 +22,11 @@ function RandomChatCreate({ handleShowChatInfo }) {
 
   const userMail = currentUser[0].email;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (name !== "" && topic !== "" && date !== "") {
-      axios
+      await axios
         .post("https://fpauthserver.herokuapp.com/api/chats", {
           name,
           topic,

@@ -102,11 +102,15 @@ function RandomChatSearch({
     </ListItem>
   ));
 
-  // TODO On Click Item
-  useEffect(() => {
-    axios
+  const getUsers = async () => {
+    await axios
       .get("https://fpauthserver.herokuapp.com/api/chats")
       .then((response) => setRefreshedRandomChats(response.data.chats));
+  };
+
+  // TODO On Click Item
+  useEffect(() => {
+    getUsers();
   }, []);
 
   const handleStartRandomChat = () => {

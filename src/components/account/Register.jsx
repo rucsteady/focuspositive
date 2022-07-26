@@ -16,9 +16,9 @@ function Register() {
   const [error, setError] = useState('');
   let navigate = useNavigate();
 
-  const register = (e) => {
+  const register = async (e) => {
     e.preventDefault();
-    axios
+    await axios
       .post('https://fpauthserver.herokuapp.com/api/auth/register', {
         email,
         password,
