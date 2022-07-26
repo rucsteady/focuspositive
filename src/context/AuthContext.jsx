@@ -26,7 +26,7 @@ export function AuthProvider({ children }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     axios
-      .post(`https://fpauthserver.herokuapp.com/api/auth/login`, {
+      .post("https://fpauthserver.herokuapp.com/api/auth/login", {
         email,
         password,
       })

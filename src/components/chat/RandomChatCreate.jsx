@@ -3,7 +3,7 @@ import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
-import axi from "axios";
+import axios from "axios";
 
 import React, { Fragment, useContext, useEffect, useState } from "react";
 
@@ -26,8 +26,8 @@ function RandomChatCreate({ handleShowChatInfo }) {
     e.preventDefault();
 
     if (name !== "" && topic !== "" && date !== "") {
-      axi
-        .post("http://localhost:8080/api/chats", {
+      axios
+        .post("https://fpauthserver.herokuapp.com/api/chats", {
           name,
           topic,
           user1,
