@@ -27,7 +27,7 @@ function RandomChatCreate({ handleShowChatInfo }) {
 
     if (name !== "" && topic !== "" && date !== "") {
       await axios
-        .post("https://fpauthserver.herokuapp.com/api/chats", {
+        .post("http://fpauthserver.herokuapp.com/api/chats", {
           name,
           topic,
           user1,
