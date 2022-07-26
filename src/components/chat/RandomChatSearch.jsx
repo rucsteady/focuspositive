@@ -104,7 +104,7 @@ function RandomChatSearch({
 
   const getUsers = async () => {
     await axios
-      .get("http://fpauthserver.herokuapp.com/api/chats")
+      .get("https://fpauthserver.herokuapp.com/api/chats")
       .then((response) => setRefreshedRandomChats(response.data.chats));
   };
 
