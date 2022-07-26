@@ -26,13 +26,15 @@ function JournalSidebar({ entrys, onAddEntry, onDeleteEntry, setActiveEntry }) {
             padding: 4,
             marginLeft: 0,
             marginBottom: 4,
+            maxHeight: 340,
           }}
+          variant={"menu"}
         >
-          <Typography variant="h6" sx={{ marginBottom: 2 }} component={"span"}>
+          <Typography variant="h6" sx={{ marginBottom: 2 }} component="div">
             Einträge
           </Typography>
-          {sortedEntrys.map(({ id, title, body, lastModified, index }) => (
-            <Card>
+          {sortedEntrys.map(({ id, title, body, lastModified }) => (
+            <Card sx={{ marginBottom: 1 }} key={nanoid()}>
               <List
                 sx={{
                   width: "100%",
@@ -53,15 +55,10 @@ function JournalSidebar({ entrys, onAddEntry, onDeleteEntry, setActiveEntry }) {
                     primary={`${title}`}
                     secondary={
                       <div>
-                        <Typography
-                          sx={{ display: "inline" }}
-                          component={"div"}
-                          variant="body2"
-                          color="text.primary"
-                        >
+                        <Typography sx={{ display: "inline" }} component="div">
                           {body && body.substr(0, 40) + "..."}
                         </Typography>
-                        <Typography sx={{ fontSize: 10 }} component={"span"}>
+                        <Typography sx={{ fontSize: 10 }} component="div">
                           {" "}
                           Zuletzt bearbeitet{" "}
                           {new Date(lastModified).toLocaleDateString("de-DE", {
