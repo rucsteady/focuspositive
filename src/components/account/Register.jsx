@@ -19,7 +19,7 @@ function Register() {
   const register = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:8080/api/auth/register', {
+      .post('https://fpauthserver.herokuapp.com/api/auth/register', {
         email,
         password,
         firstname,

@@ -6,7 +6,7 @@ This project was build by Nils Rausch, Student of Hochschule für Wirtschaft und
 
 Start a Terminal in each of these three Diretories
 
-`/`
+`focuspositive`
 `authServer`
 `chatServer`
 
@@ -16,7 +16,7 @@ install all dependencies in each dir with
 
 Start Service in each dir
 
-`/`
+`focuspositive`
 `authServer`
 `chatServer`
 
