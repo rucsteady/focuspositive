@@ -19,6 +19,7 @@ import "./RandomChatStyle.css";
 import io from "socket.io-client";
 import Countdown from "react-countdown";
 import { Navigate } from "react-router-dom";
+import { nanoid } from "nanoid";
 
 const socket = io.connect("https://fpchatserver.herokuapp.com/");
 
@@ -42,6 +43,7 @@ function RandomChat({
   const sendMessage = async () => {
     if (chatUser && message !== "") {
       const messageData = {
+        key: nanoid(),
         room: room,
         user: chatUser,
         message: message,
@@ -93,19 +95,26 @@ function RandomChat({
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chatMessages]);
 
+
+
+  const CountdownWrapper = () => {
+    return <Countdown date={Date.now() + 50000} ><Navigate to="/chatover" replace={true} /></Countdown>;
+  };
+
+  const MemoCountdown = React.memo(CountdownWrapper);
+
+
   return (
     <div>
       <Container>
-        <Countdown date={Date.now() + 15000}>
-          <Navigate to="/chatover" replace={true} />
-        </Countdown>
-
+      <MemoCountdown />
         <Paper elevation={0}>
           <Typography
             sx={{ fontSize: "11px", padding: 0, margin: 0, align: "right" }}
           >
             Chatroom: {room}
           </Typography>
+        
           <Box p={3}>
             <Typography variant="h6" gutterBottom>
               Verbunden: {activeRandomChat.name} von {activeRandomChat.user1}{" "}
