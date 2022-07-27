@@ -47,8 +47,6 @@ function RandomChatCreate({ handleShowChatInfo }) {
     }
   };
 
-
-
   useEffect(() => {
     setUser1(userMail);
   }, [userMail, user1]);
