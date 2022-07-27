@@ -1,13 +1,13 @@
-import { Container, Grid, Paper } from '@mui/material';
+import { Container, Grid, Paper } from "@mui/material";
 
-import React, { useContext, useState } from 'react';
-import AuthContext from '../../context/AuthContext';
-import RandomChat from './RandomChat';
-import RandomChatInfo from './RandomChatInfo';
-import RandomChatSearch from './RandomChatSearch';
-import RandomChatCreate from './RandomChatCreate';
+import React, { useContext, useState } from "react";
+import AuthContext from "../../context/AuthContext";
+import RandomChat from "./RandomChat";
+import RandomChatInfo from "./RandomChatInfo";
+import RandomChatSearch from "./RandomChatSearch";
+import RandomChatCreate from "./RandomChatCreate";
 
-function Chat() {
+function Chat({ MemoCountdown }) {
   const { currentUser } = useContext(AuthContext);
   const [showChatInfo, setShowChatInfo] = useState(true);
   const [showChatSearch, setShowChatSearch] = useState(false);
@@ -37,7 +37,7 @@ function Chat() {
 
   return (
     <div>
-      <Container elevation={0} maxWidth='md'>
+      <Container elevation={0} maxWidth="md">
         <Paper elevation={0} sx={{ padding: 4 }}>
           <Grid>
             <Grid item>
@@ -74,6 +74,7 @@ function Chat() {
                   setShowRandomChat={setShowRandomChat}
                   setShowChatInfo={setShowChatInfo}
                   activeRandomChat={activeRandomChat}
+                  MemoCountdown={MemoCountdown}
                 />
               )}
             </Grid>

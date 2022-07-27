@@ -17,8 +17,6 @@ import {
 import React, { useEffect, useState, useRef } from "react";
 import "./RandomChatStyle.css";
 import io from "socket.io-client";
-import Countdown from "react-countdown";
-import { Navigate } from "react-router-dom";
 import { nanoid } from "nanoid";
 
 const socket = io.connect("https://fpchatserver.herokuapp.com/");
@@ -29,6 +27,7 @@ function RandomChat({
   setShowChatInfo,
   activeRoom,
   activeRandomChat,
+  MemoCountdown
 }) {
   const [message, setMessage] = useState("");
   const [room, setRoom] = useState("");
@@ -97,11 +96,7 @@ function RandomChat({
 
 
 
-  const CountdownWrapper = () => {
-    return <Countdown date={Date.now() + 50000} ><Navigate to="/chatover" replace={true} /></Countdown>;
-  };
-
-  const MemoCountdown = React.memo(CountdownWrapper);
+ 
 
 
   return (

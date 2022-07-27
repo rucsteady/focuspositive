@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Dashboard from "./components/Dashboard";
 import Chat from "./components/chat/Chat";
@@ -11,9 +11,19 @@ import Login from "./components/account/Login";
 import Register from "./components/account/Register";
 import AuthContext from "./context/AuthContext";
 import RandomChatTimeUp from "./components/chat/RandomChatTimeUp";
+import Countdown from "react-countdown";
 
 function App() {
   const { userLoggedIn } = useContext(AuthContext);
+
+  const CountdownWrapper = () => {
+    return (
+      <Countdown date={Date.now() + 100000}>
+        <Navigate to="/chatover" replace={true} />
+      </Countdown>
+    );
+  };
+  const MemoCountdown = React.memo(CountdownWrapper);
   // changed
   return (
     <>
@@ -25,7 +35,12 @@ function App() {
         <Routes>
           <Route index element={<Dashboard />} />
           <Route path="dashboard" element={<Dashboard />} />
-          {userLoggedIn && <Route path="chat" element={<Chat />} />}
+          {userLoggedIn && (
+            <Route
+              path="chat"
+              element={<Chat MemoCountdown={MemoCountdown} />}
+            />
+          )}
           {userLoggedIn && <Route path="journal" element={<Journal />} />}
           {userLoggedIn && <Route path="account" element={<Account />} />}
           {userLoggedIn && (
