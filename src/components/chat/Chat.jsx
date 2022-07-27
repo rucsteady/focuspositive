@@ -1,6 +1,6 @@
 import { Container, Grid, Paper } from "@mui/material";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import RandomChat from "./RandomChat";
 import RandomChatInfo from "./RandomChatInfo";
@@ -38,9 +38,9 @@ function Chat({ MemoCountdown }) {
   console.log("currentUser", currentUser);
   console.log("chatUser", chatUser);
 
-  const chatUserObj = () => {
+  const chatUserObj = useCallback(() => {
     setChatUser(currentUser[0].firstname);
-  };
+  }, [currentUser]);
 
   useEffect(() => {
     chatUserObj();
