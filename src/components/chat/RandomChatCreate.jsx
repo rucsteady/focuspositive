@@ -13,7 +13,7 @@ function RandomChatCreate({ handleShowChatInfo }) {
   const [name, setName] = useState("");
   const [topic, setTopic] = useState("");
   const [user1, setUser1] = useState("");
-  const [user2, setUser2] = useState("");
+  // const [user2, setUser2] = useState("");
   const [date, setDate] = useState("");
 
   const [error, setError] = useState("");
@@ -31,19 +31,17 @@ function RandomChatCreate({ handleShowChatInfo }) {
           name,
           topic,
           user1,
-          user2,
           date,
         })
         .then((response) => {
-          console.log(response);
           setError("");
           setName("");
           setTopic("");
           setDate("");
-          setUser2("");
-          navigate("/");
+          // setUser2("");
+          navigate("/dashboard");
         })
-        .catch(() => setError(error.response.data.message));
+        .catch((err) => setError(error));
     }
   };
 
