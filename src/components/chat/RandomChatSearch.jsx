@@ -15,10 +15,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./RandomChatSearchStyle.css";
 
-
-
 const handleDeleteChat = (room) => {
-  axios.delete("https://fpauthserver.herokuapp.com/api/chats" + room);
+  axios({
+    method: "DELETE",
+    url: "https://fpauthserver.herokuapp.com/api/chats" + room,
+  });
 };
 
 function RandomChatSearch({
@@ -134,7 +135,6 @@ function RandomChatSearch({
   const handleRegisterRandomChat = () => {
     return console.log("handle register");
   };
-
 
   return !refreshedRandomChats ? (
     <div>
