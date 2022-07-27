@@ -18,7 +18,7 @@ import "./RandomChatSearchStyle.css";
 const handleDeleteChat = (chat) => {
   axios({
     method: "DELETE",
-    url: `https://fpauthserver.herokuapp.com/api/chats/room/${chat.id}`,
+    url: `https://fpauthserver.herokuapp.com/api/chats/${chat.id}`,
   });
 
   console.log("room delete", chat.id);
