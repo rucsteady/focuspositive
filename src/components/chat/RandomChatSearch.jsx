@@ -15,13 +15,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./RandomChatSearchStyle.css";
 
-const handleDeleteChat = (room) => {
+const handleDeleteChat = (chat) => {
   axios({
     method: "DELETE",
-    url: `https://fpauthserver.herokuapp.com/api/chats/${room}`,
+    url: `https://fpauthserver.herokuapp.com/api/chats/room/${chat.id}`,
   });
 
-  console.log("room delete", room.room);
+  console.log("room delete", chat.id);
 };
 
 function RandomChatSearch({
@@ -39,7 +39,7 @@ function RandomChatSearch({
   const randomChatItems = refreshedRandomChats.map((randomChatDto, index) => (
     <ListItem key={index} sx={{ paddingBottom: 0 }}>
       <ListItemButton sx={{ padding: 0 }}>
-        <Button onClick={handleDeleteChat}>delete</Button>
+        <Button onClick={handleDeleteChat(randomChatDto)}>delete</Button>
         <Card
           sx={{
             padding: 2,
