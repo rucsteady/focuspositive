@@ -8,7 +8,7 @@ function NotFound() {
       <Container elevation={0} maxWidth='md'>
         <Paper elevation={0} sx={{ padding: 4 }}>
           <div>
-            <Typography>- 404 - Nothing found here </Typography>
+            <Typography>- 404 | Nothing found here </Typography>
           </div>
         </Paper>
       </Container>

@@ -23,6 +23,29 @@ export function AuthProvider({ children }) {
   //     password,
   //   }) .post("https://fpauthserver.herokuapp.com/api/auth/login", {
 
+    const getUsers = async () => {
+      await axios
+        .get("https://fpauthserver.herokuapp.com/api/users")
+        .then((response) => setUsers(response.data.users));
+    };
+    useEffect(() => {
+      getUsers();
+    }, []);
+  
+    const getChats = async () => {
+      await axios
+        .get("https://fpauthserver.herokuapp.com/api/chats")
+        .then((response) => setRandomChats(response.data.chats));
+    };
+  
+    useEffect(() => {
+      getChats();
+    }, []);
+  
+    useEffect(() => {
+      setCurrentUser(users.filter((user) => user.email === currentEmail));
+    }, [users, currentEmail]);
+  
   const handleLogin = async (e) => {
     e.preventDefault();
     await axios
@@ -38,6 +61,7 @@ export function AuthProvider({ children }) {
             token: response.data.access_token,
           })
         );
+        setCurrentUser(users.filter((user) => user.email === currentEmail));
         setCurrentEmail(email);
         setError("");
         setEmail("");
@@ -53,28 +77,6 @@ export function AuthProvider({ children }) {
     navigate("/login");
   };
 
-  const getUsers = async () => {
-    await axios
-      .get("https://fpauthserver.herokuapp.com/api/users")
-      .then((response) => setUsers(response.data.users));
-  };
-  useEffect(() => {
-    getUsers();
-  }, []);
-
-  const getChats = async () => {
-    await axios
-      .get("https://fpauthserver.herokuapp.com/api/chats")
-      .then((response) => setRandomChats(response.data.chats));
-  };
-
-  useEffect(() => {
-    getChats();
-  }, []);
-
-  useEffect(() => {
-    setCurrentUser(users.filter((user) => user.email === currentEmail));
-  }, [users, currentEmail]);
 
   return (
     <AuthContext.Provider
@@ -88,6 +90,7 @@ export function AuthProvider({ children }) {
         currentEmail,
         users,
         handleLogOut,
+        setCurrentUser,
         currentUser,
         randomChats,
       }}

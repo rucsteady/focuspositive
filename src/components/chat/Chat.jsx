@@ -1,6 +1,6 @@
 import { Container, Grid, Paper } from "@mui/material";
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import RandomChat from "./RandomChat";
 import RandomChatInfo from "./RandomChatInfo";
@@ -15,7 +15,7 @@ function Chat({ MemoCountdown }) {
   const [showRandomChat, setShowRandomChat] = useState(false);
   const [activeRoom, setActiveRoom] = useState(0);
   const [activeRandomChat, setActiveRandomChat] = useState();
-  const chatUser = currentUser[0].firstname;
+  const [chatUser, setChatUser] = useState({});
 
   const handleShowChatInfo = () => {
     setShowChatNew(false);
@@ -34,6 +34,17 @@ function Chat({ MemoCountdown }) {
     setShowChatSearch(false);
     setShowChatNew(true);
   };
+
+  console.log("currentUser", currentUser);
+  console.log("chatUser", chatUser);
+
+  const chatUserObj = () => {
+    setChatUser(currentUser[0].firstname);
+  };
+
+  useEffect(() => {
+    chatUserObj();
+  }, [chatUserObj, currentUser]);
 
   return (
     <div>

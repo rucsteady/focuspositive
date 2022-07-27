@@ -1,108 +1,125 @@
-import React, { useState, useContext } from 'react';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import AuthContext from '../../context/AuthContext';
-import './RegisterStyle.css';
-import { Container, Paper } from '@mui/material';
+import React, { useState, useContext } from "react";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import AuthContext from "../../context/AuthContext";
+import "./RegisterStyle.css";
+import { Container, Paper } from "@mui/material";
 
 function Register() {
-  const { setLogoutUser } = useContext(AuthContext);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [firstname, setFirstName] = useState('');
-  const [lastname, setLastName] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [error, setError] = useState("");
   let navigate = useNavigate();
 
+  const { currentUser, setCurrentUser, currentEmail, users } =
+  useContext(AuthContext);
+
   const register = async (e) => {
+   
+
     e.preventDefault();
     await axios
-      .post('https://fpauthserver.herokuapp.com/api/auth/register', {
+      .post("https://fpauthserver.herokuapp.com/api/auth/register", {
         email,
         password,
         firstname,
         lastname,
       })
       .then((response) => {
-        console.log('response', response);
+        console.log("response", response);
         localStorage.setItem(
-          'login',
+          "login",
           JSON.stringify({
             userLogin: true,
             token: response.data.access_token,
           })
         );
-        setError('');
-        setEmail('');
-        setPassword('');
-        setFirstName('');
-        setLastName('');
-        setLogoutUser(false);
-        navigate('/');
+        setError("");
+        setEmail("");
+        setPassword("");
+        setFirstName("");
+        setLastName("");
+        setCurrentUser(users.filter((user) => user.email === currentEmail));
+        navigate("/login");
       })
-      .catch((error) => setError(error.response.data.message));
+      .catch(function (error) {
+        if (error.response) {
+          // Request made and server responded
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
+      });
   };
   return (
     <div>
-      <Container elevation={0} maxWidth='md'>
+      <Container elevation={0} maxWidth="md">
         <Paper elevation={0} sx={{ padding: 4 }}>
           <div>
-            <div style={{ marginBottom: '10px' }}>Account-Registrierung</div>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <div style={{ marginBottom: "10px" }}>Account-Registrierung</div>
+            {error && <p style={{ color: "red" }}>{error}</p>}
 
-            <form noValidate autoComplete='off' onSubmit={register}>
+            <form noValidate autoComplete="off" onSubmit={register}>
               <TextField
-                variant='outlined'
-                margin='normal'
+                variant="outlined"
+                margin="normal"
                 required
-                id='firstname'
-                name='firstname'
-                label='Vorname'
-                type='text'
+                id="firstname"
+                name="firstname"
+                label="Vorname"
+                type="text"
                 value={firstname}
                 onChange={(e) => setFirstName(e.target.value)}
                 sx={{ marginRight: 3 }}
               />
               <TextField
-                variant='outlined'
-                margin='normal'
+                variant="outlined"
+                margin="normal"
                 required
-                id='lastname'
-                name='lastname'
-                label='Nachname'
-                type='text'
+                id="lastname"
+                name="lastname"
+                label="Nachname"
+                type="text"
                 value={lastname}
                 onChange={(e) => setLastName(e.target.value)}
               />
               <br />
               <TextField
-                variant='outlined'
-                margin='normal'
+                variant="outlined"
+                margin="normal"
                 required
-                id='email'
-                name='email'
-                label='Email Addresse'
-                type='text'
+                id="email"
+                name="email"
+                label="Email Addresse"
+                type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 sx={{ marginRight: 3 }}
               />
               <TextField
-                variant='outlined'
-                margin='normal'
+                variant="outlined"
+                margin="normal"
                 required
-                id='password'
-                name='password'
-                label='Passwort'
-                type='password'
+                id="password"
+                name="password"
+                label="Passwort"
+                type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
 
-              <div className='button'>
-                <Button variant='contained' type='submit' sx={{ boxShadow: 0 }}>
+              <div className="button">
+                <Button variant="contained" type="submit" sx={{ boxShadow: 0 }}>
                   Anlegen
                 </Button>
               </div>
