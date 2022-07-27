@@ -107,7 +107,7 @@ function RandomChat({
 
           <Box p={3}>
             <Typography variant="h6" gutterBottom>
-              Verbunden: {activeRandomChat.name} von {activeRandomChat.user1}{" "}
+              Verbunden: {activeRandomChat.name} von {chatUser}{" "}
               mit {activeRandomChat.user2}
             </Typography>
             <Divider />
