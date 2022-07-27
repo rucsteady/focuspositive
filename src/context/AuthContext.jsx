@@ -21,7 +21,7 @@ export function AuthProvider({ children }) {
   //   .post('http://localhost:8080/api/auth/login', {
   //     email,
   //     password,
-  //   })
+  //   }) .post("https://fpauthserver.herokuapp.com/api/auth/login", {
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -45,7 +45,7 @@ export function AuthProvider({ children }) {
         setUserLoggedIn(true);
         navigate("/");
       })
-      .catch((err) => setError(err.response.data.message));
+      .catch((err) => setError(err.message));
   };
 
   const handleLogOut = () => {
