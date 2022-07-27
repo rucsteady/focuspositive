@@ -21,7 +21,7 @@ const handleDeleteChat = (room) => {
     url: `https://fpauthserver.herokuapp.com/api/chats/${room}`,
   });
 
-  console.log("room delete", room);
+  console.log("room delete", room.room);
 };
 
 function RandomChatSearch({
