@@ -27,7 +27,7 @@ function RandomChat({
   setShowChatInfo,
   activeRoom,
   activeRandomChat,
-  MemoCountdown
+  MemoCountdown,
 }) {
   const [message, setMessage] = useState("");
   const [room, setRoom] = useState("");
@@ -94,22 +94,17 @@ function RandomChat({
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chatMessages]);
 
-
-
- 
-
-
   return (
     <div>
       <Container>
-      <MemoCountdown />
+        <MemoCountdown />
         <Paper elevation={0}>
           <Typography
             sx={{ fontSize: "11px", padding: 0, margin: 0, align: "right" }}
           >
             Chatroom: {room}
           </Typography>
-        
+
           <Box p={3}>
             <Typography variant="h6" gutterBottom>
               Verbunden: {activeRandomChat.name} von {activeRandomChat.user1}{" "}
