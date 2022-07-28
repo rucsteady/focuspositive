@@ -24,7 +24,6 @@ export function AuthProvider({ children }) {
     getUsers();
   }, []);
 
-  console.log(users);
 
   const getChats = async () => {
     await axios
@@ -61,7 +60,7 @@ export function AuthProvider({ children }) {
 
   const handleLogOut = () => {
     setCurrentUser("");
-    setCurrentEmail("")
+    setCurrentEmail("");
     setUserLoggedIn("");
     setUserLoggedIn(false);
     navigate("/dashboard");
