@@ -17,6 +17,9 @@ install all dependencies in each dir with
 Start Service in each dir
 
 `focuspositive`
+
+### with `npm run dev`
+
 `authServer`
 `chatServer`
 
