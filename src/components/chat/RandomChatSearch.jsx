@@ -15,13 +15,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./RandomChatSearchStyle.css";
 
-
 function RandomChatSearch({
   handleShowChatInfo,
   setShowRandomChat,
   setActiveRoom,
   setShowChatSearch,
   setActiveRandomChat,
+  
 }) {
   const [refreshedRandomChats, setRefreshedRandomChats] = useState([]);
   const [open, setOpen] = React.useState(false);
@@ -31,7 +31,6 @@ function RandomChatSearch({
   const randomChatItems = refreshedRandomChats.map((randomChatDto, index) => (
     <ListItem key={index} sx={{ paddingBottom: 0 }}>
       <ListItemButton sx={{ padding: 0 }}>
-       
         <Card
           sx={{
             padding: 2,
@@ -104,15 +103,15 @@ function RandomChatSearch({
     </ListItem>
   ));
 
-  const getUsers = async () => {
+  const getChats = async () => {
     await axios
-      .get("https://fpauthserver.herokuapp.com/api/chats")
-      .then((response) => setRefreshedRandomChats(response.data.chats));
+      .get("https://fpjsonserver.herokuapp.com/chats")
+      .then(({ data }) => setRefreshedRandomChats(data));
   };
 
   // TODO On Click Item
   useEffect(() => {
-    getUsers();
+    getChats();
   }, []);
 
   const handleStartRandomChat = () => {

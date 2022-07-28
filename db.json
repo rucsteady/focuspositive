@@ -1,0 +1,165 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "louis@focuspositive.de",
+      "password": "123456",
+      "firstname": "Louis",
+      "lastname": "C."
+    },
+    {
+      "id": 2,
+      "email": "nils@focuspositive.de",
+      "password": "123456",
+      "firstname": "Nils",
+      "lastname": "Rausch"
+    },
+    {
+      "id": 3,
+      "email": "lea@focuspositive.de",
+      "password": "123456",
+      "firstname": "Lea",
+      "lastname": "F."
+    },
+    {
+      "id": 4,
+      "email": "marc@focuspositive.de",
+      "password": "123456",
+      "firstname": "Marc",
+      "lastname": "F."
+    },
+    {
+      "id": 4,
+      "email": "leo@focuspositive.de",
+      "password": "123456",
+      "firstname": "Leo",
+      "lastname": "m."
+    },
+    {
+      "id": 5,
+      "email": "sascha@focuspositive.de",
+      "password": "123456",
+      "firstname": "Sascha",
+      "lastname": "E."
+    },
+    {
+      "id": 6,
+      "email": "martin@focuspositive.de",
+      "password": "123456",
+      "firstname": "Martin",
+      "lastname": "S."
+    },
+    {
+      "id": 7,
+      "email": "kathi@focuspositive.de",
+      "password": "123456",
+      "firstname": "Kathi",
+      "lastname": "B."
+    },
+    {
+      "id": 8,
+      "email": "katharina@focuspositive.de",
+      "password": "123456",
+      "firstname": "Katharina",
+      "lastname": "B."
+    },
+    {
+      "id": 9,
+      "email": "stephan@focuspositive.de",
+      "password": "123456",
+      "firstname": "Stephan",
+      "lastname": "A."
+    },
+    {
+      "id": 10,
+      "email": "matthias@focuspositive.de",
+      "password": "123456",
+      "firstname": "Matthias",
+      "lastname": "P."
+    },
+    {
+      "id": 11,
+      "email": "matze@focuspositive.de",
+      "password": "123456",
+      "firstname": "Matze",
+      "lastname": "P."
+    },
+    {
+      "id": 12,
+      "email": "jannis@focuspositive.de",
+      "password": "123456",
+      "firstname": "Jannis",
+      "lastname": "B."
+    },
+    {
+      "id": 13,
+      "email": "daniel@focuspositive.de",
+      "password": "123456",
+      "firstname": "Daniel",
+      "lastname": "M."
+    },
+    {
+      "id": 14,
+      "email": "andre@focuspositive.de",
+      "password": "123456",
+      "firstname": "Andre",
+      "lastname": "T."
+    },
+    {
+      "id": 15,
+      "email": "keto@focuspositive.de",
+      "password": "123456",
+      "firstname": "Keto",
+      "lastname": "L."
+    },
+    {
+      "id": 16,
+      "email": "user@focuspositive.de",
+      "password": "123456",
+      "firstname": "Keto",
+      "lastname": "L."
+    }
+  ],
+  "chats": [
+    {
+      "name": "Serientalk",
+      "topic": "Filme & Serien",
+      "user1": "user1@test.de",
+      "user2": "Nils",
+      "date": "2022-08-18T14:30:00+00:00",
+      "room": 100001,
+      "isOpen": false,
+      "isReady": true
+    },
+    {
+      "name": "Nachmittags Tee",
+      "topic": "Dies & das",
+      "user1": "user3@test.de",
+      "user2": "",
+      "date": "2022-10-01T11:30:00+00:00",
+      "room": 100002,
+      "isOpen": true,
+      "isReady": false
+    },
+    {
+      "name": "Frühstückschat",
+      "topic": "News des Tages",
+      "user1": "user3@test.de",
+      "user2": "",
+      "date": "2022-11-01T15:30:00+00:00",
+      "room": 100003,
+      "isOpen": true,
+      "isReady": false
+    },
+    {
+      "name": "Kaffee/Kuchen",
+      "topic": "Neue Rezepte",
+      "user1": "user3@test.de",
+      "user2": "",
+      "date": "2022-11-06T08:45:00+00:00",
+      "room": 100004,
+      "isOpen": true,
+      "isReady": false
+    }
+  ]
+}

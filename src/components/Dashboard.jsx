@@ -1,27 +1,18 @@
-import React, { useContext } from 'react';
-import './DashboardStyle.css';
-import AuthContext from '../context/AuthContext';
-import { NavLink } from 'react-router-dom';
-import { Box, Container, Paper, Typography } from '@mui/material';
+import React, { useContext } from "react";
+import "./DashboardStyle.css";
+import AuthContext from "../context/AuthContext";
+import { NavLink } from "react-router-dom";
+import { Box, Container, Paper, Typography } from "@mui/material";
 
 function Dashboard() {
-  // const user = JSON.parse(localStorage.getItem("user"));
   const { userLoggedIn, users, currentEmail } = useContext(AuthContext);
 
   return (
-    <div className='dashboard'>
-      <div className='bg'>
-        {/* <div style={{ backgroundColor: "#fff", padding: "10px" }}>
-          Wilkommen{" "}
-          {currentUser.lastname}
-          {users
-            .filter((user) => user.email === currentEmail)
-            .map((user) => user.firstname)}
-        </div> */}
-
-        <Container elevation={0} maxWidth='md'>
+    <div className="dashboard">
+      <div className="bg">
+        <Container elevation={0} maxWidth="md">
           <Paper elevation={0} sx={{ padding: 4 }}>
-            <Typography variant='h6'>
+            <Typography variant="h6">
               Herzlich Willkommen{` `}
               {users
                 .filter((user) => user.email === currentEmail)
@@ -45,9 +36,9 @@ function Dashboard() {
               Eintrag verwenden.
             </Typography>
             <br />
-            <Box className='link' elevation={0} sx={{ marginTop: 2 }}>
+            <Box className="link" elevation={0} sx={{ marginTop: 2 }}>
               {!userLoggedIn && (
-                <NavLink to='/login' className='link'>
+                <NavLink to="/login" className="link">
                   Jetzt einloggen
                 </NavLink>
               )}

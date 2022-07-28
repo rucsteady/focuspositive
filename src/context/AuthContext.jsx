@@ -15,52 +15,39 @@ export function AuthProvider({ children }) {
   const [randomChats, setRandomChats] = useState([]);
   let navigate = useNavigate();
 
-  // const port = process.env.PORT || 8080;
+  const getUsers = async () => {
+    await axios
+      .get("https://fpjsonserver.herokuapp.com/users")
+      .then(({ data }) => setUsers(data));
+  };
+  useEffect(() => {
+    getUsers();
+  }, []);
 
-  // axios
-  //   .post('http://localhost:8080/api/auth/login', {
-  //     email,
-  //     password,
-  //   }) .post("https://fpauthserver.herokuapp.com/api/auth/login", {
+  console.log(users);
 
-    const getUsers = async () => {
-      await axios
-        .get("https://fpauthserver.herokuapp.com/api/users")
-        .then((response) => setUsers(response.data.users));
-    };
-    useEffect(() => {
-      getUsers();
-    }, []);
-  
-    const getChats = async () => {
-      await axios
-        .get("https://fpauthserver.herokuapp.com/api/chats")
-        .then((response) => setRandomChats(response.data.chats));
-    };
-  
-    useEffect(() => {
-      getChats();
-    }, []);
-  
-    useEffect(() => {
-      setCurrentUser(users.filter((user) => user.email === currentEmail));
-    }, [users, currentEmail]);
-  
+  const getChats = async () => {
+    await axios
+      .get("https://fpjsonserver.herokuapp.com/chats")
+      .then(({ data }) => setRandomChats(data));
+  };
+
+  useEffect(() => {
+    getChats();
+  }, []);
+
+  useEffect(() => {
+    setCurrentUser(users.filter((user) => user.email === currentEmail));
+  }, [users, currentEmail]);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     await axios
-      .post("https://fpauthserver.herokuapp.com/api/auth/login", {
+      .get("https://fpjsonserver.herokuapp.com/users", {
         email,
         password,
       })
       .then((response) => {
-        localStorage.setItem(
-          "login",
-          JSON.stringify({
-            userLogin: true,
-            token: response.data.access_token,
-          })
-        );
         setCurrentUser(users.filter((user) => user.email === currentEmail));
         setCurrentEmail(email);
         setError("");
@@ -73,10 +60,12 @@ export function AuthProvider({ children }) {
   };
 
   const handleLogOut = () => {
+    setCurrentUser("");
+    setCurrentEmail("")
+    setUserLoggedIn("");
     setUserLoggedIn(false);
-    navigate("/login");
+    navigate("/dashboard");
   };
-
 
   return (
     <AuthContext.Provider

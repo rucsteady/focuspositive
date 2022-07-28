@@ -4,8 +4,10 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import axios from "axios";
+import { nanoid } from "nanoid";
 
 import React, { Fragment, useContext, useEffect, useState } from "react";
+import { NavigateNextOutlined } from "@mui/icons-material";
 
 function RandomChatCreate({ handleShowChatInfo }) {
   const { currentUser } = useContext(AuthContext);
@@ -15,7 +17,6 @@ function RandomChatCreate({ handleShowChatInfo }) {
   const [user1, setUser1] = useState("");
   // const [user2, setUser2] = useState("");
   const [date, setDate] = useState("");
-
   const [error, setError] = useState("");
 
   let navigate = useNavigate();
@@ -26,22 +27,35 @@ function RandomChatCreate({ handleShowChatInfo }) {
     e.preventDefault();
 
     if (name !== "" && topic !== "" && date !== "") {
+      const newChat = {
+        id: nanoid(),
+        name,
+        topic,
+        user1,
+        date,
+      };
+
+      const customConfig = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
       await axios
-        .post("https://fpauthserver.herokuapp.com/api/chats", {
-          name,
-          topic,
-          user1,
-          date,
-        })
+        .post(
+          "https://fpjsonserver.herokuapp.com/chats",
+          { newChat },
+          customConfig
+        )
         .then((response) => {
+          console.log(response.data);
           setError("");
           setName("");
           setTopic("");
           setDate("");
           // setUser2("");
-          navigate("/dashboard");
+          navigate("/chats");
         })
-        .catch((err) => setError(error));
+        .catch((err) => setError(err));
     }
   };
 
