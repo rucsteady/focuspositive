@@ -64,8 +64,8 @@ function RandomChatCreate({ handleShowChatInfo }) {
 
   return (
     <Fragment>
-      {error && <p style={{ color: "red" }}>{error}</p>}
       <Typography variant="h6">Erstelle einen neuen Random Chat</Typography>
+      {error && <p style={{ color: "red" }}>{error}</p>}
       <Grid container>
         <Grid item mt={4}>
           <Typography>
