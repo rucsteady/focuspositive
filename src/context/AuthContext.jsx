@@ -24,7 +24,6 @@ export function AuthProvider({ children }) {
     getUsers();
   }, []);
 
-
   const getChats = async () => {
     await axios
       .get("https://fpjsonserver.herokuapp.com/chats")

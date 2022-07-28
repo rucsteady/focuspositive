@@ -11,6 +11,7 @@ import Login from "./components/account/Login";
 import Register from "./components/account/Register";
 import AuthContext from "./context/AuthContext";
 import RandomChatTimeUp from "./components/chat/RandomChatTimeUp";
+import RandomChatCreateFinal from "./components/chat/RandomChatCreateFinal"
 import Countdown from "react-countdown";
 
 function App() {
@@ -46,6 +47,10 @@ function App() {
           {userLoggedIn && (
             <Route path="chatover" element={<RandomChatTimeUp />} />
           )}
+         
+            <Route path="rcsuccess" element={<RandomChatCreateFinal />} />
+     
+
           {!userLoggedIn && <Route path="login" element={<Login />} />}
           {!userLoggedIn && <Route path="register" element={<Register />} />}
           <Route path="*" element={<NotFound />} />
