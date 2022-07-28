@@ -7,7 +7,6 @@ import axios from "axios";
 import { nanoid } from "nanoid";
 
 import React, { Fragment, useContext, useEffect, useState } from "react";
-import { NavigateNextOutlined } from "@mui/icons-material";
 
 function RandomChatCreate({ handleShowChatInfo }) {
   const { currentUser } = useContext(AuthContext);
@@ -32,7 +31,11 @@ function RandomChatCreate({ handleShowChatInfo }) {
         name,
         topic,
         user1,
+        user2: "",
         date,
+        room: nanoid(),
+        isOpen: true,
+        isReady: false,
       };
 
       const customConfig = {
@@ -41,11 +44,7 @@ function RandomChatCreate({ handleShowChatInfo }) {
         },
       };
       await axios
-        .post(
-          "https://fpjsonserver.herokuapp.com/chats",
-          { newChat },
-          customConfig
-        )
+        .post("https://fpjsonserver.herokuapp.com/chats", newChat, customConfig)
         .then((response) => {
           console.log(response.data);
           setError("");
@@ -53,7 +52,7 @@ function RandomChatCreate({ handleShowChatInfo }) {
           setTopic("");
           setDate("");
           // setUser2("");
-          navigate("/chats");
+          navigate("/");
         })
         .catch((err) => setError(err));
     }
@@ -65,6 +64,7 @@ function RandomChatCreate({ handleShowChatInfo }) {
 
   return (
     <Fragment>
+      {error && <p style={{ color: "red" }}>{error}</p>}
       <Typography variant="h6">Erstelle einen neuen Random Chat</Typography>
       <Grid container>
         <Grid item mt={4}>
