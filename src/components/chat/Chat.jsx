@@ -35,9 +35,6 @@ function Chat({ MemoCountdown }) {
     setShowChatNew(true);
   };
 
-  console.log("currentUser", currentUser);
-  console.log("chatUser", chatUser);
-
   const chatUserObj = useCallback(() => {
     setChatUser(currentUser[0].firstname);
   }, [currentUser]);

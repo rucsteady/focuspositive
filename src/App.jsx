@@ -11,10 +11,11 @@ import Login from "./components/account/Login";
 import Register from "./components/account/Register";
 import AuthContext from "./context/AuthContext";
 import RandomChatTimeUp from "./components/chat/RandomChatTimeUp";
+import RandomChatCreateFinal from "./components/chat/RandomChatCreateFinal";
 import Countdown from "react-countdown";
 
 function App() {
-  const { userLoggedIn, currentUser } = useContext(AuthContext);
+  const { userLoggedIn } = useContext(AuthContext);
 
   const CountdownWrapper = () => {
     return (
@@ -24,9 +25,6 @@ function App() {
     );
   };
   const MemoCountdown = React.memo(CountdownWrapper);
-  // changed
-
-  console.log("currentUser", currentUser);
 
   return (
     <>
@@ -49,6 +47,9 @@ function App() {
           {userLoggedIn && (
             <Route path="chatover" element={<RandomChatTimeUp />} />
           )}
+
+          <Route path="rcsuccess" element={<RandomChatCreateFinal />} />
+
           {!userLoggedIn && <Route path="login" element={<Login />} />}
           {!userLoggedIn && <Route path="register" element={<Register />} />}
           <Route path="*" element={<NotFound />} />

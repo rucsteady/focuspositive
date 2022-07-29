@@ -20,7 +20,7 @@ function Register() {
   const register = async (e) => {
     e.preventDefault();
     await axios
-      .post("https://fpauthserver.herokuapp.com/api/auth/register", {
+      .post("https://fpjsonserver.herokuapp.com/users", {
         email,
         password,
         firstname,

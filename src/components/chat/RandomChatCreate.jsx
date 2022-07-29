@@ -4,6 +4,7 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import axios from "axios";
+import { nanoid } from "nanoid";
 
 import React, { Fragment, useContext, useEffect, useState } from "react";
 
@@ -15,7 +16,6 @@ function RandomChatCreate({ handleShowChatInfo }) {
   const [user1, setUser1] = useState("");
   // const [user2, setUser2] = useState("");
   const [date, setDate] = useState("");
-
   const [error, setError] = useState("");
 
   let navigate = useNavigate();
@@ -26,22 +26,35 @@ function RandomChatCreate({ handleShowChatInfo }) {
     e.preventDefault();
 
     if (name !== "" && topic !== "" && date !== "") {
+      const newChat = {
+        id: nanoid(),
+        name,
+        topic,
+        user1,
+        user2: "",
+        date,
+        room: nanoid(),
+        isOpen: true,
+        isReady: false,
+      };
+
+      const customConfig = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
       await axios
-        .post("https://fpauthserver.herokuapp.com/api/chats", {
-          name,
-          topic,
-          user1,
-          date,
-        })
+        .post("https://fpjsonserver.herokuapp.com/chats", newChat, customConfig)
         .then((response) => {
+          console.log(response.data);
           setError("");
           setName("");
           setTopic("");
           setDate("");
           // setUser2("");
-          navigate("/dashboard");
+          navigate("/");
         })
-        .catch((err) => setError(error));
+        .catch((err) => setError(err));
     }
   };
 
@@ -52,6 +65,7 @@ function RandomChatCreate({ handleShowChatInfo }) {
   return (
     <Fragment>
       <Typography variant="h6">Erstelle einen neuen Random Chat</Typography>
+      {error && <p style={{ color: "red" }}>{error}</p>}
       <Grid container>
         <Grid item mt={4}>
           <Typography>
