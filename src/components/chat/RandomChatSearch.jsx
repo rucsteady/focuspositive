@@ -44,8 +44,7 @@ function RandomChatSearch({
               handleOpen();
               setActiveRoom(randomChatDto.room);
               setActiveRandomChat(randomChatDto);
-            } else if (randomChatDto.isOpen) {
-              console.log("is open", randomChatDto);
+            } else if (randomChatDto.isOpen) {          
               handleRegisterRandomChat();
             }
           }}
