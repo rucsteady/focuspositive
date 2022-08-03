@@ -13,8 +13,15 @@ import { Container } from "@mui/system";
 import React from "react";
 import { nanoid } from "nanoid";
 
-function JournalSidebar({ entrys, onAddEntry, onDeleteEntry, setActiveEntry }) {
-  const sortedEntrys = entrys.sort((a, b) => b.lastModified - a.lastModified);
+function JournalSidebar({
+  journals,
+  createJournal,
+  onDeleteJournal,
+  setActiveJournal,
+}) {
+  const sortedJournals = journals.sort(
+    (a, b) => b.lastModified - a.lastModified
+  );
 
   return (
     <div>
@@ -33,7 +40,7 @@ function JournalSidebar({ entrys, onAddEntry, onDeleteEntry, setActiveEntry }) {
           <Typography variant="h6" sx={{ marginBottom: 2 }} component={"div"}>
             Einträge
           </Typography>
-          {sortedEntrys.map(({ id, title, body, lastModified }) => (
+          {sortedJournals.map(({ id, title, body, lastModified }) => (
             <Card sx={{ marginBottom: 1 }} key={nanoid()}>
               <List
                 sx={{
@@ -48,7 +55,7 @@ function JournalSidebar({ entrys, onAddEntry, onDeleteEntry, setActiveEntry }) {
                 <ListItem
                   alignItems="flex-start"
                   button
-                  onClick={() => setActiveEntry(id)}
+                  onClick={() => setActiveJournal(id)}
                   key={nanoid()}
                 >
                   <ListItemText
@@ -71,7 +78,7 @@ function JournalSidebar({ entrys, onAddEntry, onDeleteEntry, setActiveEntry }) {
                           <IconButton
                             aria-label="delete"
                             edge={"end"}
-                            onClick={(e) => onDeleteEntry(id)}
+                            onClick={(e) => onDeleteJournal(id)}
                           >
                             <DeleteIcon fontSize={"small"} />
                           </IconButton>
@@ -88,7 +95,7 @@ function JournalSidebar({ entrys, onAddEntry, onDeleteEntry, setActiveEntry }) {
             <Button
               variant="contained"
               sx={{ marginTop: 3, boxShadow: 0 }}
-              onClick={onAddEntry}
+              onClick={createJournal}
             >
               Neuer Eintrag
             </Button>

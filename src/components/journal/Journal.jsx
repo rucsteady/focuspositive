@@ -1,20 +1,16 @@
 import { Grid } from "@mui/material";
 import { Container } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import JournalMain from "./JournalMain";
 import JournalSidebar from "./JournalSidebar";
+import AuthContext from "../../context/AuthContext";
 import { nanoid } from "nanoid";
+import axios from "axios";
 
 function Journal() {
-  const [entrys, setEntrys] = useState(
-    localStorage.entrys ? JSON.parse(localStorage.entrys) : []
-  );
+  const { journals, setJournals } = useContext(AuthContext);
 
-  const [activeEntry, setActiveEntry] = useState(false);
-
-  useEffect(() => {
-    localStorage.setItem("entrys", JSON.stringify(entrys));
-  }, [entrys]);
+  const [activeJournal, setActiveJournal] = useState(false);
 
   var dateObj = new Date();
   var month = dateObj.getUTCMonth() + 1; //months from 1-12
@@ -23,8 +19,29 @@ function Journal() {
 
   const newdate = day + "." + month + "." + year;
 
-  const onAddEntry = () => {
-    const newEntry = {
+  const newJournalPost = {
+    id: nanoid(),
+    title: newdate,
+    body: "",
+    one: "",
+    two: "",
+    three: "",
+    lastModified: Date.now(),
+  };
+
+  function createJournal() {
+    axios
+      .post("https://fpjsonserver.herokuapp.com/journals", {
+        newJournalPost,
+      })
+      .then((response) => {
+        setJournals(response.data)
+        setActiveJournal(newJournalPost.id);
+      });
+  }
+
+  const onAddJournal = () => {
+    const newJournal = {
       id: nanoid(),
       title: newdate,
       body: "",
@@ -34,28 +51,31 @@ function Journal() {
       lastModified: Date.now(),
     };
 
-    setEntrys([newEntry, ...entrys]);
-    setActiveEntry(newEntry.id);
+    setJournals([newJournal, ...journals]);
+    setActiveJournal(newJournal.id);
   };
 
-  const onDeleteEntry = (entryId) => {
-    setEntrys(entrys.filter(({ id }) => id !== entryId));
+  const onDeleteJournal = async (journalId) => {
+    await axios.delete(
+      `https://fpjsonserver.herokuapp.com/journals/${journalId}`
+    );
+    setJournals(journals.filter(({ id }) => id !== journalId));
   };
 
-  const onUpdateEntry = (updatedEntry) => {
-    const updatedEntrysArr = entrys.map((entry) => {
-      if (entry.id === updatedEntry.id) {
-        return updatedEntry;
+  const onUpdateJournal = (updatedJournal) => {
+    const updatedJournalsArr = journals.map((journal) => {
+      if (journal.id === updatedJournal.id) {
+        return updatedJournal;
       }
 
-      return entry;
+      return journal;
     });
 
-    setEntrys(updatedEntrysArr);
+    setJournals(updatedJournalsArr);
   };
 
-  const getActiveEntry = () => {
-    return entrys.find(({ id }) => id === activeEntry);
+  const getActiveJournal = (activeJournal) => {
+    return journals.find(({ id }) => id === activeJournal);
   };
 
   return (
@@ -64,17 +84,18 @@ function Journal() {
         <Grid container>
           <Grid item>
             <JournalSidebar
-              entrys={entrys}
-              onAddEntry={onAddEntry}
-              onDeleteEntry={onDeleteEntry}
-              activeEntry={activeEntry}
-              setActiveEntry={setActiveEntry}
+              journals={journals}
+              onAddJournal={onAddJournal}
+              onDeleteJournal={onDeleteJournal}
+              activeJournal={activeJournal}
+              setActiveJournal={setActiveJournal}
+              createJournal={createJournal}
             />
           </Grid>
           <Grid item>
             <JournalMain
-              activeEntry={getActiveEntry()}
-              onUpdateEntry={onUpdateEntry}
+              activeJournal={getActiveJournal()}
+              onUpdateJournal={onUpdateJournal}
             />
           </Grid>
         </Grid>
