@@ -62,7 +62,7 @@ function JournalSidebar({
                     <Typography sx={{ display: "block" }} component={"span"}>
                       {title && title.substr(0, 18)}
                     </Typography>
-                    <Typography sx={{ display: "inline", fontSize: 11 }} component={"span"}>
+                    <Typography sx={{ display: "inline", fontSize: 12 }} component={"span"}>
                       {body && body.substr(0, 20) + "..."}
                     </Typography>
                     <Typography sx={{ fontSize: 10 }} component={"div"}>
