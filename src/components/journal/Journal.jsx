@@ -19,41 +19,22 @@ function Journal() {
 
   const newdate = day + "." + month + "." + year;
 
-  const newJournalPost = {
-    id: nanoid(),
-    title: newdate,
-    body: "",
-    one: "",
-    two: "",
-    three: "",
-    lastModified: Date.now(),
-  };
-
   function createJournal() {
     axios
       .post("https://fpjsonserver.herokuapp.com/journals", {
-        newJournalPost,
+        id: nanoid(),
+        title: newdate,
+        body: "",
+        one: "",
+        two: "",
+        three: "",
+        lastModified: Date.now(),
       })
       .then((response) => {
-        setJournals(response.data)
-        setActiveJournal(newJournalPost.id);
+        setJournals(response.data);
+        setActiveJournal(response.data.id);
       });
   }
-
-  const onAddJournal = () => {
-    const newJournal = {
-      id: nanoid(),
-      title: newdate,
-      body: "",
-      one: "",
-      two: "",
-      three: "",
-      lastModified: Date.now(),
-    };
-
-    setJournals([newJournal, ...journals]);
-    setActiveJournal(newJournal.id);
-  };
 
   const onDeleteJournal = async (journalId) => {
     await axios.delete(
@@ -74,7 +55,9 @@ function Journal() {
     setJournals(updatedJournalsArr);
   };
 
-  const getActiveJournal = (activeJournal) => {
+  console.log(journals)
+
+  const getActiveJournal = () => {
     return journals.find(({ id }) => id === activeJournal);
   };
 
@@ -85,7 +68,6 @@ function Journal() {
           <Grid item>
             <JournalSidebar
               journals={journals}
-              onAddJournal={onAddJournal}
               onDeleteJournal={onDeleteJournal}
               activeJournal={activeJournal}
               setActiveJournal={setActiveJournal}
