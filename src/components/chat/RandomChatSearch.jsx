@@ -11,8 +11,8 @@ import {
   Modal,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
+
 import "./RandomChatSearchStyle.css";
 
 function RandomChatSearch({
@@ -21,14 +21,13 @@ function RandomChatSearch({
   setActiveRoom,
   setShowChatSearch,
   setActiveRandomChat,
-  
+  randomChats,
 }) {
-  const [refreshedRandomChats, setRefreshedRandomChats] = useState([]);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const randomChatItems = refreshedRandomChats.map((randomChatDto, index) => (
+  const randomChatItems = randomChats.map((randomChatDto, index) => (
     <ListItem key={index} sx={{ paddingBottom: 0 }}>
       <ListItemButton sx={{ padding: 0 }}>
         <Card
@@ -103,17 +102,6 @@ function RandomChatSearch({
     </ListItem>
   ));
 
-  const getChats = async () => {
-    await axios
-      .get("https://fpjsonserver.herokuapp.com/chats")
-      .then(({ data }) => setRefreshedRandomChats(data));
-  };
-
-  // TODO On Click Item
-  useEffect(() => {
-    getChats();
-  }, []);
-
   const handleStartRandomChat = () => {
     setShowChatSearch(false);
     setShowRandomChat(true);
@@ -129,7 +117,7 @@ function RandomChatSearch({
     return console.log("handle register");
   };
 
-  return !refreshedRandomChats ? (
+  return !randomChats ? (
     <div>
       <CircularProgress />
     </div>

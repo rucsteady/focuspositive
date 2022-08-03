@@ -8,7 +8,7 @@ import RandomChatSearch from "./RandomChatSearch";
 import RandomChatCreate from "./RandomChatCreate";
 
 function Chat({ MemoCountdown }) {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, randomChats } = useContext(AuthContext);
   const [showChatInfo, setShowChatInfo] = useState(true);
   const [showChatSearch, setShowChatSearch] = useState(false);
   const [showChatNew, setShowChatNew] = useState(false);
@@ -70,6 +70,7 @@ function Chat({ MemoCountdown }) {
                   setActiveRoom={setActiveRoom}
                   setShowChatSearch={setShowChatSearch}
                   setActiveRandomChat={setActiveRandomChat}
+                  randomChats={randomChats}
                 />
               )}
             </Grid>

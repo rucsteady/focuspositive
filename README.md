@@ -7,7 +7,7 @@ This project was build by Nils Rausch, Student of Hochschule für Wirtschaft und
 Start a Terminal in each of these three Diretories
 
 `focuspositive`
-`authServer`
+`jsonserver`
 `chatServer`
 
 install all dependencies in each dir with
@@ -20,7 +20,7 @@ Start Service in each dir
 
 ### with `npm run dev`
 
-`authServer`
+`jsonserver`
 `chatServer`
 
 ### with `npm start`
@@ -35,7 +35,7 @@ Runs the app in the development mode.\
 
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-authServer runs at Port:8080
+jsonserver runs at Port:8080
 chatServer runs at Port:3001
 
 The page will reload when you make changes.\
