@@ -59,9 +59,11 @@ function JournalSidebar({
                   key={nanoid()}
                 >
                   <div>
-                    <Typography sx={{ display: "inline" }} component={"span"}>
-                      {`Titel: ${title}`}
-                      {body && body.substr(0, 40) + "..."}
+                    <Typography sx={{ display: "block" }} component={"span"}>
+                      {title && title.substr(0, 18)}
+                    </Typography>
+                    <Typography sx={{ display: "inline", fontSize: 11 }} component={"span"}>
+                      {body && body.substr(0, 20) + "..."}
                     </Typography>
                     <Typography sx={{ fontSize: 10 }} component={"div"}>
                       {" "}
