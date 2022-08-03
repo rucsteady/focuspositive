@@ -2,7 +2,7 @@ import { Button, Card, Paper, TextField } from "@mui/material";
 
 import React from "react";
 
-function JournalMain({ activeJournal, onUpdateJournal,handleSaveJournal }) {
+function JournalMain({ activeJournal, onUpdateJournal, handleSaveJournal }) {
   const onEditField = (field, value) => {
     onUpdateJournal({
       ...activeJournal,
@@ -75,9 +75,14 @@ function JournalMain({ activeJournal, onUpdateJournal,handleSaveJournal }) {
           value={activeJournal.three}
           sx={{ marginBottom: 2 }}
         />
-        <Button type="submit" variant="contained" sx={{ boxShadow: 0 }} onClick={handleSaveJournal}>
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{ boxShadow: 0 }}
+          onClick={handleSaveJournal}
+        >
           Speichern
-        </Button>       
+        </Button>
       </Paper>
     </div>
   );

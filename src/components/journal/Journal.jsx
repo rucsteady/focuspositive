@@ -9,8 +9,16 @@ import axios from "axios";
 
 function Journal() {
   const { journals, setJournals } = useContext(AuthContext);
-
   const [activeJournal, setActiveJournal] = useState(false);
+  const [editedJournal, setEditedJournal] = useState({
+    id: "",
+    title: "",
+    body: "",
+    one: "",
+    two: "",
+    three: "",
+    lastModified: "",
+  });
 
   var dateObj = new Date();
   var month = dateObj.getUTCMonth() + 1; //months from 1-12
@@ -36,11 +44,11 @@ function Journal() {
       });
   };
 
-  const onDeleteJournal = async (journalId) => {
+  const onDeleteJournal = async () => {
     await axios.delete(
-      `https://fpjsonserver.herokuapp.com/journals/${journalId}`
+      `https://fpjsonserver.herokuapp.com/journals/${activeJournal}`
     );
-    setJournals(journals.filter(({ id }) => id !== journalId));
+    setJournals(journals.filter(({ id }) => id !== activeJournal));
   };
 
   const onUpdateJournal = (updatedJournal) => {
@@ -55,15 +63,22 @@ function Journal() {
     setJournals(updatedJournalsArr);
   };
 
-  const handleSaveJournal = (e) => {
-    e.preventDefault();
-    console.log("save journal");
+  const handleSaveJournal = async (journalId) => {
+    await axios
+      .put(`https://fpjsonserver.herokuapp.com/journals/${journalId}`, {
+        activeJournal,
+      })
+
+      .then((res) => {
+        console.log(res.data);
+      });
   };
-  console.log(journals);
 
   const getActiveJournal = () => {
     return journals.find(({ id }) => id === activeJournal);
   };
+
+  console.log("activeJournal", activeJournal);
 
   return (
     <div>
