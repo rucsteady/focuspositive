@@ -58,34 +58,27 @@ function JournalSidebar({
                   onClick={() => setActiveJournal(id)}
                   key={nanoid()}
                 >
-                  <ListItemText
-                    primary={`${title}`}
-                    secondary={
-                      <div>
-                        <Typography
-                          sx={{ display: "inline" }}
-                          component={"div"}
-                        >
-                          {body && body.substr(0, 40) + "..."}
-                        </Typography>
-                        <Typography sx={{ fontSize: 10 }} component={"div"}>
-                          {" "}
-                          Zuletzt bearbeitet{" "}
-                          {new Date(lastModified).toLocaleDateString("de-DE", {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })}
-                          <IconButton
-                            aria-label="delete"
-                            edge={"end"}
-                            onClick={(e) => onDeleteJournal(id)}
-                          >
-                            <DeleteIcon fontSize={"small"} />
-                          </IconButton>
-                        </Typography>
-                      </div>
-                    }
-                  />
+                  <div>
+                    <Typography sx={{ display: "inline" }} component={"span"}>
+                      {`Titel: ${title}`}
+                      {body && body.substr(0, 40) + "..."}
+                    </Typography>
+                    <Typography sx={{ fontSize: 10 }} component={"div"}>
+                      {" "}
+                      Zuletzt bearbeitet{" "}
+                      {new Date(lastModified).toLocaleDateString("de-DE", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                      <IconButton
+                        aria-label="delete"
+                        edge={"end"}
+                        onClick={(e) => onDeleteJournal(id)}
+                      >
+                        <DeleteIcon fontSize={"small"} />
+                      </IconButton>
+                    </Typography>
+                  </div>
                 </ListItem>
                 {/* <Divider component="li" /> */}
               </List>
