@@ -2,10 +2,21 @@ import { Button, Card, Paper, TextField } from "@mui/material";
 
 import React from "react";
 
-function JournalMain({ activeJournal, onUpdateJournal, handleSaveJournal }) {
+function JournalMain({
+  activeJournal,
+  onUpdateJournal,
+  handleSaveJournal,
+  setEditedJournal,
+  editedJournal,
+}) {
   const onEditField = (field, value) => {
     onUpdateJournal({
       ...activeJournal,
+      [field]: value,
+      lastModified: Date.now(),
+    });
+    setEditedJournal({
+      ...editedJournal,
       [field]: value,
       lastModified: Date.now(),
     });

@@ -7,18 +7,20 @@ import AuthContext from "../../context/AuthContext";
 import { nanoid } from "nanoid";
 import axios from "axios";
 
+const initialValue = {
+  id: nanoid(),
+  title: "",
+  body: "",
+  one: "",
+  two: "",
+  three: "",
+  lastModified: Date.now(),
+};
+
 function Journal() {
   const { journals, setJournals } = useContext(AuthContext);
   const [activeJournal, setActiveJournal] = useState(false);
-  const [editedJournal, setEditedJournal] = useState({
-    id: "",
-    title: "",
-    body: "",
-    one: "",
-    two: "",
-    three: "",
-    lastModified: "",
-  });
+  const [editedJournal, setEditedJournal] = useState(initialValue);
 
   var dateObj = new Date();
   var month = dateObj.getUTCMonth() + 1; //months from 1-12
@@ -63,10 +65,10 @@ function Journal() {
     setJournals(updatedJournalsArr);
   };
 
-  const handleSaveJournal = async (journalId) => {
+  const handleSaveJournal = async () => {
     await axios
-      .put(`https://fpjsonserver.herokuapp.com/journals/${journalId}`, {
-        activeJournal,
+      .put(`https://fpjsonserver.herokuapp.com/journals/${activeJournal}`, {
+        editedJournal,
       })
 
       .then((res) => {
@@ -79,6 +81,7 @@ function Journal() {
   };
 
   console.log("activeJournal", activeJournal);
+  console.log("editedJournal", editedJournal);
 
   return (
     <div>
@@ -98,6 +101,8 @@ function Journal() {
               activeJournal={getActiveJournal()}
               onUpdateJournal={onUpdateJournal}
               handleSaveJournal={handleSaveJournal}
+              setEditedJournal={setEditedJournal}
+              editedJournal={editedJournal}
             />
           </Grid>
         </Grid>
