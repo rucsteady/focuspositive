@@ -19,7 +19,7 @@ function Journal() {
 
   const newdate = day + "." + month + "." + year;
 
-  function createJournal() {
+  const createJournal = () => {
     axios
       .post("https://fpjsonserver.herokuapp.com/journals", {
         id: nanoid(),
@@ -31,10 +31,10 @@ function Journal() {
         lastModified: Date.now(),
       })
       .then((response) => {
-        setJournals(response.data);
+        setJournals([...journals, response.data]);
         setActiveJournal(response.data.id);
       });
-  }
+  };
 
   const onDeleteJournal = async (journalId) => {
     await axios.delete(
@@ -55,7 +55,11 @@ function Journal() {
     setJournals(updatedJournalsArr);
   };
 
-  console.log(journals)
+  const handleSaveJournal = (e) => {
+    e.preventDefault();
+    console.log("save journal");
+  };
+  console.log(journals);
 
   const getActiveJournal = () => {
     return journals.find(({ id }) => id === activeJournal);
@@ -78,6 +82,7 @@ function Journal() {
             <JournalMain
               activeJournal={getActiveJournal()}
               onUpdateJournal={onUpdateJournal}
+              handleSaveJournal={handleSaveJournal}
             />
           </Grid>
         </Grid>
