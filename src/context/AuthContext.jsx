@@ -13,16 +13,20 @@ export function AuthProvider({ children }) {
   const [error, setError] = useState("");
   const [currentUser, setCurrentUser] = useState("");
   const [randomChats, setRandomChats] = useState([]);
+  const [journals, setJournals] = useState([]);
   let navigate = useNavigate();
+
+  const getJournals = async () => {
+    await axios
+      .get("https://fpjsonserver.herokuapp.com/journals")
+      .then(({ data }) => setJournals(data));
+  };
 
   const getUsers = async () => {
     await axios
       .get("https://fpjsonserver.herokuapp.com/users")
       .then(({ data }) => setUsers(data));
   };
-  useEffect(() => {
-    getUsers();
-  }, []);
 
   const getChats = async () => {
     await axios
@@ -32,6 +36,8 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     getChats();
+    getUsers();
+    getJournals();
   }, []);
 
   useEffect(() => {
@@ -80,6 +86,8 @@ export function AuthProvider({ children }) {
         setCurrentUser,
         currentUser,
         randomChats,
+        journals,
+        setJournals
       }}
     >
       {children}

@@ -30,7 +30,7 @@ function JournalSidebar({ entrys, onAddEntry, onDeleteEntry, setActiveEntry }) {
           }}
           variant={"menu"}
         >
-          <Typography variant="h6" sx={{ marginBottom: 2 }} ccomponent="span">
+          <Typography variant="h6" sx={{ marginBottom: 2 }} component={"div"}>
             Einträge
           </Typography>
           {sortedEntrys.map(({ id, title, body, lastModified }) => (
@@ -55,10 +55,13 @@ function JournalSidebar({ entrys, onAddEntry, onDeleteEntry, setActiveEntry }) {
                     primary={`${title}`}
                     secondary={
                       <div>
-                        <Typography sx={{ display: "inline" }} component="span">
+                        <Typography
+                          sx={{ display: "inline" }}
+                          component={"div"}
+                        >
                           {body && body.substr(0, 40) + "..."}
                         </Typography>
-                        <Typography sx={{ fontSize: 10 }} component="span">
+                        <Typography sx={{ fontSize: 10 }} component={"div"}>
                           {" "}
                           Zuletzt bearbeitet{" "}
                           {new Date(lastModified).toLocaleDateString("de-DE", {
@@ -69,9 +72,8 @@ function JournalSidebar({ entrys, onAddEntry, onDeleteEntry, setActiveEntry }) {
                             aria-label="delete"
                             edge={"end"}
                             onClick={(e) => onDeleteEntry(id)}
-                            component="span"
                           >
-                            <DeleteIcon fontSize={"small"}  />
+                            <DeleteIcon fontSize={"small"} />
                           </IconButton>
                         </Typography>
                       </div>
