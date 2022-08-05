@@ -8,6 +8,8 @@ function JournalMain({
   handleSaveJournal,
   setEditedJournal,
   editedJournal,
+  isSaved,
+  setSavedStatus,
 }) {
   const onEditField = (field, value) => {
     onUpdateJournal({
@@ -20,6 +22,7 @@ function JournalMain({
       [field]: value,
       lastModified: Date.now(),
     });
+    setSavedStatus();
   };
 
   if (!activeJournal)
@@ -91,6 +94,7 @@ function JournalMain({
           variant="contained"
           sx={{ boxShadow: 0 }}
           onClick={handleSaveJournal}
+          color={!isSaved ? "error" : "success"}
         >
           Speichern
         </Button>

@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import { Container } from "@mui/system";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import JournalMain from "./JournalMain";
 import JournalSidebar from "./JournalSidebar";
 import AuthContext from "../../context/AuthContext";
@@ -21,6 +21,7 @@ function Journal() {
   const { journals, setJournals } = useContext(AuthContext);
   const [activeJournal, setActiveJournal] = useState(false);
   const [editedJournal, setEditedJournal] = useState(initialValue);
+  const [isSaved, setIsSaved] = useState(false);
 
   var dateObj = new Date();
   var month = dateObj.getUTCMonth() + 1; //months from 1-12
@@ -44,6 +45,7 @@ function Journal() {
         setJournals([...journals, response.data]);
         setActiveJournal(response.data.id);
       });
+    setIsSaved(false);
   };
 
   const onDeleteJournal = async () => {
@@ -63,6 +65,7 @@ function Journal() {
     });
 
     setJournals(updatedJournalsArr);
+    setIsSaved(false);
   };
 
   const handleSaveJournal = async () => {
@@ -74,14 +77,16 @@ function Journal() {
       .then((res) => {
         console.log(res.data);
       });
+    setIsSaved(true);
   };
 
   const getActiveJournal = () => {
     return journals.find(({ id }) => id === activeJournal);
   };
 
-  console.log("activeJournal", activeJournal);
-  console.log("editedJournal", editedJournal);
+  const setSavedStatus = () => {
+    setIsSaved(false);
+  };
 
   return (
     <div>
@@ -103,6 +108,8 @@ function Journal() {
               handleSaveJournal={handleSaveJournal}
               setEditedJournal={setEditedJournal}
               editedJournal={editedJournal}
+              isSaved={isSaved}
+              setSavedStatus={setSavedStatus}
             />
           </Grid>
         </Grid>

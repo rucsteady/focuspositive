@@ -52,7 +52,7 @@ function RandomChat({
           new Date(Date.now()).getMinutes(),
       };
 
-      console.log(messageData);
+      // console.log(messageData);
       await socket.emit("send_message", messageData);
       setChatMessages((list) => [...list, messageData]);
       // if (scrollBottomRef.current) {
@@ -64,7 +64,6 @@ function RandomChat({
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
-      console.log(data);
       setChatMessages((list) => [...list, data]);
     });
   }, []);
@@ -107,8 +106,8 @@ function RandomChat({
 
           <Box p={3}>
             <Typography variant="h6" gutterBottom>
-              Verbunden: {activeRandomChat.name} von {chatUser}{" "}
-              mit {activeRandomChat.user2}
+              Verbunden: {activeRandomChat.name} von {chatUser} mit{" "}
+              {activeRandomChat.user2}
             </Typography>
             <Divider />
             <Grid container spacing={4} alignItems="center">
