@@ -46,7 +46,6 @@ function RandomChatCreate({ handleShowChatInfo }) {
       await axios
         .post("https://fpjsonserver.herokuapp.com/chats", newChat, customConfig)
         .then((response) => {
-   
           setError("");
           setName("");
           setTopic("");
