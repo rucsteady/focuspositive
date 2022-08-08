@@ -1,17 +1,31 @@
-import { Card, Paper, TextField } from "@mui/material";
+import { Button, Card, Paper, TextField } from "@mui/material";
 
 import React from "react";
 
-function JournalMain({ activeEntry, onUpdateEntry }) {
+function JournalMain({
+  activeJournal,
+  onUpdateJournal,
+  handleSaveJournal,
+  setEditedJournal,
+  editedJournal,
+  isSaved,
+  setSavedStatus,
+}) {
   const onEditField = (field, value) => {
-    onUpdateEntry({
-      ...activeEntry,
+    onUpdateJournal({
+      ...activeJournal,
       [field]: value,
       lastModified: Date.now(),
     });
+    setEditedJournal({
+      ...editedJournal,
+      [field]: value,
+      lastModified: Date.now(),
+    });
+    setSavedStatus();
   };
 
-  if (!activeEntry)
+  if (!activeJournal)
     return (
       <Card elevation={0}>
         <Paper sx={{ padding: 4, maxWidth: 350 }}>
@@ -29,7 +43,7 @@ function JournalMain({ activeEntry, onUpdateEntry }) {
           label="Titel"
           variant="outlined"
           fullWidth
-          value={activeEntry.title}
+          value={activeJournal.title}
           sx={{ marginBottom: 2 }}
         />
         <TextField
@@ -39,10 +53,12 @@ function JournalMain({ activeEntry, onUpdateEntry }) {
           multiline
           rows={6}
           fullWidth
-          value={activeEntry.body}
+          value={activeJournal.body}
           sx={{ marginBottom: 2 }}
         />
-        <div style={{marginBottom: 12, marginTop: 10}}>Drei Positive Dinge des Tages</div>
+        <div style={{ marginBottom: 12, marginTop: 10 }}>
+          Drei Positive Dinge des Tages
+        </div>
         <TextField
           onChange={(e) => onEditField("one", e.target.value)}
           label="Erster Eintrag"
@@ -50,7 +66,7 @@ function JournalMain({ activeEntry, onUpdateEntry }) {
           multiline
           rows={1}
           fullWidth
-          value={activeEntry.one}
+          value={activeJournal.one}
           sx={{ marginBottom: 2 }}
         />
         <TextField
@@ -60,7 +76,7 @@ function JournalMain({ activeEntry, onUpdateEntry }) {
           multiline
           rows={1}
           fullWidth
-          value={activeEntry.two}
+          value={activeJournal.two}
           sx={{ marginBottom: 2 }}
         />
         <TextField
@@ -70,12 +86,18 @@ function JournalMain({ activeEntry, onUpdateEntry }) {
           multiline
           rows={1}
           fullWidth
-          value={activeEntry.three}
+          value={activeJournal.three}
           sx={{ marginBottom: 2 }}
         />
-        {/* <Button type='submit' variant='contained' sx={{ boxShadow: 0 }}>
-            Speichern
-          </Button> */}
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{ boxShadow: 0 }}
+          onClick={handleSaveJournal}
+          color={!isSaved ? "error" : "success"}
+        >
+          Speichern
+        </Button>
       </Paper>
     </div>
   );

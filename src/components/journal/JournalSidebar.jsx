@@ -13,8 +13,15 @@ import { Container } from "@mui/system";
 import React from "react";
 import { nanoid } from "nanoid";
 
-function JournalSidebar({ entrys, onAddEntry, onDeleteEntry, setActiveEntry }) {
-  const sortedEntrys = entrys.sort((a, b) => b.lastModified - a.lastModified);
+function JournalSidebar({
+  journals,
+  createJournal,
+  onDeleteJournal,
+  setActiveJournal,
+}) {
+  const sortedJournals = journals.sort(
+    (a, b) => b.lastModified - a.lastModified
+  );
 
   return (
     <div>
@@ -30,10 +37,10 @@ function JournalSidebar({ entrys, onAddEntry, onDeleteEntry, setActiveEntry }) {
           }}
           variant={"menu"}
         >
-          <Typography variant="h6" sx={{ marginBottom: 2 }} ccomponent="span">
+          <Typography variant="h6" sx={{ marginBottom: 2 }} component={"div"}>
             Einträge
           </Typography>
-          {sortedEntrys.map(({ id, title, body, lastModified }) => (
+          {sortedJournals.map(({ id, title, body, lastModified }) => (
             <Card sx={{ marginBottom: 1 }} key={nanoid()}>
               <List
                 sx={{
@@ -48,35 +55,32 @@ function JournalSidebar({ entrys, onAddEntry, onDeleteEntry, setActiveEntry }) {
                 <ListItem
                   alignItems="flex-start"
                   button
-                  onClick={() => setActiveEntry(id)}
+                  onClick={() => setActiveJournal(id)}
                   key={nanoid()}
                 >
-                  <ListItemText
-                    primary={`${title}`}
-                    secondary={
-                      <div>
-                        <Typography sx={{ display: "inline" }} component="span">
-                          {body && body.substr(0, 40) + "..."}
-                        </Typography>
-                        <Typography sx={{ fontSize: 10 }} component="span">
-                          {" "}
-                          Zuletzt bearbeitet{" "}
-                          {new Date(lastModified).toLocaleDateString("de-DE", {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })}
-                          <IconButton
-                            aria-label="delete"
-                            edge={"end"}
-                            onClick={(e) => onDeleteEntry(id)}
-                            component="span"
-                          >
-                            <DeleteIcon fontSize={"small"}  />
-                          </IconButton>
-                        </Typography>
-                      </div>
-                    }
-                  />
+                  <div>
+                    <Typography sx={{ display: "block" }} component={"span"}>
+                      {title && title.substr(0, 18)}
+                    </Typography>
+                    <Typography sx={{ display: "inline", fontSize: 12 }} component={"span"}>
+                      {body && body.substr(0, 20) + "..."}
+                    </Typography>
+                    <Typography sx={{ fontSize: 10 }} component={"div"}>
+                      {" "}
+                      Zuletzt bearbeitet{" "}
+                      {new Date(lastModified).toLocaleDateString("de-DE", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                      <IconButton
+                        aria-label="delete"
+                        edge={"end"}
+                        onClick={(e) => onDeleteJournal(id)}
+                      >
+                        <DeleteIcon fontSize={"small"} />
+                      </IconButton>
+                    </Typography>
+                  </div>
                 </ListItem>
                 {/* <Divider component="li" /> */}
               </List>
@@ -86,7 +90,7 @@ function JournalSidebar({ entrys, onAddEntry, onDeleteEntry, setActiveEntry }) {
             <Button
               variant="contained"
               sx={{ marginTop: 3, boxShadow: 0 }}
-              onClick={onAddEntry}
+              onClick={createJournal}
             >
               Neuer Eintrag
             </Button>

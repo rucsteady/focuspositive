@@ -40,12 +40,10 @@ function RandomChatSearch({
           className={randomChatDto.isOpen ? "open" : "ready"}
           onClick={() => {
             if (randomChatDto.isReady) {
-              console.log("is ready", randomChatDto);
               handleOpen();
               setActiveRoom(randomChatDto.room);
               setActiveRandomChat(randomChatDto);
             } else if (randomChatDto.isOpen) {
-              console.log("is open", randomChatDto);
               handleRegisterRandomChat();
             }
           }}
