@@ -4,15 +4,45 @@ import Button from "@mui/material/Button";
 import {
   Container,
   Divider,
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
   Paper,
   TextField,
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 function Account() {
   const { users, handleLogOut, currentEmail } = useContext(AuthContext);
   const [editAccount, setEditAccount] = useState(false);
+
+  const [values, setValues] = useState({
+    amount: "",
+    password: "",
+    weight: "",
+    weightRange: "",
+    showPassword: false,
+  });
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   return (
     <div>
@@ -25,28 +55,28 @@ function Account() {
             <Box>
               <Typography sx={{ padding: 1 }}>Account bearbeiten:</Typography>
               <TextField
-                sx={{ padding: 1 }}
+                sx={{ margin: 1, padding: 1, display: "block" }}
                 defaultValue={users
                   .filter((user) => user.email === currentEmail)
                   .map((user) => user.firstname)}
                 label="Vorname"
-              >
-                Vorname:{` `}
-                {users
-                  .filter((user) => user.email === currentEmail)
-                  .map((user) => user.firstname)}
-              </TextField>
-              <TextField sx={{ padding: 1 }} label="Nachname">
-                Nachname:{` `}
-                {users
+              ></TextField>
+              <TextField
+                sx={{ margin: 1, padding: 1, display: "block" }}
+                defaultValue={users
                   .filter((user) => user.email === currentEmail)
                   .map((user) => user.lastname)}
-              </TextField>
-              <TextField sx={{ padding: 1 }}>
-                E-Mail:{` `}
-                {currentEmail}
-              </TextField>
-              <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+                label="Nachname"
+              ></TextField>
+              <TextField
+                sx={{ margin: 1, padding: 1, display: "block" }}
+                label="E-Mail"
+                defaultValue={currentEmail}
+              ></TextField>
+              <FormControl
+                sx={{ margin: 1, padding: 1, display: "block" }}
+                variant="outlined"
+              >
                 <InputLabel htmlFor="outlined-adornment-password">
                   Password
                 </InputLabel>
