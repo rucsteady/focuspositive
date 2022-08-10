@@ -34,7 +34,7 @@ function Account() {
   };
 
   const handleAccountSubmit = () => {
-    setEditAccount(true);
+    setEditAccount(false);
   };
 
   console.log(editAccount);
@@ -58,79 +58,81 @@ function Account() {
             <Typography variant="h5">Account</Typography>
             <Divider sx={{ padding: 1 }} />
 
-            <Box>
-              <Typography sx={{ padding: 1 }}>Account bearbeiten:</Typography>
-              <TextField
-                sx={{ margin: 1, padding: 1, display: "block" }}
-                defaultValue={users
-                  .filter((user) => user.email === currentEmail)
-                  .map((user) => user.firstname)}
-                label="Vorname"
-              ></TextField>
-              <TextField
-                sx={{ margin: 1, padding: 1, display: "block" }}
-                defaultValue={users
-                  .filter((user) => user.email === currentEmail)
-                  .map((user) => user.lastname)}
-                label="Nachname"
-              ></TextField>
-              <TextField
-                sx={{ margin: 1, padding: 1, display: "block" }}
-                label="E-Mail"
-                defaultValue={currentEmail}
-              ></TextField>
-              <FormControl
-                sx={{ margin: 1, padding: 1, display: "block" }}
-                variant="outlined"
-              >
-                <InputLabel htmlFor="outlined-adornment-password">
-                  Password
-                </InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  type={values.showPassword ? "text" : "password"}
-                  value={values.password}
-                  onChange={handleChange("password")}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {values.showPassword ? (
-                          <VisibilityOff />
-                        ) : (
-                          <Visibility />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Password"
-                />
-              </FormControl>
-            </Box>
-
-            <Box>
-              <Typography sx={{ padding: 1 }}>Eingeloggt als:</Typography>
-              <Typography sx={{ padding: 1 }}>
-                Vorname:{` `}
-                {users
-                  .filter((user) => user.email === currentEmail)
-                  .map((user) => user.firstname)}
-              </Typography>
-              <Typography sx={{ padding: 1 }}>
-                Nachname:{` `}
-                {users
-                  .filter((user) => user.email === currentEmail)
-                  .map((user) => user.lastname)}
-              </Typography>
-              <Typography sx={{ padding: 1 }}>
-                E-Mail:{` `}
-                {currentEmail}
-              </Typography>
-            </Box>
+            {editAccount ? (
+              <Box>
+                <Typography sx={{ padding: 1 }}>Account bearbeiten:</Typography>
+                <TextField
+                  sx={{ margin: 1, padding: 1, display: "block" }}
+                  defaultValue={users
+                    .filter((user) => user.email === currentEmail)
+                    .map((user) => user.firstname)}
+                  label="Vorname"
+                ></TextField>
+                <TextField
+                  sx={{ margin: 1, padding: 1, display: "block" }}
+                  defaultValue={users
+                    .filter((user) => user.email === currentEmail)
+                    .map((user) => user.lastname)}
+                  label="Nachname"
+                ></TextField>
+                <TextField
+                  sx={{ margin: 1, padding: 1, display: "block" }}
+                  label="E-Mail"
+                  defaultValue={currentEmail}
+                ></TextField>
+                <FormControl
+                  sx={{ margin: 1, padding: 1, display: "block" }}
+                  variant="outlined"
+                >
+                  <InputLabel htmlFor="outlined-adornment-password">
+                    Password
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-password"
+                    type={values.showPassword ? "text" : "password"}
+                    value={values.password}
+                    onChange={handleChange("password")}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {values.showPassword ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="Password"
+                  />
+                </FormControl>
+              </Box>
+            ) : (
+              <Box>
+                <Typography sx={{ padding: 1 }}>Eingeloggt als:</Typography>
+                <Typography sx={{ padding: 1 }}>
+                  Vorname:{` `}
+                  {users
+                    .filter((user) => user.email === currentEmail)
+                    .map((user) => user.firstname)}
+                </Typography>
+                <Typography sx={{ padding: 1 }}>
+                  Nachname:{` `}
+                  {users
+                    .filter((user) => user.email === currentEmail)
+                    .map((user) => user.lastname)}
+                </Typography>
+                <Typography sx={{ padding: 1 }}>
+                  E-Mail:{` `}
+                  {currentEmail}
+                </Typography>
+              </Box>
+            )}
 
             <div style={{ marginTop: 10 }}>
               <Button
@@ -149,7 +151,7 @@ function Account() {
               </Button>
               <Button
                 variant="contained"
-                onClick={() => handleAccountSubmit}
+                onClick={handleAccountSubmit}
                 sx={{ boxShadow: 0, ml: 2 }}
               >
                 Save

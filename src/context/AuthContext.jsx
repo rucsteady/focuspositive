@@ -16,6 +16,18 @@ export function AuthProvider({ children }) {
   const [journals, setJournals] = useState([]);
   let navigate = useNavigate();
 
+  useEffect(() => {
+    getChats();
+    getUsers();
+    getJournals();
+  }, []);
+
+  useEffect(() => {
+    setCurrentUser(users.filter((user) => user.email === currentEmail));
+  }, [users, currentEmail]);
+
+  console.log(currentUser)
+
   const getJournals = async () => {
     await axios
       .get("https://fpjsonserver.herokuapp.com/journals")
@@ -34,16 +46,7 @@ export function AuthProvider({ children }) {
       .then(({ data }) => setRandomChats(data));
   };
 
-  useEffect(() => {
-    getChats();
-    getUsers();
-    getJournals();
-  }, []);
-
-  useEffect(() => {
-    setCurrentUser(users.filter((user) => user.email === currentEmail));
-  }, [users, currentEmail]);
-
+ 
   const handleLogin = async (e) => {
     e.preventDefault();
     await axios
