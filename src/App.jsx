@@ -15,7 +15,7 @@ import RandomChatCreateFinal from "./components/chat/RandomChatCreateFinal";
 import Countdown from "react-countdown";
 
 function App() {
-  const { userLoggedIn } = useContext(AuthContext);
+  const { userLoggedIn, users } = useContext(AuthContext);
 
   const CountdownWrapper = () => {
     return (
@@ -25,6 +25,8 @@ function App() {
     );
   };
   const MemoCountdown = React.memo(CountdownWrapper);
+
+  console.log(users);
 
   return (
     <>
