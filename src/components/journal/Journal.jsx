@@ -49,9 +49,13 @@ function Journal() {
   };
 
   const onDeleteJournal = async () => {
-    await axios.delete(
-      `https://fpjsonserver.herokuapp.com/journals/${activeJournal}`
+    const confirm = window.confirm(
+      "Sicher, dass du diesen Eintrag löschen möchtest?"
     );
+    confirm &&
+      (await axios.delete(
+        `https://fpjsonserver.herokuapp.com/journals/${activeJournal}`
+      ));
     setJournals(journals.filter(({ id }) => id !== activeJournal));
   };
 
