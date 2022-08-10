@@ -5,6 +5,7 @@ import {
   Container,
   Divider,
   FormControl,
+  FormLabel,
   IconButton,
   InputAdornment,
   InputLabel,
@@ -60,56 +61,60 @@ function Account() {
 
             {editAccount ? (
               <Box>
-                <Typography sx={{ padding: 1 }}>Account bearbeiten:</Typography>
-                <TextField
-                  sx={{ margin: 1, padding: 1, display: "block" }}
-                  defaultValue={users
-                    .filter((user) => user.email === currentEmail)
-                    .map((user) => user.firstname)}
-                  label="Vorname"
-                ></TextField>
-                <TextField
-                  sx={{ margin: 1, padding: 1, display: "block" }}
-                  defaultValue={users
-                    .filter((user) => user.email === currentEmail)
-                    .map((user) => user.lastname)}
-                  label="Nachname"
-                ></TextField>
-                <TextField
-                  sx={{ margin: 1, padding: 1, display: "block" }}
-                  label="E-Mail"
-                  defaultValue={currentEmail}
-                ></TextField>
                 <FormControl
-                  sx={{ margin: 1, padding: 1, display: "block" }}
+                  sx={{ margin: 1, padding: 1}}
                   variant="outlined"
                 >
-                  <InputLabel htmlFor="outlined-adornment-password">
-                    Password
-                  </InputLabel>
-                  <OutlinedInput
-                    id="outlined-adornment-password"
-                    type={values.showPassword ? "text" : "password"}
-                    value={values.password}
-                    onChange={handleChange("password")}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end"
-                        >
-                          {values.showPassword ? (
-                            <VisibilityOff />
-                          ) : (
-                            <Visibility />
-                          )}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                    label="Password"
-                  />
+                <FormLabel sx={{ padding: 1 }}>Account bearbeiten:</FormLabel>
+                
+                  <TextField
+                    sx={{ margin: 1, padding: 1 }}
+                    defaultValue={users
+                      .filter((user) => user.email === currentEmail)
+                      .map((user) => user.firstname)}
+                    label="Vorname"
+                  ></TextField>
+                  <TextField
+                    sx={{ margin: 1, padding: 1 }}
+                    defaultValue={users
+                      .filter((user) => user.email === currentEmail)
+                      .map((user) => user.lastname)}
+                    label="Nachname"
+                  ></TextField>
+                  <TextField
+                    sx={{ margin: 1, padding: 1 }}
+                    label="E-Mail"
+                    defaultValue={currentEmail}
+                    onChange={handleChange}
+                  ></TextField>
+
+                  <FormControl>
+                    <InputLabel htmlFor="outlined-adornment-password">
+                      Password
+                    </InputLabel>
+                    <OutlinedInput
+                      id="outlined-adornment-password"
+                      label="Password"
+                      type={values.showPassword ? "text" : "password"}
+                      value={values.password}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {values.showPassword ? (
+                              <VisibilityOff />
+                            ) : (
+                              <Visibility />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                    />
+                  </FormControl>
                 </FormControl>
               </Box>
             ) : (
