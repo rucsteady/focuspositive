@@ -33,6 +33,12 @@ function Account() {
     setValues({ ...values, [prop]: event.target.value });
   };
 
+  const handleAccountSubmit = () => {
+    setEditAccount(true);
+  };
+
+  console.log(editAccount);
+
   const handleClickShowPassword = () => {
     setValues({
       ...values,
@@ -133,6 +139,20 @@ function Account() {
                 sx={{ boxShadow: 0 }}
               >
                 Logout
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => setEditAccount(true)}
+                sx={{ boxShadow: 0, ml: 2 }}
+              >
+                Edit
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => handleAccountSubmit}
+                sx={{ boxShadow: 0, ml: 2 }}
+              >
+                Save
               </Button>
             </div>
           </Box>
