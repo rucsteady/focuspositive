@@ -28,6 +28,7 @@ function RandomChat({
   activeRoom,
   activeRandomChat,
   MemoCountdown,
+  users,
 }) {
   const [message, setMessage] = useState("");
   const [room, setRoom] = useState("");

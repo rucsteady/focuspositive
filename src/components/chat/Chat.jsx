@@ -7,7 +7,7 @@ import RandomChatInfo from "./RandomChatInfo";
 import RandomChatSearch from "./RandomChatSearch";
 import RandomChatCreate from "./RandomChatCreate";
 
-function Chat({ MemoCountdown }) {
+function Chat({ MemoCountdown, users }) {
   const { currentUser, randomChats } = useContext(AuthContext);
   const [showChatInfo, setShowChatInfo] = useState(true);
   const [showChatSearch, setShowChatSearch] = useState(false);
@@ -78,6 +78,7 @@ function Chat({ MemoCountdown }) {
             <Grid item xs={12} md={5} xl={7}>
               {showRandomChat && (
                 <RandomChat
+                users={users}
                   chatUser={chatUser}
                   activeRoom={activeRoom}
                   setShowRandomChat={setShowRandomChat}

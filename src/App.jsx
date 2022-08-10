@@ -26,7 +26,6 @@ function App() {
   };
   const MemoCountdown = React.memo(CountdownWrapper);
 
-  console.log(users);
 
   return (
     <>
@@ -41,7 +40,7 @@ function App() {
           {userLoggedIn && (
             <Route
               path="chat"
-              element={<Chat MemoCountdown={MemoCountdown} />}
+              element={<Chat users={users} MemoCountdown={MemoCountdown} />}
             />
           )}
           {userLoggedIn && <Route path="journal" element={<Journal />} />}
