@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import Button from "@mui/material/Button";
 import {
@@ -35,22 +35,25 @@ function Account() {
 
   const userId = users
     .filter((user) => user.email === currentEmail)
-    .map((user) => user.id).toString();
+    .map((user) => user.id)
+    .toString();
 
   const getValues = () => {
-    axios.get(`https://fpjsonserver.herokuapp.com/users/${userId}`)
-    .then(({ data }) => setValues(data));
+    axios
+      .get(`https://fpjsonserver.herokuapp.com/users/${userId}`)
+      .then(({ data }) => setValues(data));
   };
 
-  console.log(userId)
+  useEffect(() => {
+    getValues();
+  }, []);
 
-  console.log(values)
-
- 
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
+
+  console.log(values);
 
   const handleAccountSubmit = () => {
     setEditAccount(false);
