@@ -48,18 +48,23 @@ function Account() {
     getValues();
   }, []);
 
-
   const handleChange = (prop) => (event) => {
+    console.log(event.target.value);
     setValues({ ...values, [prop]: event.target.value });
   };
 
-  console.log(values);
-
-  const handleAccountSubmit = () => {
-    setEditAccount(false);
+  const handleChanged = (event) => {
+    console.log(event.target.value);
+    setValues(event.target.value);
   };
 
-  console.log(editAccount);
+  const handleAccountSubmit = () => {
+    axios.put(`https://fpjsonserver.herokuapp.com/users/${userId}`, {
+      values,
+    });
+
+    setEditAccount(false);
+  };
 
   const handleClickShowPassword = () => {
     setValues({
@@ -90,6 +95,7 @@ function Account() {
                         .filter((user) => user.email === currentEmail)
                         .map((user) => user.firstname)}
                       label="Vorname"
+                      onChange={handleChanged}
                     ></TextField>
                     <TextField
                       sx={{ margin: 1, padding: 1 }}
@@ -97,12 +103,13 @@ function Account() {
                         .filter((user) => user.email === currentEmail)
                         .map((user) => user.lastname)}
                       label="Nachname"
+                      onChange={handleChanged}
                     ></TextField>
                     <TextField
                       sx={{ margin: 1, padding: 1 }}
                       label="E-Mail"
                       defaultValue={currentEmail}
-                      onChange={handleChange}
+                      onChange={handleChanged}
                     ></TextField>
                   </FormGroup>
 

@@ -26,7 +26,7 @@ export function AuthProvider({ children }) {
     setCurrentUser(users.filter((user) => user.email === currentEmail));
   }, [users, currentEmail]);
 
-  console.log(currentUser)
+  console.log(currentUser);
 
   const getJournals = async () => {
     await axios
@@ -46,24 +46,27 @@ export function AuthProvider({ children }) {
       .then(({ data }) => setRandomChats(data));
   };
 
- 
   const handleLogin = async (e) => {
     e.preventDefault();
-    await axios
-      .get("https://fpjsonserver.herokuapp.com/users", {
-        email,
-        password,
-      })
-      .then((response) => {
-        setCurrentUser(users.filter((user) => user.email === currentEmail));
-        setCurrentEmail(email);
-        setError("");
-        setEmail("");
-        setPassword("");
-        setUserLoggedIn(true);
-        navigate("/");
-      })
-      .catch((err) => setError(err.message));
+    if (users.filter((user) => user.email === currentEmail)) {
+      await axios
+        .get("https://fpjsonserver.herokuapp.com/users", {
+          email,
+          password,
+        })
+        .then((response) => {
+          setCurrentUser(users.filter((user) => user.email === currentEmail));
+          setCurrentEmail(email);
+          setError("");
+          setEmail("");
+          setPassword("");
+          setUserLoggedIn(true);
+          navigate("/");
+        })
+        .catch((err) => setError(err.message));
+    } else {
+      console.log("works");
+    }
   };
 
   const handleLogOut = () => {
@@ -90,7 +93,7 @@ export function AuthProvider({ children }) {
         currentUser,
         randomChats,
         journals,
-        setJournals
+        setJournals,
       }}
     >
       {children}
