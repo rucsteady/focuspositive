@@ -6,7 +6,6 @@ import {
   Divider,
   FormControl,
   FormGroup,
-  FormLabel,
   IconButton,
   InputAdornment,
   InputLabel,
@@ -24,6 +23,11 @@ function Account() {
   const { users, handleLogOut, currentEmail } = useContext(AuthContext);
   const [editAccount, setEditAccount] = useState(false);
 
+  const [email, setEmail] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [password, setPassword] = useState("");
+
   const [values, setValues] = useState({
     id: "",
     email: "",
@@ -38,33 +42,31 @@ function Account() {
     .map((user) => user.id)
     .toString();
 
+  useEffect(() => {
+    getValues();
+  }, []);
+
   const getValues = () => {
     axios
       .get(`https://fpjsonserver.herokuapp.com/users/${userId}`)
       .then(({ data }) => setValues(data));
   };
 
-  useEffect(() => {
-    getValues();
-  }, []);
-
-  const handleChange = (prop) => (event) => {
-    console.log(event.target.value);
-    setValues({ ...values, [prop]: event.target.value });
+  const data = {
+    id: userId,
+    email: email,
+    firstname: firstname,
+    lastname: lastname,
   };
 
-  const handleChanged = (event) => {
-    console.log(event.target.value);
-    setValues(event.target.value);
-  };
+  console.log(data);
 
   const handleAccountSubmit = () => {
-    axios.put(`https://fpjsonserver.herokuapp.com/users/${userId}`, {
-      values,
-    });
+    axios.put(`https://fpjsonserver.herokuapp.com/users/${userId}`, data);
 
-    setEditAccount(false);
+    // setEditAccount(false);
   };
+  console.log(data);
 
   const handleClickShowPassword = () => {
     setValues({
@@ -95,7 +97,7 @@ function Account() {
                         .filter((user) => user.email === currentEmail)
                         .map((user) => user.firstname)}
                       label="Vorname"
-                      onChange={handleChanged}
+                      onChange={(e) => setFirstname(e.target.value)}
                     ></TextField>
                     <TextField
                       sx={{ margin: 1, padding: 1 }}
@@ -103,13 +105,13 @@ function Account() {
                         .filter((user) => user.email === currentEmail)
                         .map((user) => user.lastname)}
                       label="Nachname"
-                      onChange={handleChanged}
+                      onChange={(e) => setLastname(e.target.value)}
                     ></TextField>
                     <TextField
                       sx={{ margin: 1, padding: 1 }}
                       label="E-Mail"
                       defaultValue={currentEmail}
-                      onChange={handleChanged}
+                      onChange={(e) => setEmail(e.target.value)}
                     ></TextField>
                   </FormGroup>
 

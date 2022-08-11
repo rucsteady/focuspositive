@@ -78,7 +78,7 @@ function Chat({ MemoCountdown, users }) {
             <Grid item xs={12} md={5} xl={7}>
               {showRandomChat && (
                 <RandomChat
-                users={users}
+                  users={users}
                   chatUser={chatUser}
                   activeRoom={activeRoom}
                   setShowRandomChat={setShowRandomChat}
