@@ -5,6 +5,7 @@ import {
   Container,
   Divider,
   FormControl,
+  FormGroup,
   FormLabel,
   IconButton,
   InputAdornment,
@@ -17,18 +18,35 @@ import {
 import { Box } from "@mui/system";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import axios from "axios";
 
 function Account() {
   const { users, handleLogOut, currentEmail } = useContext(AuthContext);
   const [editAccount, setEditAccount] = useState(false);
 
   const [values, setValues] = useState({
-    amount: "",
+    id: "",
+    email: "",
     password: "",
-    weight: "",
-    weightRange: "",
+    firstname: "",
+    lastname: "",
     showPassword: false,
   });
+
+  const userId = users
+    .filter((user) => user.email === currentEmail)
+    .map((user) => user.id).toString();
+
+  const getValues = () => {
+    axios.get(`https://fpjsonserver.herokuapp.com/users/${userId}`)
+    .then(({ data }) => setValues(data));
+  };
+
+  console.log(userId)
+
+  console.log(values)
+
+ 
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -61,40 +79,35 @@ function Account() {
 
             {editAccount ? (
               <Box>
-                <FormControl
-                  sx={{ margin: 1, padding: 1}}
-                  variant="outlined"
-                >
-                <FormLabel sx={{ padding: 1 }}>Account bearbeiten:</FormLabel>
-                
-                  <TextField
-                    sx={{ margin: 1, padding: 1 }}
-                    defaultValue={users
-                      .filter((user) => user.email === currentEmail)
-                      .map((user) => user.firstname)}
-                    label="Vorname"
-                  ></TextField>
-                  <TextField
-                    sx={{ margin: 1, padding: 1 }}
-                    defaultValue={users
-                      .filter((user) => user.email === currentEmail)
-                      .map((user) => user.lastname)}
-                    label="Nachname"
-                  ></TextField>
-                  <TextField
-                    sx={{ margin: 1, padding: 1 }}
-                    label="E-Mail"
-                    defaultValue={currentEmail}
-                    onChange={handleChange}
-                  ></TextField>
+                <FormControl sx={{ margin: 1, padding: 1 }} variant="outlined">
+                  <FormGroup row>
+                    <TextField
+                      sx={{ margin: 1, padding: 1 }}
+                      defaultValue={users
+                        .filter((user) => user.email === currentEmail)
+                        .map((user) => user.firstname)}
+                      label="Vorname"
+                    ></TextField>
+                    <TextField
+                      sx={{ margin: 1, padding: 1 }}
+                      defaultValue={users
+                        .filter((user) => user.email === currentEmail)
+                        .map((user) => user.lastname)}
+                      label="Nachname"
+                    ></TextField>
+                    <TextField
+                      sx={{ margin: 1, padding: 1 }}
+                      label="E-Mail"
+                      defaultValue={currentEmail}
+                      onChange={handleChange}
+                    ></TextField>
+                  </FormGroup>
 
                   <FormControl>
-                    <InputLabel htmlFor="outlined-adornment-password">
-                      Password
-                    </InputLabel>
+                    <InputLabel htmlFor="password">Passwort</InputLabel>
                     <OutlinedInput
-                      id="outlined-adornment-password"
-                      label="Password"
+                      id="password"
+                      label="Passwort"
                       type={values.showPassword ? "text" : "password"}
                       value={values.password}
                       endAdornment={
