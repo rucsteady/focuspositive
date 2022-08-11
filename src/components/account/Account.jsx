@@ -43,14 +43,14 @@ function Account() {
     .toString();
 
   useEffect(() => {
-    getValues();
-  }, []);
-
-  const getValues = () => {
     axios
       .get(`https://fpjsonserver.herokuapp.com/users/${userId}`)
-      .then(({ data }) => setValues(data));
-  };
+      .then((res) => {
+        setEmail(res.data.email);
+        setFirstname(res.data.firstname);
+        setLastname(res.data.lastname);
+      });
+  }, []);
 
   const data = {
     id: userId,
@@ -59,9 +59,10 @@ function Account() {
     lastname: lastname,
   };
 
-  console.log(data);
+  console.log(userId);
 
-  const handleAccountSubmit = () => {
+  const handleAccountSubmit = (e) => {
+    e.preventDefault();
     axios.put(`https://fpjsonserver.herokuapp.com/users/${userId}`, data);
 
     // setEditAccount(false);
