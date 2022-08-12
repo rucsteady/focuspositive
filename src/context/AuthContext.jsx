@@ -27,8 +27,6 @@ export function AuthProvider({ children }) {
     setCurrentUser(users.filter((user) => user.email === currentEmail));
   }, [users, currentEmail]);
 
-  console.log(currentUser);
-
   const getJournals = async () => {
     await axios
       .get("https://fpjsonserver.herokuapp.com/journals")

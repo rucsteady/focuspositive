@@ -11,7 +11,8 @@ import {
   Modal,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import "./RandomChatSearchStyle.css";
 
@@ -23,11 +24,25 @@ function RandomChatSearch({
   setActiveRandomChat,
   randomChats,
 }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const randomChatItems = randomChats.map((randomChatDto, index) => (
+  const [chats, setChats] = useState([]);
+
+  useEffect(() => {
+    const getChats = async () => {
+      await axios
+        .get("https://fpjsonserver.herokuapp.com/chats")
+        .then(({ data }) => setChats(data));
+    };
+
+    getChats();
+  }, [randomChats]);
+
+  console.log(chats);
+
+  const randomChatItems = chats.map((randomChatDto, index) => (
     <ListItem key={index} sx={{ paddingBottom: 0 }}>
       <ListItemButton sx={{ padding: 0 }}>
         <Card
