@@ -6,9 +6,10 @@ import RandomChat from "./RandomChat";
 import RandomChatInfo from "./RandomChatInfo";
 import RandomChatSearch from "./RandomChatSearch";
 import RandomChatCreate from "./RandomChatCreate";
+import axios from "axios";
 
-function Chat({ MemoCountdown }) {
-  const { currentUser, randomChats } = useContext(AuthContext);
+function Chat({ MemoCountdown, users }) {
+  const { currentUser, randomChats, currentEmail } = useContext(AuthContext);
   const [showChatInfo, setShowChatInfo] = useState(true);
   const [showChatSearch, setShowChatSearch] = useState(false);
   const [showChatNew, setShowChatNew] = useState(false);
@@ -16,6 +17,21 @@ function Chat({ MemoCountdown }) {
   const [activeRoom, setActiveRoom] = useState(0);
   const [activeRandomChat, setActiveRandomChat] = useState();
   const [chatUser, setChatUser] = useState({});
+  const [user, setUser] = useState("");
+
+  const userId = users
+    .filter((user) => user.email === currentEmail)
+    .map((user) => user.id)
+    .toString();
+
+  useEffect(() => {
+    const getUser = async () => {
+      await axios
+        .get(`https://fpjsonserver.herokuapp.com/users/${userId}`)
+        .then(({ data }) => setUser(data));
+    };
+    getUser();
+  }, [userId]);
 
   const handleShowChatInfo = () => {
     setShowChatNew(false);
@@ -71,6 +87,7 @@ function Chat({ MemoCountdown }) {
                   setShowChatSearch={setShowChatSearch}
                   setActiveRandomChat={setActiveRandomChat}
                   randomChats={randomChats}
+                  user={user}
                 />
               )}
             </Grid>
@@ -78,12 +95,14 @@ function Chat({ MemoCountdown }) {
             <Grid item xs={12} md={5} xl={7}>
               {showRandomChat && (
                 <RandomChat
+                  users={users}
                   chatUser={chatUser}
                   activeRoom={activeRoom}
                   setShowRandomChat={setShowRandomChat}
                   setShowChatInfo={setShowChatInfo}
                   activeRandomChat={activeRandomChat}
                   MemoCountdown={MemoCountdown}
+                  user={user}
                 />
               )}
             </Grid>

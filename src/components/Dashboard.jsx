@@ -1,11 +1,27 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./DashboardStyle.css";
 import AuthContext from "../context/AuthContext";
 import { NavLink } from "react-router-dom";
 import { Box, Container, Paper, Typography } from "@mui/material";
+import axios from "axios";
 
 function Dashboard() {
   const { userLoggedIn, users, currentEmail } = useContext(AuthContext);
+  const [user, setUser] = useState("");
+
+  const userId = users
+    .filter((user) => user.email === currentEmail)
+    .map((user) => user.id)
+    .toString();
+
+  useEffect(() => {
+    const getUser = async () => {
+      await axios
+        .get(`https://fpjsonserver.herokuapp.com/users/${userId}`)
+        .then(({ data }) => setUser(data));
+    };
+    getUser();
+  }, [userId]);
 
   return (
     <div className="dashboard">
@@ -14,10 +30,7 @@ function Dashboard() {
           <Paper elevation={0} sx={{ padding: 4 }}>
             <Typography variant="h6">
               Herzlich Willkommen{` `}
-              {users
-                .filter((user) => user.email === currentEmail)
-                .map((user) => user.firstname)}
-              !
+              {user.firstname}!
               <br />
               <br />
             </Typography>

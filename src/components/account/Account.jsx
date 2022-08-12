@@ -1,47 +1,67 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import Button from "@mui/material/Button";
 import {
   Container,
   Divider,
   FormControl,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
+  FormGroup,
   Paper,
   TextField,
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import axios from "axios";
 
 function Account() {
   const { users, handleLogOut, currentEmail } = useContext(AuthContext);
   const [editAccount, setEditAccount] = useState(false);
 
-  const [values, setValues] = useState({
-    amount: "",
-    password: "",
-    weight: "",
-    weightRange: "",
-    showPassword: false,
-  });
+  const [email, setEmail] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [password, setPassword] = useState("");
+  const [user, setUser] = useState("");
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+  const userId = users
+    .filter((user) => user.email === currentEmail)
+    .map((user) => user.id)
+    .toString();
+
+  useEffect(() => {
+    const getUser = async () => {
+      await axios
+        .get(`https://fpjsonserver.herokuapp.com/users/${userId}`)
+        .then(({ data }) => setUser(data));
+    };
+    getUser();
+  }, [userId]);
+
+  useEffect(() => {
+    axios
+      .get(`https://fpjsonserver.herokuapp.com/users/${userId}`)
+      .then((res) => {
+        setEmail(res.data.email);
+        setFirstname(res.data.firstname);
+        setLastname(res.data.lastname);
+        setPassword(res.data.password);
+      });
+  }, [users, userId]);
+
+  const data = {
+    id: userId,
+    email: email,
+    firstname: firstname,
+    lastname: lastname,
+    password: password,
   };
 
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
-  };
+  console.log("password", user.password);
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
+  const handleAccountSubmit = async () => {
+    await axios.put(`https://fpjsonserver.herokuapp.com/users/${userId}`, data);
+
+    setEditAccount(false);
   };
 
   return (
@@ -52,79 +72,54 @@ function Account() {
             <Typography variant="h5">Account</Typography>
             <Divider sx={{ padding: 1 }} />
 
-            <Box>
-              <Typography sx={{ padding: 1 }}>Account bearbeiten:</Typography>
-              <TextField
-                sx={{ margin: 1, padding: 1, display: "block" }}
-                defaultValue={users
-                  .filter((user) => user.email === currentEmail)
-                  .map((user) => user.firstname)}
-                label="Vorname"
-              ></TextField>
-              <TextField
-                sx={{ margin: 1, padding: 1, display: "block" }}
-                defaultValue={users
-                  .filter((user) => user.email === currentEmail)
-                  .map((user) => user.lastname)}
-                label="Nachname"
-              ></TextField>
-              <TextField
-                sx={{ margin: 1, padding: 1, display: "block" }}
-                label="E-Mail"
-                defaultValue={currentEmail}
-              ></TextField>
-              <FormControl
-                sx={{ margin: 1, padding: 1, display: "block" }}
-                variant="outlined"
-              >
-                <InputLabel htmlFor="outlined-adornment-password">
-                  Password
-                </InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  type={values.showPassword ? "text" : "password"}
-                  value={values.password}
-                  onChange={handleChange("password")}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {values.showPassword ? (
-                          <VisibilityOff />
-                        ) : (
-                          <Visibility />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Password"
-                />
-              </FormControl>
-            </Box>
-
-            <Box>
-              <Typography sx={{ padding: 1 }}>Eingeloggt als:</Typography>
-              <Typography sx={{ padding: 1 }}>
-                Vorname:{` `}
-                {users
-                  .filter((user) => user.email === currentEmail)
-                  .map((user) => user.firstname)}
-              </Typography>
-              <Typography sx={{ padding: 1 }}>
-                Nachname:{` `}
-                {users
-                  .filter((user) => user.email === currentEmail)
-                  .map((user) => user.lastname)}
-              </Typography>
-              <Typography sx={{ padding: 1 }}>
-                E-Mail:{` `}
-                {currentEmail}
-              </Typography>
-            </Box>
+            {editAccount ? (
+              <Box>
+                <FormControl sx={{ margin: 1, padding: 1 }} variant="outlined">
+                  <FormGroup row>
+                    <TextField
+                      sx={{ margin: 1, padding: 1 }}
+                      defaultValue={user.firstname}
+                      label="Vorname"
+                      onChange={(e) => setFirstname(e.target.value)}
+                    ></TextField>
+                    <TextField
+                      sx={{ margin: 1, padding: 1 }}
+                      defaultValue={user.lastname}
+                      label="Nachname"
+                      onChange={(e) => setLastname(e.target.value)}
+                    ></TextField>
+                    <TextField
+                      sx={{ margin: 1, padding: 1 }}
+                      label="E-Mail"
+                      defaultValue={user.email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    ></TextField>
+                    <TextField
+                      sx={{ margin: 1, padding: 1 }}
+                      label="Passwort"
+                      defaultValue={user.password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    ></TextField>
+                  </FormGroup>
+                </FormControl>
+              </Box>
+            ) : (
+              <Box>
+                <Typography sx={{ padding: 1 }}>Eingeloggt als:</Typography>
+                <Typography sx={{ padding: 1 }}>
+                  Vorname:{` `}
+                  {user.firstname}
+                </Typography>
+                <Typography sx={{ padding: 1 }}>
+                  Nachname:{` `}
+                  {user.lastname}
+                </Typography>
+                <Typography sx={{ padding: 1 }}>
+                  E-Mail:{` `}
+                  {user.email}
+                </Typography>
+              </Box>
+            )}
 
             <div style={{ marginTop: 10 }}>
               <Button
@@ -133,6 +128,20 @@ function Account() {
                 sx={{ boxShadow: 0 }}
               >
                 Logout
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => setEditAccount(true)}
+                sx={{ boxShadow: 0, ml: 2 }}
+              >
+                Edit
+              </Button>
+              <Button
+                variant="contained"
+                onClick={handleAccountSubmit}
+                sx={{ boxShadow: 0, ml: 2 }}
+              >
+                Save
               </Button>
             </div>
           </Box>
