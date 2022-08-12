@@ -29,6 +29,7 @@ function RandomChat({
   activeRandomChat,
   MemoCountdown,
   users,
+  user,
 }) {
   const [message, setMessage] = useState("");
   const [room, setRoom] = useState("");
@@ -41,7 +42,7 @@ function RandomChat({
   };
 
   const sendMessage = async () => {
-    if (chatUser && message !== "") {
+    if (user && message !== "") {
       const messageData = {
         key: nanoid(),
         room: room,
@@ -80,7 +81,7 @@ function RandomChat({
   const listChatMessages = chatMessages.map((chatMessageDto, index) => (
     <ListItem key={index}>
       <ListItemText
-        primary={`${chatMessageDto.user + ":"} ${chatMessageDto.message}`}
+        primary={`${user.firstname + ":"} ${chatMessageDto.message}`}
       />
     </ListItem>
   ));
@@ -107,7 +108,7 @@ function RandomChat({
 
           <Box p={3}>
             <Typography variant="h6" gutterBottom>
-              Verbunden: {activeRandomChat.name} von {chatUser} mit{" "}
+              Verbunden: {activeRandomChat.name} von {user.firstname} mit{" "}
               {activeRandomChat.user2}
             </Typography>
             <Divider />
