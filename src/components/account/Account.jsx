@@ -6,17 +6,11 @@ import {
   Divider,
   FormControl,
   FormGroup,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
   Paper,
   TextField,
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
 
 function Account() {
@@ -26,17 +20,8 @@ function Account() {
   const [email, setEmail] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
-  // const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
-
-  const [values, setValues] = useState({
-    id: "",
-    email: "",
-    password: "",
-    firstname: "",
-    lastname: "",
-    showPassword: false,
-  });
 
   const userId = users
     .filter((user) => user.email === currentEmail)
@@ -44,15 +29,13 @@ function Account() {
     .toString();
 
   useEffect(() => {
+    const getUser = async () => {
+      await axios
+        .get(`https://fpjsonserver.herokuapp.com/users/${userId}`)
+        .then(({ data }) => setUser(data));
+    };
     getUser();
-    console.log(user);
-  }, [editAccount]);
-
-  const getUser = async () => {
-    await axios
-      .get(`https://fpjsonserver.herokuapp.com/users/${userId}`)
-      .then(({ data }) => setUser(data));
-  };
+  }, [userId]);
 
   useEffect(() => {
     axios
@@ -61,31 +44,24 @@ function Account() {
         setEmail(res.data.email);
         setFirstname(res.data.firstname);
         setLastname(res.data.lastname);
+        setPassword(res.data.password);
       });
-  }, [users]);
+  }, [users, userId]);
 
   const data = {
     id: userId,
     email: email,
     firstname: firstname,
     lastname: lastname,
+    password: password,
   };
+
+  console.log("password", user.password);
 
   const handleAccountSubmit = async () => {
     await axios.put(`https://fpjsonserver.herokuapp.com/users/${userId}`, data);
 
     setEditAccount(false);
-  };
-
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
   };
 
   return (
@@ -118,33 +94,13 @@ function Account() {
                       defaultValue={user.email}
                       onChange={(e) => setEmail(e.target.value)}
                     ></TextField>
-                  </FormGroup>
-
-                  <FormControl>
-                    <InputLabel htmlFor="password">Passwort</InputLabel>
-                    <OutlinedInput
-                      id="password"
+                    <TextField
+                      sx={{ margin: 1, padding: 1 }}
                       label="Passwort"
-                      type={values.showPassword ? "text" : "password"}
-                      value={values.password}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            edge="end"
-                          >
-                            {values.showPassword ? (
-                              <VisibilityOff />
-                            ) : (
-                              <Visibility />
-                            )}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                    />
-                  </FormControl>
+                      defaultValue={user.password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    ></TextField>
+                  </FormGroup>
                 </FormControl>
               </Box>
             ) : (

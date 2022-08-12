@@ -25,15 +25,13 @@ function Chat({ MemoCountdown, users }) {
     .toString();
 
   useEffect(() => {
+    const getUser = async () => {
+      await axios
+        .get(`https://fpjsonserver.herokuapp.com/users/${userId}`)
+        .then(({ data }) => setUser(data));
+    };
     getUser();
-    console.log(user);
-  }, [showChatInfo]);
-
-  const getUser = async () => {
-    await axios
-      .get(`https://fpjsonserver.herokuapp.com/users/${userId}`)
-      .then(({ data }) => setUser(data));
-  };
+  }, [userId]);
 
   const handleShowChatInfo = () => {
     setShowChatNew(false);
