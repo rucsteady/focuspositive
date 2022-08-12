@@ -14,6 +14,7 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState("");
   const [randomChats, setRandomChats] = useState([]);
   const [journals, setJournals] = useState([]);
+  const [user, setUser] = useState("");
   let navigate = useNavigate();
 
   useEffect(() => {
