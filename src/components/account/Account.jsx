@@ -35,7 +35,7 @@ function Account() {
         .then(({ data }) => setUser(data));
     };
     getUser();
-  }, [userId]);
+  }, [editAccount]);
 
   useEffect(() => {
     axios
