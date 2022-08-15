@@ -59,7 +59,7 @@ function RandomChatSearch({
               setActiveRoom(randomChatDto.room);
               setActiveRandomChat(randomChatDto);
             } else if (randomChatDto.isOpen) {
-              handleRegisterRandomChat();
+              handleRegisterRandomChat(randomChatDto);
             }
           }}
         >
@@ -126,8 +126,8 @@ function RandomChatSearch({
     setOpen(false);
   };
 
-  const handleRegisterRandomChat = () => {
-    return console.log("handle register");
+  const handleRegisterRandomChat = (randomChatDto) => {
+    return console.log("handle register", randomChatDto);
   };
 
   return !randomChats ? (
