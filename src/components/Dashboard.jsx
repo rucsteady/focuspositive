@@ -17,7 +17,7 @@ function Dashboard() {
   useEffect(() => {
     const getUser = async () => {
       await axios
-        .get(`https://fpjsonserver.herokuapp.com/users/${userId}`)
+        .get(`http://localhost:8080/users/${userId}`)
         .then(({ data }) => setUser(data));
     };
     getUser();

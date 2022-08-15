@@ -32,21 +32,19 @@ function Account() {
   useEffect(() => {
     const getUser = async () => {
       await axios
-        .get(`https://fpjsonserver.herokuapp.com/users/${userId}`)
+        .get(`http://localhost:8080/users/${userId}`)
         .then(({ data }) => setUser(data));
     };
     getUser();
   }, [editAccount, userId]);
 
   useEffect(() => {
-    axios
-      .get(`https://fpjsonserver.herokuapp.com/users/${userId}`)
-      .then((res) => {
-        setEmail(res.data.email);
-        setFirstname(res.data.firstname);
-        setLastname(res.data.lastname);
-        setPassword(res.data.password);
-      });
+    axios.get(`http://localhost:8080//users/${userId}`).then((res) => {
+      setEmail(res.data.email);
+      setFirstname(res.data.firstname);
+      setLastname(res.data.lastname);
+      setPassword(res.data.password);
+    });
   }, [users, userId]);
 
   const data = {
@@ -58,7 +56,7 @@ function Account() {
   };
 
   const handleAccountSubmit = async () => {
-    await axios.put(`https://fpjsonserver.herokuapp.com/users/${userId}`, data);
+    await axios.put(`http://localhost:8080/users/${userId}`, data);
 
     setEditAccount(false);
   };

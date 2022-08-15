@@ -20,7 +20,7 @@ function Register() {
   const register = async (e) => {
     e.preventDefault();
     await axios
-      .post("https://fpjsonserver.herokuapp.com/users", {
+      .post("http://localhost:8080/users", {
         email,
         password,
         firstname,

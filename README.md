@@ -30,6 +30,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 jsonserver runs at Port:8080
 chatServer runs at Port:3001
 
-You can Register a new Login or use an existing Account from: https://fpjsonserver.herokuapp.com/users
+You can Register a new Login or use an existing Account from: http://localhost:8080/users
 
 Live Demo on Heroku: https://focuspositive.herokuapp.com

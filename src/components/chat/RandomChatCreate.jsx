@@ -40,7 +40,7 @@ function RandomChatCreate({ handleShowChatInfo, user }) {
         },
       };
       await axios
-        .post("https://fpjsonserver.herokuapp.com/chats", newChat, customConfig)
+        .post("http://localhost:8080/chats", newChat, customConfig)
         .then((response) => {
           setError("");
           setName("");

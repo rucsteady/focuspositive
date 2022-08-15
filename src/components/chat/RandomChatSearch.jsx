@@ -34,7 +34,7 @@ function RandomChatSearch({
   useEffect(() => {
     const getChats = async () => {
       await axios
-        .get("https://fpjsonserver.herokuapp.com/chats")
+        .get("http://localhost:8080/chats")
         .then(({ data }) => setChats(data));
     };
 
@@ -130,7 +130,7 @@ function RandomChatSearch({
       randomChatDto.user2 = user.email;
       console.log("rc", randomChatDto);
       axios.put(
-        `https://fpjsonserver.herokuapp.com/chats/${randomChatDto.id}`,
+        `http://localhost:8080/chats/${randomChatDto.id}`,
         randomChatDto
       );
     } else {

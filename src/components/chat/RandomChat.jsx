@@ -19,7 +19,7 @@ import "./RandomChatStyle.css";
 import io from "socket.io-client";
 import { nanoid } from "nanoid";
 
-const socket = io.connect("https://fpchatserver.herokuapp.com/");
+const socket = io.connect("http://localhost:3001");
 
 function RandomChat({
   chatUser,

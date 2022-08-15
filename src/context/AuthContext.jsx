@@ -29,19 +29,19 @@ export function AuthProvider({ children }) {
 
   const getJournals = async () => {
     await axios
-      .get("https://fpjsonserver.herokuapp.com/journals")
+      .get("http://localhost:8080/journals")
       .then(({ data }) => setJournals(data));
   };
 
   const getUsers = async () => {
     await axios
-      .get("https://fpjsonserver.herokuapp.com/users")
+      .get("http://localhost:8080/users")
       .then(({ data }) => setUsers(data));
   };
 
   const getChats = async () => {
     await axios
-      .get("https://fpjsonserver.herokuapp.com/chats")
+      .get("http://localhost:8080/chats")
       .then(({ data }) => setRandomChats(data));
   };
 
@@ -53,7 +53,7 @@ export function AuthProvider({ children }) {
       users.filter((user) => user.email === currentEmail)
     ) {
       await axios
-        .get("https://fpjsonserver.herokuapp.com/users", {
+        .get("http://localhost:8080/users", {
           email,
           password,
         })

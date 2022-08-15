@@ -32,7 +32,7 @@ function Journal() {
 
   const createJournal = () => {
     axios
-      .post("https://fpjsonserver.herokuapp.com/journals", {
+      .post("http://localhost:8080/journals", {
         id: nanoid(),
         title: newdate,
         body: "",
@@ -53,9 +53,7 @@ function Journal() {
       "Sicher, dass du diesen Eintrag löschen möchtest?"
     );
     confirm &&
-      (await axios.delete(
-        `https://fpjsonserver.herokuapp.com/journals/${activeJournal}`
-      ));
+      (await axios.delete(`http://localhost:8080/journals/${activeJournal}`));
     setJournals(journals.filter(({ id }) => id !== activeJournal));
   };
 
@@ -74,7 +72,7 @@ function Journal() {
 
   const handleSaveJournal = async () => {
     await axios
-      .put(`https://fpjsonserver.herokuapp.com/journals/${activeJournal}`, {
+      .put(`http://localhost:8080/journals/${activeJournal}`, {
         editedJournal,
       })
 
