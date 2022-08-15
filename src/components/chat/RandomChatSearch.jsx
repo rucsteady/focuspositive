@@ -23,11 +23,12 @@ function RandomChatSearch({
   setShowChatSearch,
   setActiveRandomChat,
   randomChats,
+  user,
 }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  const [error, setError] = useState("");
   const [chats, setChats] = useState([]);
 
   useEffect(() => {
@@ -39,8 +40,6 @@ function RandomChatSearch({
 
     getChats();
   }, [randomChats]);
-
-  console.log(chats);
 
   const randomChatItems = chats.map((randomChatDto, index) => (
     <ListItem key={index} sx={{ paddingBottom: 0 }}>
@@ -127,12 +126,16 @@ function RandomChatSearch({
   };
 
   const handleRegisterRandomChat = (randomChatDto) => {
-    console.log("handle register id", randomChatDto.id);
-    console.log("handle register spread", ...randomChatDto);
-    axios.put(
-      `https://fpjsonserver.herokuapp.com/chats/${randomChatDto.id}`,
-      randomChatDto
-    );
+    if (randomChatDto.user1 !== user.email) {
+      randomChatDto.user2 = user.email;
+      console.log("rc", randomChatDto);
+      axios.put(
+        `https://fpjsonserver.herokuapp.com/chats/${randomChatDto.id}`,
+        randomChatDto
+      );
+    } else {
+      setError("Dies ist dein eigener Chat");
+    }
   };
 
   return !randomChats ? (
@@ -149,6 +152,9 @@ function RandomChatSearch({
             Hier findest du eine Liste von Random Chats, die bereits erstellt
             worden sind.
           </Typography>
+          {error && (
+            <p style={{ color: "red", marginBottom: "10px" }}>{error}</p>
+          )}
 
           <Card elevation={0}>
             <List sx={{ maxHeight: "400px", overflow: "auto", padding: 0 }}>

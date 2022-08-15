@@ -2,15 +2,11 @@ import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../../context/AuthContext";
 import axios from "axios";
 import { nanoid } from "nanoid";
-
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 
 function RandomChatCreate({ handleShowChatInfo, user }) {
-  const { currentUser } = useContext(AuthContext);
-
   const [name, setName] = useState("");
   const [topic, setTopic] = useState("");
   const [user1, setUser1] = useState("");
@@ -54,6 +50,8 @@ function RandomChatCreate({ handleShowChatInfo, user }) {
           navigate("/");
         })
         .catch((err) => setError(err));
+    } else {
+      setError("Bitte fülle die Felder korrekt aus.");
     }
   };
 
@@ -64,7 +62,7 @@ function RandomChatCreate({ handleShowChatInfo, user }) {
   return (
     <Fragment>
       <Typography variant="h6">Erstelle einen neuen Random Chat</Typography>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+
       <Grid container>
         <Grid item mt={4}>
           <Typography>
@@ -118,11 +116,13 @@ function RandomChatCreate({ handleShowChatInfo, user }) {
               </LocalizationProvider>
             </Grid>
           </Grid>
-          <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
+          {error && <p style={{ color: "red", paddingTop: "20px" }}>{error}</p>}
+          <Button type="submit" variant="contained" sx={{ mt: 2, mb: 2 }}>
             erstellen
           </Button>
         </Box>
       </Grid>
+
       <Grid item>
         <Button size="small" variant="text" onClick={handleShowChatInfo}>
           Zurück
