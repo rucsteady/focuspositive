@@ -39,7 +39,7 @@ function Account() {
   }, [editAccount, userId]);
 
   useEffect(() => {
-    axios.get(`http://localhost:8080//users/${userId}`).then((res) => {
+    axios.get(`http://localhost:8080/users/${userId}`).then((res) => {
       setEmail(res.data.email);
       setFirstname(res.data.firstname);
       setLastname(res.data.lastname);
