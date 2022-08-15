@@ -17,7 +17,7 @@ Install all dependencies in each dir with
 
 Start Service
 
-### `focuspositive` with `npm run dev`
+### `focuspositive` with `npm start`
 
 ### `jsonserver` with `npm start`
 
