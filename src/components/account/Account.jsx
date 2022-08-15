@@ -22,6 +22,7 @@ function Account() {
   const [lastname, setLastname] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
+  const [isHidden, setIsHidden] = useState(true);
 
   const userId = users
     .filter((user) => user.email === currentEmail)
@@ -35,7 +36,7 @@ function Account() {
         .then(({ data }) => setUser(data));
     };
     getUser();
-  }, [editAccount]);
+  }, [editAccount, userId]);
 
   useEffect(() => {
     axios
@@ -55,8 +56,6 @@ function Account() {
     lastname: lastname,
     password: password,
   };
-
-  console.log("password", user.password);
 
   const handleAccountSubmit = async () => {
     await axios.put(`https://fpjsonserver.herokuapp.com/users/${userId}`, data);
@@ -97,11 +96,28 @@ function Account() {
                     <TextField
                       sx={{ margin: 1, padding: 1 }}
                       label="Passwort"
+                      type={isHidden ? "password" : "text"}
                       defaultValue={user.password}
                       onChange={(e) => setPassword(e.target.value)}
                     ></TextField>
+                    {isHidden ? (
+                      <Button onClick={() => setIsHidden(false)}>
+                        Passwort anzeigen
+                      </Button>
+                    ) : (
+                      <Button onClick={() => setIsHidden(true)}>
+                        Passwort verbergen
+                      </Button>
+                    )}
                   </FormGroup>
                 </FormControl>
+                <Button
+                  variant="contained"
+                  onClick={handleAccountSubmit}
+                  sx={{ boxShadow: 0, ml: 2 }}
+                >
+                  Save
+                </Button>
               </Box>
             ) : (
               <Box>
@@ -118,6 +134,13 @@ function Account() {
                   E-Mail:{` `}
                   {user.email}
                 </Typography>
+                <Button
+                  variant="contained"
+                  onClick={() => setEditAccount(true)}
+                  sx={{ boxShadow: 0, ml: 2 }}
+                >
+                  Edit
+                </Button>
               </Box>
             )}
 
@@ -128,20 +151,6 @@ function Account() {
                 sx={{ boxShadow: 0 }}
               >
                 Logout
-              </Button>
-              <Button
-                variant="contained"
-                onClick={() => setEditAccount(true)}
-                sx={{ boxShadow: 0, ml: 2 }}
-              >
-                Edit
-              </Button>
-              <Button
-                variant="contained"
-                onClick={handleAccountSubmit}
-                sx={{ boxShadow: 0, ml: 2 }}
-              >
-                Save
               </Button>
             </div>
           </Box>
