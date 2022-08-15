@@ -22,6 +22,7 @@ function Account() {
   const [lastname, setLastname] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
+  const [isHidden, setIsHidden] = useState(true);
 
   const userId = users
     .filter((user) => user.email === currentEmail)
@@ -95,9 +96,19 @@ function Account() {
                     <TextField
                       sx={{ margin: 1, padding: 1 }}
                       label="Passwort"
+                      type={isHidden ? "password" : "text"}
                       defaultValue={user.password}
                       onChange={(e) => setPassword(e.target.value)}
                     ></TextField>
+                    {isHidden ? (
+                      <Button onClick={() => setIsHidden(false)}>
+                        Passwort anzeigen
+                      </Button>
+                    ) : (
+                      <Button onClick={() => setIsHidden(true)}>
+                        Passwort verbergen
+                      </Button>
+                    )}
                   </FormGroup>
                 </FormControl>
                 <Button
