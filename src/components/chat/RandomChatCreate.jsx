@@ -8,7 +8,7 @@ import { nanoid } from "nanoid";
 
 import React, { Fragment, useContext, useEffect, useState } from "react";
 
-function RandomChatCreate({ handleShowChatInfo }) {
+function RandomChatCreate({ handleShowChatInfo, user }) {
   const { currentUser } = useContext(AuthContext);
 
   const [name, setName] = useState("");
@@ -20,7 +20,7 @@ function RandomChatCreate({ handleShowChatInfo }) {
 
   let navigate = useNavigate();
 
-  const userMail = currentUser[0].email;
+  const userMail = user.email;
 
   const handleSubmit = async (e) => {
     e.preventDefault();

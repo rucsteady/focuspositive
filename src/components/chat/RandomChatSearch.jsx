@@ -127,7 +127,12 @@ function RandomChatSearch({
   };
 
   const handleRegisterRandomChat = (randomChatDto) => {
-    return console.log("handle register", randomChatDto);
+    console.log("handle register id", randomChatDto.id);
+    console.log("handle register spread", ...randomChatDto);
+    axios.put(
+      `https://fpjsonserver.herokuapp.com/chats/${randomChatDto.id}`,
+      randomChatDto
+    );
   };
 
   return !randomChats ? (

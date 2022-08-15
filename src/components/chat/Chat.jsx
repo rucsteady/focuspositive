@@ -52,8 +52,8 @@ function Chat({ MemoCountdown, users }) {
   };
 
   const chatUserObj = useCallback(() => {
-    setChatUser(currentUser[0].firstname);
-  }, [currentUser]);
+    setChatUser(user.firstname);
+  }, [user]);
 
   useEffect(() => {
     chatUserObj();
@@ -61,54 +61,59 @@ function Chat({ MemoCountdown, users }) {
 
   return (
     <div>
-      <Container elevation={0} maxWidth="md">
-        <Paper elevation={0} sx={{ padding: 4 }}>
-          <Grid>
-            <Grid item>
-              {showChatInfo && (
-                <RandomChatInfo
-                  handleShowChatSearch={handleShowChatSearch}
-                  handleShowChatNew={handleShowChatNew}
-                />
-              )}
+      {user ? (
+        <Container elevation={0} maxWidth="md">
+          <Paper elevation={0} sx={{ padding: 4 }}>
+            <Grid>
+              <Grid item>
+                {showChatInfo && (
+                  <RandomChatInfo
+                    handleShowChatSearch={handleShowChatSearch}
+                    handleShowChatNew={handleShowChatNew}
+                  />
+                )}
 
-              {showChatNew && (
-                <RandomChatCreate
-                  handleShowChatSearch={handleShowChatSearch}
-                  handleShowChatInfo={handleShowChatInfo}
-                />
-              )}
+                {showChatNew && (
+                  <RandomChatCreate
+                    handleShowChatSearch={handleShowChatSearch}
+                    handleShowChatInfo={handleShowChatInfo}
+                    user={user}
+                  />
+                )}
 
-              {showChatSearch && (
-                <RandomChatSearch
-                  handleShowChatInfo={handleShowChatInfo}
-                  setShowRandomChat={setShowRandomChat}
-                  setActiveRoom={setActiveRoom}
-                  setShowChatSearch={setShowChatSearch}
-                  setActiveRandomChat={setActiveRandomChat}
-                  randomChats={randomChats}
-                  user={user}
-                />
-              )}
+                {showChatSearch && (
+                  <RandomChatSearch
+                    handleShowChatInfo={handleShowChatInfo}
+                    setShowRandomChat={setShowRandomChat}
+                    setActiveRoom={setActiveRoom}
+                    setShowChatSearch={setShowChatSearch}
+                    setActiveRandomChat={setActiveRandomChat}
+                    randomChats={randomChats}
+                    user={user}
+                  />
+                )}
+              </Grid>
+
+              <Grid item xs={12} md={5} xl={7}>
+                {showRandomChat && (
+                  <RandomChat
+                    users={users}
+                    chatUser={chatUser}
+                    activeRoom={activeRoom}
+                    setShowRandomChat={setShowRandomChat}
+                    setShowChatInfo={setShowChatInfo}
+                    activeRandomChat={activeRandomChat}
+                    MemoCountdown={MemoCountdown}
+                    user={user}
+                  />
+                )}
+              </Grid>
             </Grid>
-
-            <Grid item xs={12} md={5} xl={7}>
-              {showRandomChat && (
-                <RandomChat
-                  users={users}
-                  chatUser={chatUser}
-                  activeRoom={activeRoom}
-                  setShowRandomChat={setShowRandomChat}
-                  setShowChatInfo={setShowChatInfo}
-                  activeRandomChat={activeRandomChat}
-                  MemoCountdown={MemoCountdown}
-                  user={user}
-                />
-              )}
-            </Grid>
-          </Grid>
-        </Paper>
-      </Container>
+          </Paper>
+        </Container>
+      ) : (
+        <div>loading...</div>
+      )}
     </div>
   );
 }
