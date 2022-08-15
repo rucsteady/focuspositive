@@ -47,7 +47,11 @@ export function AuthProvider({ children }) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    if (users.filter((user) => user.email === currentEmail)) {
+    if (
+      email !== "" &&
+      password !== "" &&
+      users.filter((user) => user.email === currentEmail)
+    ) {
       await axios
         .get("https://fpjsonserver.herokuapp.com/users", {
           email,

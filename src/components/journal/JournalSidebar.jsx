@@ -4,7 +4,6 @@ import {
   IconButton,
   List,
   ListItem,
-  ListItemText,
   Paper,
   Typography,
 } from "@mui/material";
@@ -60,9 +59,12 @@ function JournalSidebar({
                 >
                   <div>
                     <Typography sx={{ display: "block" }} component={"span"}>
-                      {title && title.substr(0, 18)}
+                      {title && title.substr(0, 25)}
                     </Typography>
-                    <Typography sx={{ display: "inline", fontSize: 12 }} component={"span"}>
+                    <Typography
+                      sx={{ display: "inline", fontSize: 12 }}
+                      component={"span"}
+                    >
                       {body && body.substr(0, 20) + "..."}
                     </Typography>
                     <Typography sx={{ fontSize: 10 }} component={"div"}>

@@ -53,13 +53,8 @@ function RandomChat({
           ":" +
           new Date(Date.now()).getMinutes(),
       };
-
-      // console.log(messageData);
       await socket.emit("send_message", messageData);
       setChatMessages((list) => [...list, messageData]);
-      // if (scrollBottomRef.current) {
-      //  scrollBottomRef.current.scrollIntoView({ behavior: 'smooth' });
-      // }
     }
     setMessage("");
   };
