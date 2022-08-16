@@ -19,7 +19,7 @@ import "./RandomChatStyle.css";
 import io from "socket.io-client";
 import { nanoid } from "nanoid";
 
-const socket = io.connect("http://localhost:3001");
+const socket = io.connect("https://fpchatserver.herokuapp.com/");
 
 function RandomChat({
   chatUser,
@@ -28,8 +28,6 @@ function RandomChat({
   activeRoom,
   activeRandomChat,
   MemoCountdown,
-  users,
-  user,
 }) {
   const [message, setMessage] = useState("");
   const [room, setRoom] = useState("");
@@ -42,7 +40,7 @@ function RandomChat({
   };
 
   const sendMessage = async () => {
-    if (user && message !== "") {
+    if (chatUser && message !== "") {
       const messageData = {
         key: nanoid(),
         room: room,
@@ -53,14 +51,20 @@ function RandomChat({
           ":" +
           new Date(Date.now()).getMinutes(),
       };
+
+      console.log(messageData);
       await socket.emit("send_message", messageData);
       setChatMessages((list) => [...list, messageData]);
+      // if (scrollBottomRef.current) {
+      //  scrollBottomRef.current.scrollIntoView({ behavior: 'smooth' });
+      // }
     }
     setMessage("");
   };
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
+      console.log(data);
       setChatMessages((list) => [...list, data]);
     });
   }, []);
@@ -76,7 +80,7 @@ function RandomChat({
   const listChatMessages = chatMessages.map((chatMessageDto, index) => (
     <ListItem key={index}>
       <ListItemText
-        primary={`${user.firstname + ":"} ${chatMessageDto.message}`}
+        primary={`${chatMessageDto.user + ":"} ${chatMessageDto.message}`}
       />
     </ListItem>
   ));
@@ -103,7 +107,7 @@ function RandomChat({
 
           <Box p={3}>
             <Typography variant="h6" gutterBottom>
-              Verbunden: {activeRandomChat.name} von {user.firstname} mit{" "}
+              Verbunden: {activeRandomChat.name} von {chatUser} mit{" "}
               {activeRandomChat.user2}
             </Typography>
             <Divider />
